@@ -3,13 +3,15 @@ import { CommonModule } from '@angular/common';
 import { InputComponent } from './components/input/input.component';
 import { ButtonComponent } from './components/button/button.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { LabelComponent } from './components/label/label.component';
 
 
 
 @NgModule({
   declarations: [
     InputComponent,
-    ButtonComponent
+    ButtonComponent,
+    LabelComponent,
   ],
   imports: [
     CommonModule,
@@ -17,7 +19,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   ],
   exports: [
     ButtonComponent,
-    InputComponent
+    InputComponent,
+    LabelComponent,
   ]
 })
 export class SharedModule { }
