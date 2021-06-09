@@ -10,7 +10,9 @@ module.exports = {
     },
     darkMode: 'class', // or 'media' or 'class'
     theme: {
-      extend: {},
+      extend: {
+        'brand': '#c1d72d'
+      },
     },
     variants: {
       extend: {},
