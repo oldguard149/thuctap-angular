@@ -1,0 +1,16 @@
+.prev-next {
+    display: grid;
+    place-items: center;
+    height: 40px;
+    width: 40px;
+    font-size: 26px;
+    color: rgb(194, 192, 192);
+    font-weight: bold;
+    border: 1px solid var(--brand-color);
+  }
+
+  .prev-next:hover {
+    background-color: var(--brand-color) !important;
+    color: white;
+    cursor: pointer;
+  }

@@ -1,24 +1,46 @@
-<div class="grid grid-cols-1 space-y-3 mt-8">
-  <app-description-card
-    *ngFor="let item of descriptionItems"
-    [descriptionItem]="item"
-  ></app-description-card>
-</div>
-
-<!-- two image -->
-<div class="grid grid-cols-1">
-  <div class="p-5">
-    <a href=""
-      ><img
-        src="//cdn.shopify.com/s/files/1/1939/5421/files/block4-home2.jpg?v=1493998296"
-        alt=""
-    /></a>
+<div class="w-4/5 mx-auto">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 space-y-3">
+    <app-description-card
+      *ngFor="let item of descriptionItems"
+      [descriptionItem]="item"
+    ></app-description-card>
   </div>
-  <div class="p-5">
-    <a href=""
-      ><img
-        src="https://cdn.shopify.com/s/files/1/1939/5421/files/block5-home2.jpg?v=1493998313"
-        alt=""
-    /></a>
+
+  <!-- two image -->
+  <div class="grid grid-cols-1 md:grid-cols-2">
+    <div class="p-5">
+      <a href=""
+        ><img
+          class="w-full"
+          src="//cdn.shopify.com/s/files/1/1939/5421/files/block4-home2.jpg?v=1493998296"
+          alt=""
+      /></a>
+    </div>
+    <div class="p-5">
+      <a href=""
+        ><img
+          class="w-full"
+          src="https://cdn.shopify.com/s/files/1/1939/5421/files/block5-home2.jpg?v=1493998313"
+          alt=""
+      /></a>
+    </div>
+  </div>
+
+  <!-- new product -->
+  <div>
+    <div><h2>Today Deal</h2></div>
+    <div class="relative">
+      <!-- product list -->
+      <div
+        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+      >
+        <app-product-card
+          *ngFor="let i of [1, 2, 3, 4]"
+          [productItem]="i"
+        ></app-product-card>
+      </div>
+      <!-- horizontal navigation button -->
+      <app-horizontal-nav-button [shape]="'round'"></app-horizontal-nav-button>
+    </div>
   </div>
 </div>

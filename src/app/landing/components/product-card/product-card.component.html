@@ -1,49 +1,36 @@
-<div class="grid grid-cols-1 w-96 bg-white m-5">
-    <div class="carousel relative mx-3.5">
-      <div>
-        <!-- show one image at a time -->
-        <div class="max-w-full">
-          <img
-            src="https://cdn.shopify.com/s/files/1/1939/5421/products/14m-800x800_158bd5ae-972c-4d3d-95e2-49b85a5130f9_x800.jpg?v=1493998996"
-            alt=""
-          />
-        </div>
-        <div></div>
-        <div></div>
+<div class="grid grid-cols-1 bg-white m-5">
+  <div class="carousel relative mx-3.5">
+    <div>
+      <!-- show one image at a time -->
+      <div class="w-full">
+        <img
+          src="https://cdn.shopify.com/s/files/1/1939/5421/products/14m-800x800_158bd5ae-972c-4d3d-95e2-49b85a5130f9_x800.jpg?v=1493998996"
+          alt=""
+        />
       </div>
-
-      <div class="pre-next hidden">
-        <div class="flex w-full justify-between absolute top-2/4">
-          <!-- left arrow -->
-          <a id="previous">asf</a>
-
-          <!-- right arrow -->
-          <a id="next">asdfds</a>
-        </div>
-      </div>
-      </div>
-      
-
-    <!-- info -->
-    <div class="my-4 ml-5">
-      <h3>Nunce Failadf</h3>
-
-      <!-- stars -->
-      <div>
-        <i class="star zmdi zmdi-star-outline"></i>
-        <i class="star zmdi zmdi-star-outline"></i>
-        <i class="star zmdi zmdi-star-outline"></i>
-        <i class="star zmdi zmdi-star-outline"></i>
-        <i class="star zmdi zmdi-star-outline"></i>
-      </div>
-
-      <!-- price: using currency pipe -->
-      <div class="flex space-x-4 items-center">
-        <span class="text-red-600 text-xl">7873,878</span>
-        <span class="text-gray-400">8789</span>
-      </div>
+      <div></div>
+      <div></div>
     </div>
 
-    <!-- product-card-action -->
-    <app-product-card-action></app-product-card-action>
+    <app-horizontal-nav-button
+      class="prev-next hidden"
+    ></app-horizontal-nav-button>
   </div>
+
+  <!-- info -->
+  <div class="my-4 ml-5">
+    <h3>Nunce Failadf</h3>
+
+    <!-- stars -->
+    <app-stars></app-stars>
+
+    <!-- price: using currency pipe -->
+    <div class="flex space-x-4 items-center">
+      <span class="text-red-600 text-xl">{{7873878 | currency}}</span>
+      <span class="text-gray-400">{{8789 | currency}}</span>
+    </div>
+  </div>
+
+  <!-- product-card-action -->
+  <app-product-card-action></app-product-card-action>
+</div>

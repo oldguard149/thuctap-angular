@@ -10,6 +10,8 @@ import { DescriptionCardComponent } from './components/description-card/descript
 import { ProductCardActionComponent } from './components/product-card-action/product-card-action.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { LandingIndexComponent } from './components/landing-index/landing-index.component';
+import { HorizontalNavButtonComponent } from './components/horizontal-nav-button/horizontal-nav-button.component';
+import { StarsComponent } from './components/stars/stars.component';
 
 
 @NgModule({
@@ -20,7 +22,9 @@ import { LandingIndexComponent } from './components/landing-index/landing-index.
     DescriptionCardComponent,
     ProductCardActionComponent,
     ProductCardComponent,
-    LandingIndexComponent
+    LandingIndexComponent,
+    HorizontalNavButtonComponent,
+    StarsComponent
   ],
   imports: [
     CommonModule,

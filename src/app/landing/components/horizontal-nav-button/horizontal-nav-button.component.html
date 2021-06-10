@@ -1,0 +1,17 @@
+<div class="flex w-full justify-between absolute top-2/4">
+  <!-- left arrow -->
+  <a
+    class="prev-next zmdi zmdi-chevron-left"
+    [style.backgroundColor]="backgroundColor"
+    [ngClass]="{ 'rounded-full': shape === 'round' }"
+    (click)="triggerPrevClick()"
+  ></a>
+
+  <!-- right arrow -->
+  <a
+    class="prev-next zmdi zmdi-chevron-right"
+    [style.backgroundColor]="backgroundColor"
+    [ngClass]="{ 'rounded-full': shape === 'round' }"
+    (click)="triggerNextClick()"
+  ></a>
+</div>
