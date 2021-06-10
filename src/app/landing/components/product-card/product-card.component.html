@@ -1,5 +1,5 @@
-<div class="grid grid-cols-1 bg-white m-5">
-  <div class="carousel relative mx-3.5">
+<div class="product-card grid grid-cols-1 bg-white border grid-rows-5">
+  <div class="carousel relative row-span-3">
     <div>
       <!-- show one image at a time -->
       <div class="w-full">
@@ -18,19 +18,16 @@
   </div>
 
   <!-- info -->
-  <div class="my-4 ml-5">
+  <div class="pl-5 row-span-1">
     <h3>Nunce Failadf</h3>
 
     <!-- stars -->
     <app-stars></app-stars>
 
     <!-- price: using currency pipe -->
-    <div class="flex space-x-4 items-center">
-      <span class="text-red-600 text-xl">{{7873878 | currency}}</span>
-      <span class="text-gray-400">{{8789 | currency}}</span>
-    </div>
+    <app-product-price></app-product-price>
   </div>
 
   <!-- product-card-action -->
-  <app-product-card-action></app-product-card-action>
+  <app-product-card-action class="card-action hidden self-center ml-5"></app-product-card-action>
 </div>

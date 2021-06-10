@@ -1,4 +1,4 @@
-<div class="w-4/5 mx-auto">
+<div class="w-11/12 mx-auto lg:w-4/5">
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 space-y-3">
     <app-description-card
       *ngFor="let item of descriptionItems"
@@ -8,7 +8,7 @@
 
   <!-- two image -->
   <div class="grid grid-cols-1 md:grid-cols-2">
-    <div class="p-5">
+    <div class="md:mr-5 mb-8 md:mb-0">
       <a href=""
         ><img
           class="w-full"
@@ -16,7 +16,7 @@
           alt=""
       /></a>
     </div>
-    <div class="p-5">
+    <div class="md:ml-5">
       <a href=""
         ><img
           class="w-full"
@@ -28,11 +28,11 @@
 
   <!-- new product -->
   <div>
-    <div><h2>Today Deal</h2></div>
-    <div class="relative">
+    <div><h2>New product</h2></div>
+    <div class="today-deal-product-list relative">
       <!-- product list -->
       <div
-        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        class="grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
       >
         <app-product-card
           *ngFor="let i of [1, 2, 3, 4]"
@@ -40,7 +40,10 @@
         ></app-product-card>
       </div>
       <!-- horizontal navigation button -->
-      <app-horizontal-nav-button [shape]="'round'"></app-horizontal-nav-button>
+      <app-horizontal-nav-button
+        class="today-deal-nav-button hidden"
+        [shape]="'round'"
+      ></app-horizontal-nav-button>
     </div>
   </div>
 </div>

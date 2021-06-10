@@ -1,3 +1,10 @@
+// .product-card {
+//     height: 524px;
+// }
 .carousel:hover .prev-next {
+    display: block;
+}
+
+.product-card:hover .card-action {
     display: block;
 }

@@ -12,6 +12,10 @@ import { ProductCardComponent } from './components/product-card/product-card.com
 import { LandingIndexComponent } from './components/landing-index/landing-index.component';
 import { HorizontalNavButtonComponent } from './components/horizontal-nav-button/horizontal-nav-button.component';
 import { StarsComponent } from './components/stars/stars.component';
+import { BoxCountdownComponent } from './components/box-countdown/box-countdown.component';
+import { TodayDealsSectionComponent } from './components/today-deals-section/today-deals-section.component';
+import { TodaydealsProductCardComponent } from './components/today-deals-section/todaydeals-product-card/todaydeals-product-card.component';
+import { ProductPriceComponent } from './components/product-price/product-price.component';
 
 
 @NgModule({
@@ -24,7 +28,11 @@ import { StarsComponent } from './components/stars/stars.component';
     ProductCardComponent,
     LandingIndexComponent,
     HorizontalNavButtonComponent,
-    StarsComponent
+    StarsComponent,
+    BoxCountdownComponent,
+    TodayDealsSectionComponent,
+    TodaydealsProductCardComponent,
+    ProductPriceComponent
   ],
   imports: [
     CommonModule,
