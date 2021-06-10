@@ -3,18 +3,24 @@ import { CommonModule } from '@angular/common';
 
 import { LandingRoutingModule } from './landing-routing.module';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
-import { SectionHeaderTopnavComponent } from './components/section-header-topnav/section-header-topnav.component';
 import { SectionHeaderComponent } from './components/section-header/section-header.component';
-import { SectionHeaderHeader2Component } from './components/section-header-header2/section-header-header2.component';
 import { SharedModule } from '../shared/shared.module';
+import { DescriptionComponent } from './components/description/description.component';
+import { DescriptionCardComponent } from './components/description-card/description-card.component';
+import { ProductCardActionComponent } from './components/product-card-action/product-card-action.component';
+import { ProductCardComponent } from './components/product-card/product-card.component';
+import { LandingIndexComponent } from './components/landing-index/landing-index.component';
 
 
 @NgModule({
   declarations: [
     DropdownComponent,
-    SectionHeaderTopnavComponent,
     SectionHeaderComponent,
-    SectionHeaderHeader2Component
+    DescriptionComponent,
+    DescriptionCardComponent,
+    ProductCardActionComponent,
+    ProductCardComponent,
+    LandingIndexComponent
   ],
   imports: [
     CommonModule,

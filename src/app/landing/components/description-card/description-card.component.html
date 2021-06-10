@@ -1,0 +1,15 @@
+<div class="grid grid-cols-1 place-items-center mx-auto px-3 my-4">
+  <div class="my-3">
+    <img
+      class="max-w-full"
+      [src]="descriptionItem.image_url"
+      [alt]="descriptionItem.header"
+    />
+  </div>
+  <div>
+    <h4 class="uppercase mt-2 text-center font-bold">{{descriptionItem.header}}</h4>
+    <p class="mt-1 text-center">
+      {{descriptionItem.text}}
+    </p>
+  </div>
+</div>

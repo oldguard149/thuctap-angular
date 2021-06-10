@@ -11,7 +11,9 @@ module.exports = {
     darkMode: 'class', // or 'media' or 'class'
     theme: {
       extend: {
-        'brand': '#c1d72d'
+        colors: {
+          brand: '#c1d72d'
+        },
       },
     },
     variants: {

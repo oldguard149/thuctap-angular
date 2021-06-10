@@ -6,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./section-header.component.scss']
 })
 export class SectionHeaderComponent implements OnInit {
-  languague = ['English', 'French'];
+  show = false;
+  showHam = false;
   constructor() { }
 
   ngOnInit(): void {

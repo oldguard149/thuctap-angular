@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SectionHeaderHeader2Component } from './components/section-header-header2/section-header-header2.component';
+import { LandingIndexComponent } from './components/landing-index/landing-index.component';
 
 const routes: Routes = [
-  { path: '', component: SectionHeaderHeader2Component}
+  { path: '', component: LandingIndexComponent}
 ];
 
 @NgModule({
