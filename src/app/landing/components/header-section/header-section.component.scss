@@ -39,25 +39,3 @@
     animation: growDown 300ms ease-in-out forwards;
     transform-origin: top center;
   }
-  
-  
-  #compare::before {
-      font-family: 'Material-Design-Iconic-Font';
-      display: inline-block;
-      font-size: 22px;
-      content: "\f1b9";
-  }
-  
-  #wishlist::before {
-      font-family: 'Material-Design-Iconic-Font';
-      display: inline-block;
-      font-size: 22px;
-      content: "\f15e";
-  }
-  
-  #cart::before {
-      font-family: 'Material-Design-Iconic-Font';
-      display: inline-block;
-      font-size: 20px;
-      content: "\f1cb";
-  }

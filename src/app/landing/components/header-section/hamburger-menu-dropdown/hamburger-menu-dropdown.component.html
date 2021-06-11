@@ -1,0 +1,11 @@
+<div class="grid grid-cols-1">
+  <div class="ml-3 my-3">
+    <div>
+      <a [routerLink]="[item.main.link]">{{item.main.name}}</a>
+      <button (click)="showSubMenu = !showSubMenu">show</button>
+    </div>
+    <div *ngIf="showSubMenu" class="flex flex-col">
+      <a *ngFor="let sub of item.subs;" [routerLink]="[sub.link]">{{sub.name}}</a>
+    </div>
+  </div>
+</div>

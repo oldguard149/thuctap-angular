@@ -14,6 +14,9 @@ module.exports = {
         colors: {
           brand: '#c1d72d'
         },
+        width: (theme) => ({
+          'large-screen': '75%',
+        })
       },
     },
     variants: {

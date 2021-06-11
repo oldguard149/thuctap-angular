@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DescriptionItem } from '../description-card/description-card.component';
+import { DescriptionItem } from './description-card/description-card.component';
 
 @Component({
   selector: 'app-description',

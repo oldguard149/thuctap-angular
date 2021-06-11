@@ -1,0 +1,22 @@
+<div>
+  <div class="flex justify-between bg-gray-800 py-4 relative">
+    <h2 class="text-gray-300 text-xl ml-2 inline-block uppercase">
+      Categories
+    </h2>
+    <button
+      (click)="showHam = !showHam"
+      class="text-gray-300 ml-2 inline-block mr-3 focus:outline-none"
+    >
+      hambuar
+    </button>
+  </div>
+  <div *ngIf="showHam" class="z-10 bg-gray-300 w-full absolute">
+    <div class="grid grid-cols-1">
+      <app-hamburger-menu-dropdown></app-hamburger-menu-dropdown>
+      <div class="ml-3 my-3"><a href="">Home</a></div>
+      <app-hamburger-menu-dropdown></app-hamburger-menu-dropdown>
+      <div class="ml-3 my-3"><a href="">Home</a></div>
+      <app-hamburger-menu-dropdown></app-hamburger-menu-dropdown>
+    </div>
+  </div>
+</div>

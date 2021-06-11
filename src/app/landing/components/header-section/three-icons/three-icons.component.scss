@@ -1,0 +1,11 @@
+.icon {
+    font-family: 'Material-Design-Iconic-Font';
+    display: inline-block;
+    font-size: 22px;
+    transition: color 300ms;
+}
+
+.icon:hover {
+    color: var(--brand-color);
+    cursor: pointer;
+}
