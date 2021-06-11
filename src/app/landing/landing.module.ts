@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { LandingRoutingModule } from './landing-routing.module';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
-import { SectionHeaderComponent } from './components/section-header/section-header.component';
 import { SharedModule } from '../shared/shared.module';
 import { DescriptionComponent } from './components/description/description.component';
 import { DescriptionCardComponent } from './components/description-card/description-card.component';
@@ -24,11 +23,12 @@ import { BestSellerSectionComponent } from './components/best-seller-section/bes
 import { BestSellerCardComponent } from './components/best-seller-card/best-seller-card.component';
 import { SectionTitleComponent } from './components/section-title/section-title.component';
 import { FeatureProductCardComponent } from './components/feature-products-section/feature-product-card/feature-product-card.component';
+import { SwiperModule } from 'swiper/angular';
+import { ProductCarouselComponent } from './components/product-carousel/product-carousel.component';
 
 @NgModule({
   declarations: [
     DropdownComponent,
-    SectionHeaderComponent,
     DescriptionComponent,
     DescriptionCardComponent,
     ProductCardActionComponent,
@@ -48,7 +48,8 @@ import { FeatureProductCardComponent } from './components/feature-products-secti
     BestSellerCardComponent,
     SectionTitleComponent,
     FeatureProductCardComponent,
+    ProductCarouselComponent,
   ],
-  imports: [CommonModule, LandingRoutingModule, SharedModule],
+  imports: [CommonModule, LandingRoutingModule, SharedModule, SwiperModule],
 })
 export class LandingModule {}

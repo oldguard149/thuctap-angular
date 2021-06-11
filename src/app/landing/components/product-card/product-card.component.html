@@ -1,8 +1,17 @@
-<div class="product-card grid grid-cols-1 bg-white border grid-rows-5">
-  <div class="carousel relative row-span-3">
+<div
+  class="
+    product-card
+    grid grid-cols-1
+    bg-white
+    grid-rows-3
+    md:grid-rows-6
+    hover:drop-shadow-2xl
+  "
+>
+  <div class="carousel relative row-span-2 md:row-span-4">
     <div>
       <!-- show one image at a time -->
-      <div class="w-full">
+      <div class="h-2/3 lg:h-1/2 xl:h-full">
         <img
           src="https://cdn.shopify.com/s/files/1/1939/5421/products/14m-800x800_158bd5ae-972c-4d3d-95e2-49b85a5130f9_x800.jpg?v=1493998996"
           alt=""
@@ -18,16 +27,12 @@
   </div>
 
   <!-- info -->
-  <div class="pl-5 row-span-1">
-    <h3>Nunce Failadf</h3>
-
-    <!-- stars -->
-    <app-stars></app-stars>
-
-    <!-- price: using currency pipe -->
-    <app-product-price></app-product-price>
+  <div class="pl-5 row-span-2">
+      <h3>{{ productItem.name }}</h3>
+      <app-stars></app-stars>
+      <app-product-price></app-product-price>
+      <app-product-card-action
+        class="card-action self-center ml-3 hidden"
+      ></app-product-card-action>
   </div>
-
-  <!-- product-card-action -->
-  <app-product-card-action class="card-action hidden self-center ml-5"></app-product-card-action>
 </div>

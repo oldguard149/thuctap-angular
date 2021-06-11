@@ -1,5 +1,5 @@
 <div class="w-11/12 mx-auto lg:w-9/12 my-3">
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 space-y-3">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 my-3">
     <app-description-card
       *ngFor="let item of descriptionItems"
       [descriptionItem]="item"
@@ -27,10 +27,14 @@
   </div>
 
   <!-- new product -->
+
   <div>
     <div><app-section-title>New product</app-section-title></div>
+    <app-product-carousel></app-product-carousel>
+</div>
+<!-- <div>
+    <div><app-section-title>New product</app-section-title></div>
     <div class="today-deal-product-list relative">
-      <!-- product list -->
       <div
         class="grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3 xl::grid-cols-4"
       >
@@ -39,11 +43,11 @@
           [productItem]="i"
         ></app-product-card>
       </div>
-      <!-- horizontal navigation button -->
+
       <app-horizontal-nav-button
         class="today-deal-nav-button hidden"
         [shape]="'round'"
       ></app-horizontal-nav-button>
     </div>
   </div>
-</div>
+</div> -->

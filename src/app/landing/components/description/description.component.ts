@@ -33,6 +33,9 @@ export class DescriptionComponent implements OnInit {
       text: "So far, we've helped change 20,000 lives through our partnership",
     },
   ];
+
+
+
   constructor() {}
 
   ngOnInit(): void {}

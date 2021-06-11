@@ -1,11 +1,18 @@
-<div class="hover:shadow-md grid grid-rows-5 p-3">
-  <div class="row-span-2">
-    <a href=""><img src="" alt="" /></a>
+<div class="hover:shadow-md grid grid-rows-2 p-3 xl:grid-rows-2">
+  <div class="row-span-2 xl:row-span-1">
+    <a href=""
+      ><img
+        src="https://cdn.shopify.com/s/files/1/1939/5421/products/9m-800x800_ee7a2816-68cd-4ed7-b75a-4a715d30d2aa_x800.jpg?v=1493998913"
+        alt=""
+    /></a>
   </div>
-  <div class="row-span-2">
+  <div class="">
     <h2>asf asdf</h2>
     <app-stars></app-stars>
     <app-product-price></app-product-price>
+    <app-product-card-action
+      [showReview]="false"
+      class="card-action"
+    ></app-product-card-action>
   </div>
-  <app-product-card-action [showReview]="false" class="card-action hidden"></app-product-card-action>
 </div>

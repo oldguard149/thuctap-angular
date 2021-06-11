@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SectionHeaderComponent } from './section-header.component';
+import { ProductCarouselComponent } from './product-carousel.component';
 
-describe('SectionHeaderComponent', () => {
-  let component: SectionHeaderComponent;
-  let fixture: ComponentFixture<SectionHeaderComponent>;
+describe('ProductCarouselComponent', () => {
+  let component: ProductCarouselComponent;
+  let fixture: ComponentFixture<ProductCarouselComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SectionHeaderComponent ]
+      declarations: [ ProductCarouselComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SectionHeaderComponent);
+    fixture = TestBed.createComponent(ProductCarouselComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
