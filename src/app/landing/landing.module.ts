@@ -16,7 +16,14 @@ import { BoxCountdownComponent } from './components/box-countdown/box-countdown.
 import { TodayDealsSectionComponent } from './components/today-deals-section/today-deals-section.component';
 import { TodaydealsProductCardComponent } from './components/today-deals-section/todaydeals-product-card/todaydeals-product-card.component';
 import { ProductPriceComponent } from './components/product-price/product-price.component';
-
+import { LatestBlogsSectionComponent } from './components/latest-blogs-section/latest-blogs-section.component';
+import { LatestBlogsCardComponent } from './components/latest-blogs-card/latest-blogs-card.component';
+import { FeatureProductsSectionComponent } from './components/feature-products-section/feature-products-section.component';
+import { HeaderSectionComponent } from './components/header-section/header-section.component';
+import { BestSellerSectionComponent } from './components/best-seller-section/best-seller-section.component';
+import { BestSellerCardComponent } from './components/best-seller-card/best-seller-card.component';
+import { SectionTitleComponent } from './components/section-title/section-title.component';
+import { FeatureProductCardComponent } from './components/feature-products-section/feature-product-card/feature-product-card.component';
 
 @NgModule({
   declarations: [
@@ -32,12 +39,16 @@ import { ProductPriceComponent } from './components/product-price/product-price.
     BoxCountdownComponent,
     TodayDealsSectionComponent,
     TodaydealsProductCardComponent,
-    ProductPriceComponent
+    ProductPriceComponent,
+    LatestBlogsSectionComponent,
+    LatestBlogsCardComponent,
+    FeatureProductsSectionComponent,
+    HeaderSectionComponent,
+    BestSellerSectionComponent,
+    BestSellerCardComponent,
+    SectionTitleComponent,
+    FeatureProductCardComponent,
   ],
-  imports: [
-    CommonModule,
-    LandingRoutingModule,
-    SharedModule,
-  ]
+  imports: [CommonModule, LandingRoutingModule, SharedModule],
 })
-export class LandingModule { }
+export class LandingModule {}

@@ -1,0 +1,131 @@
+<!-- top nav -->
+<div>
+    <nav class="flex justify-center ">
+      <div id="left" class="flex justify-center space-x-2 divide-x">
+        <div class="dropdown p-1 inline-block relative">
+          <button
+            class="dropdown-button p-1 focus:outline-none"
+            (click)="show = !show"
+          >
+            English
+          </button>
+          <div class="dropdown-content absolute bg-gray-300" *ngIf="show">
+            <div class="flex flex-col w-full rounded-md shadow-lg p-1">
+              <a>English</a>
+              <a>French</a>
+            </div>
+          </div>
+        </div>
+  
+        <div class="dropdown p-1 inline-block relative">
+          <button
+            class="dropdown-button p-1 focus:outline-none"
+            (click)="show = !show"
+          >
+            English
+          </button>
+          <div class="dropdown-content absolute bg-gray-300" *ngIf="show">
+            <div class="flex flex-col w-full rounded-md shadow-lg p-1">
+              <a>English</a>
+              <a>French</a>
+            </div>
+          </div>
+        </div>
+  
+        <div class="dropdown p-1 inline-block relative">
+          <button
+            class="dropdown-button p-1 focus:outline-none"
+            (click)="show = !show"
+          >
+            English
+          </button>
+          <div class="dropdown-content absolute bg-gray-300" *ngIf="show">
+            <div class="flex flex-col w-full rounded-md shadow-lg p-1">
+              <a>English</a>
+              <a>French</a>
+            </div>
+          </div>
+        </div>
+  
+        <div class="dropdown p-1 inline-block relative">
+          <button
+            class="dropdown-button p-1 focus:outline-none"
+            (click)="show = !show"
+          >
+            English
+          </button>
+          <div class="dropdown-content absolute bg-gray-300" *ngIf="show">
+            <div class="flex flex-col w-full rounded-md shadow-lg p-1">
+              <a>English</a>
+              <a>French</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="right"></div>
+    </nav>
+  </div>
+  
+  <!-- logo to three three icon compare wishlist cart -->
+  <div class="flex flex-col items-center space-y-3">
+    <a [routerLink]="['/']"
+      ><img
+        class="max-w-full h-auto"
+        src="https://cdn.shopify.com/s/files/1/1939/5421/files/logo2@2x.png?v=1493986970"
+        alt="G Legend logo"
+    /></a>
+    <div class="space-y-3">
+      <div id="search-container" class="rounded-full p-1 space-x-1 border border-brand">
+        <form action="" class="ml-10">
+          <input
+            class="border-0 focus:border-0 focus:ring-0 border-collapse"
+            type="text"
+            placeholder="Search entire store here..."
+          />
+          <button id="search-button"></button>
+        </form>
+      </div>
+      <div
+        id="free-shipping"
+        class="flex items-center content-center justify-center"
+      >
+        <p class="text-center">Free Shipping on Orders $50+</p>
+      </div>
+  
+      <!-- three icon SUA O DAY -->
+      <div id="header-right" class="flex justify-center p-2 space-x-9">
+        <a id="compare" href=""></a>
+        <a id="wishlist" href=""></a>
+        <div><a id="cart" href=""></a></div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- categori and hambuger menu -->
+  <div >
+    <div class="flex justify-between bg-gray-800 py-4 relative">
+      <h2 class="text-gray-300 text-xl ml-2 inline-block uppercase">Categories</h2>
+    <button
+      (click)="showHam = !showHam"
+      class="text-gray-300 ml-2 inline-block mr-3 focus:outline-none"
+    >
+      hambuar
+    </button>
+    </div>
+    <div *ngIf="showHam" class="z-10 bg-gray-300 w-full absolute">
+      <div class="grid grid-cols-1">
+        <div class="ml-3 my-3"><a href="">Home</a></div>
+        <div class="ml-3 my-3"><a href="">Home</a></div>
+        <div class="ml-3 my-3"><a href="">Home</a></div>
+        <div class="ml-3 my-3"><a href="">Home</a></div>
+        <div class="ml-3 my-3"><a href="">Home</a></div>
+        <div class="ml-3 my-3"><a href="">Home</a></div>
+      </div>
+    </div>
+  </div>
+  
+  <p>asdfjh kjhasfd kjh adfkjh</p>
+  <p>asdfjh kjhasfd kjh adfkjh</p>
+  <p>asdfjh kjhasfd kjh adfkjh</p>
+  <p>asdfjh kjhasfd kjh adfkjh</p>
+  

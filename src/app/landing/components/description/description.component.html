@@ -1,4 +1,4 @@
-<div class="w-11/12 mx-auto lg:w-4/5">
+<div class="w-11/12 mx-auto lg:w-9/12 my-3">
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 space-y-3">
     <app-description-card
       *ngFor="let item of descriptionItems"
@@ -28,11 +28,11 @@
 
   <!-- new product -->
   <div>
-    <div><h2>New product</h2></div>
+    <div><app-section-title>New product</app-section-title></div>
     <div class="today-deal-product-list relative">
       <!-- product list -->
       <div
-        class="grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        class="grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3 xl::grid-cols-4"
       >
         <app-product-card
           *ngFor="let i of [1, 2, 3, 4]"

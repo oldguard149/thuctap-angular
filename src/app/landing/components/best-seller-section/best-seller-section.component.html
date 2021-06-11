@@ -1,0 +1,14 @@
+<div class="bg-white"> <!-- background -->
+
+    <div id="container" class="w-9/12 grid grid-cols-1 lg:grid-cols-3 lg:gap-3 m-8 mx-auto">
+        <div><a href=""><img src="https://cdn.shopify.com/s/files/1/1939/5421/files/block6-home2_370x596.jpg?v=1494018377" alt=""></a></div>
+        <div id="best-seller" class="gap-2 grid mt-5">
+            <h2>best seller</h2>
+            <app-best-seller-card *ngFor="let i of [1, 2, 3];">{{i}}</app-best-seller-card>
+        </div>
+        <div id="new-arrivals" class="gap-2 grid mt-5">
+            <h2>New arrival</h2>
+            <app-best-seller-card *ngFor="let i of [1, 2, 3];">{{i}}</app-best-seller-card>
+        </div>
+    </div>
+</div>
