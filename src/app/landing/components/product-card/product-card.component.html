@@ -1,14 +1,12 @@
 <div
   class="
     product-card
-    grid grid-cols-1
+    flex flex-col
     bg-white
-    grid-rows-3
-    md:grid-rows-6
     hover:drop-shadow-2xl
   "
 >
-  <div class="carousel relative row-span-2 md:row-span-4">
+  <div class="carousel relative">
     <div>
       <!-- show one image at a time -->
       <div class="h-2/3 lg:h-1/2 xl:h-full">
@@ -27,12 +25,14 @@
   </div>
 
   <!-- info -->
-  <div class="pl-5 row-span-2">
-      <h3>{{ productItem.name }}</h3>
-      <app-stars></app-stars>
-      <app-product-price></app-product-price>
+  <div class="pl-5">
+    <h3>{{ productItem.name }}</h3>
+    <app-stars></app-stars>
+    <app-product-price></app-product-price>
+    <div appCardActionContainer >
       <app-product-card-action
         class="card-action self-center ml-3 hidden"
       ></app-product-card-action>
+    </div>
   </div>
 </div>

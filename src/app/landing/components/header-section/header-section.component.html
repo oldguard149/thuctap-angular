@@ -1,69 +1,6 @@
 <!-- top nav -->
 <div>
-  <nav class="flex justify-center">
-    <div id="left" class="flex justify-center space-x-2 divide-x">
-      <div class="dropdown p-1 inline-block relative">
-        <button
-          class="dropdown-button p-1 focus:outline-none"
-          (click)="show = !show"
-        >
-          English
-        </button>
-        <div class="dropdown-content absolute bg-gray-300" *ngIf="show">
-          <div class="flex flex-col w-full rounded-md shadow-lg p-1">
-            <a>English</a>
-            <a>French</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="dropdown p-1 inline-block relative">
-        <button
-          class="dropdown-button p-1 focus:outline-none"
-          (click)="show = !show"
-        >
-          English
-        </button>
-        <div class="dropdown-content absolute bg-gray-300" *ngIf="show">
-          <div class="flex flex-col w-full rounded-md shadow-lg p-1">
-            <a>English</a>
-            <a>French</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="dropdown p-1 inline-block relative">
-        <button
-          class="dropdown-button p-1 focus:outline-none"
-          (click)="show = !show"
-        >
-          English
-        </button>
-        <div class="dropdown-content absolute bg-gray-300" *ngIf="show">
-          <div class="flex flex-col w-full rounded-md shadow-lg p-1">
-            <a>English</a>
-            <a>French</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="dropdown p-1 inline-block relative">
-        <button
-          class="dropdown-button p-1 focus:outline-none"
-          (click)="show = !show"
-        >
-          English
-        </button>
-        <div class="dropdown-content absolute bg-gray-300" *ngIf="show">
-          <div class="flex flex-col w-full rounded-md shadow-lg p-1">
-            <a>English</a>
-            <a>French</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div id="right"></div>
-  </nav>
+  <app-header-section-top></app-header-section-top>
 </div>
 
 <!-- logo to three icon compare wishlist cart -->
@@ -71,10 +8,11 @@
   class="
     flex flex-col
     items-center
+    w-11/12
     md:grid
-    grid-cols-6
-    md:w-large-screen
+    lg:w-large-screen
     md:mx-auto
+    grid-cols-6
   "
 >
   <a [routerLink]="['/']" class="cols-span-1"
@@ -106,8 +44,7 @@
     <p class="text-center">Free Shipping on Orders $50+</p>
   </div>
 
-  <!-- three icon SUA O DAY -->
-  <app-three-icons></app-three-icons>
+  <app-three-icons class="md:hidden"></app-three-icons>
 </div>
 
 <!-- categori and hambuger menu -->

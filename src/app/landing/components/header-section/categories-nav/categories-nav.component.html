@@ -1,22 +1,68 @@
 <div>
-  <div class="flex justify-between bg-gray-800 py-4 relative">
-    <h2 class="text-gray-300 text-xl ml-2 inline-block uppercase">
+  <div class="flex justify-between items-center bg-gray-800 py-4 relative">
+    <h2 class="text-gray-300 text-xl ml-2 inline-block uppercase lg:hidden">
       Categories
     </h2>
-    <button
-      (click)="showHam = !showHam"
-      class="text-gray-300 ml-2 inline-block mr-3 focus:outline-none"
-    >
-      hambuar
-    </button>
-  </div>
-  <div *ngIf="showHam" class="z-10 bg-gray-300 w-full absolute">
-    <div class="grid grid-cols-1">
-      <app-hamburger-menu-dropdown></app-hamburger-menu-dropdown>
-      <div class="ml-3 my-3"><a href="">Home</a></div>
-      <app-hamburger-menu-dropdown></app-hamburger-menu-dropdown>
-      <div class="ml-3 my-3"><a href="">Home</a></div>
-      <app-hamburger-menu-dropdown></app-hamburger-menu-dropdown>
+
+    <div class="hidden lg:block">
+      <div class="flex">
+        <div class="menu-container" *ngFor="let item of items">
+          <a [routerLink]="[item.link]">{{ item.name }}</a>
+          <ng-container *ngIf="item.level === 1">
+            <app-popup-menu
+              class="popup-menu"
+              [hasHeaderTitle]="false"
+              [items]="item.subLevel.items"
+              [parentLink]="item.link"
+            ></app-popup-menu>
+          </ng-container>
+  
+          <!-- cho nay de hien thi cua shop -->
+          <ng-container *ngIf="item.level === 2">
+            <div class="popup-menu flex flex-row">
+              <app-popup-menu
+                *ngFor="let subItem of item.subLevel.items"
+                [hasHeaderTitle]="true"
+                [items]="subItem.subLevel.items"
+                [parentLink]="subItem.link"
+                [headerTitle]="subItem.name"
+              ></app-popup-menu>
+            </div>
+          </ng-container>
+        </div>
+      </div>
     </div>
+
+
+    <div class="flex">
+      <app-three-icons
+        class="hidden md:block mr-8"
+        [textColor]="'text-white'"
+      ></app-three-icons>
+      <button
+        (click)="showHam = !showHam"
+        class="
+          fas
+          fa-bars
+          text-gray-300
+          ml-2
+          inline-block
+          mr-3
+          focus:outline-none
+          lg:hidden
+        "
+      ></button>
+    </div>
+
+    
+
+
+  </div>
+  <div
+    *ngIf="showHam"
+    class="dropdown-mobilemenu z-10 w-full absolute lg:hidden"
+  >
+    <app-hamburger-menu-dropdown [parentLink]="'/'" [items]="items">
+    </app-hamburger-menu-dropdown>
   </div>
 </div>

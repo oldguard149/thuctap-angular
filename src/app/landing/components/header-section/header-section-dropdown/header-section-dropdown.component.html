@@ -1,0 +1,32 @@
+<div class="dropdown p-1 inline-block relative">
+  <button
+    *ngIf="updateTitleWhenValueChange; else notUpdateTitle"
+    class="dropdown-button p-1 focus:outline-none"
+    (click)="show = !show"
+  >
+    {{ (choosedItem$ | async) }}
+  </button>
+  <ng-template #notUpdateTitle>
+    <button
+      class="dropdown-button p-1 focus:outline-none"
+      (click)="show = !show"
+    >
+      {{ displayTitle }}
+    </button>
+  </ng-template>
+
+  <div class="dropdown-content absolute bg-gray-300 z-10" *ngIf="show">
+    <div class="flex flex-col w-full rounded-md shadow-lg p-1">
+      <button class="hover:cursor-pointer" *ngFor="let item of dropdownItems" (click)="chooseAction(item)">
+        {{item.displayName}}
+      </button>
+    </div>
+  </div>
+
+  <div
+    id="backdrop"
+    *ngIf="show"
+    class="fixed inset-0"
+    (click)="backdropClick()"
+  ></div>
+</div>

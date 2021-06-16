@@ -1,0 +1,8 @@
+<div style="width: 225px;" class="bg-gray-100">
+    <h2 *ngIf="hasHeaderTitle" class="uppercase font-semibold">{{headerTitle}}</h2>
+    <ul>
+        <li *ngFor="let item of items;">
+            <a [routerLink]="[parentLink, item.link]">{{item.name}}</a>   
+        </li>
+    </ul>
+</div>

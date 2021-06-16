@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-three-icons',
@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./three-icons.component.scss']
 })
 export class ThreeIconsComponent implements OnInit {
-
+  @Input() textColor: string = 'text-gray-900';
   constructor() { }
 
   ngOnInit(): void {

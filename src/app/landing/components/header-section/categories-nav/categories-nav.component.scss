@@ -1,0 +1,15 @@
+.dropdown-mobilemenu {
+    background-color: #faf8f8;
+}
+
+.fas {
+    font-family: FontAwesome;
+}
+
+.popup-menu {
+    display: none;
+}
+
+.menu-container:hover .popup-menu{
+    display: block;
+}

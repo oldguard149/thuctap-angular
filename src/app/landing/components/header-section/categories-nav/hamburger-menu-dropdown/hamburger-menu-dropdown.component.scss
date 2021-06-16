@@ -1,0 +1,19 @@
+.mobile-dropdown {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+
+ul > li {
+    border-bottom: 1px solid #e1e4eb;
+}
+
+ul li:last-child {
+    border: none;
+}
+
+.collapsible {
+    overflow: hidden;
+  }

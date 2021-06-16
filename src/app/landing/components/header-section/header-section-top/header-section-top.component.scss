@@ -1,0 +1,15 @@
+.guarantee, .store {
+    font-family: 'Material-Design-Iconic-Font';
+    display: inline-block;
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+
+.guarantee::before {
+    content: "\f1c6";
+}
+
+.store::before {
+    content: "\f1ab";
+}

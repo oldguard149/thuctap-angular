@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { LandingRoutingModule } from './landing-routing.module';
-import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { SharedModule } from '../shared/shared.module';
 import { DescriptionComponent } from './components/description/description.component';
 import { DescriptionCardComponent } from './components/description/description-card/description-card.component';
@@ -27,11 +26,14 @@ import { SwiperModule } from 'swiper/angular';
 import { ProductCarouselComponent } from './components/product-carousel/product-carousel.component';
 import { ThreeIconsComponent } from './components/header-section/three-icons/three-icons.component';
 import { CategoriesNavComponent } from './components/header-section/categories-nav/categories-nav.component';
-import { HamburgerMenuDropdownComponent } from './components/header-section/hamburger-menu-dropdown/hamburger-menu-dropdown.component';
+import { HamburgerMenuDropdownComponent } from './components/header-section/categories-nav/hamburger-menu-dropdown/hamburger-menu-dropdown.component';
+import { HeaderSectionDropdownComponent } from './components/header-section/header-section-dropdown/header-section-dropdown.component';
+import { CardActionContainerDirective } from './directives/card-action-container.directive';
+import { PopupMenuComponent } from './components/header-section/categories-nav/popup-menu/popup-menu.component';
+import { HeaderSectionTopComponent } from './components/header-section/header-section-top/header-section-top.component';
 
 @NgModule({
   declarations: [
-    DropdownComponent,
     DescriptionComponent,
     DescriptionCardComponent,
     ProductCardActionComponent,
@@ -55,6 +57,10 @@ import { HamburgerMenuDropdownComponent } from './components/header-section/hamb
     ThreeIconsComponent,
     CategoriesNavComponent,
     HamburgerMenuDropdownComponent,
+    HeaderSectionDropdownComponent,
+    CardActionContainerDirective,
+    PopupMenuComponent,
+    HeaderSectionTopComponent,
   ],
   imports: [CommonModule, LandingRoutingModule, SharedModule, SwiperModule],
 })

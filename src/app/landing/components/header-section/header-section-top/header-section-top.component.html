@@ -1,0 +1,28 @@
+<nav class="flex flex-col items-center md:flex-row justify-center border-b-2">
+    <div class="left flex justify-center space-x-2 divide-x">
+      <app-header-section-dropdown
+        [dropdownItems]="language"
+        (onSelect)="handleLanguageChange($event)"
+      ></app-header-section-dropdown>
+      <app-header-section-dropdown
+        [dropdownItems]="currencyUnits"
+        (onSelect)="handleCurrencyUnitChange($event)"
+      ></app-header-section-dropdown>
+      <app-header-section-dropdown
+        [updateTitle]="false"
+        [displayTitle]="'Account'"
+        [dropdownItems]="accountActions"
+        (onSelect)="handleAccountActionChange($event)"
+        
+      ></app-header-section-dropdown>
+    </div>
+
+    <div class="right flex justify-center">
+      <div>
+        <a class="store">Store Location</a>
+      </div>
+      <div>
+        <a class="guarantee">Guarantee</a>
+      </div>
+    </div>
+  </nav>

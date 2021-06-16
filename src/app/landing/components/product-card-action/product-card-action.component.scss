@@ -12,3 +12,33 @@
 .product-card-action > *:hover {
   background-color: var(--brand-color);
 }
+
+@keyframes grow {
+  0% {
+    transform: scale(0);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.shopping-cart,.wishlist, .compare, .review, .product-card-action > *{
+  animation: grow 1000ms;
+}
+
+.shopping-cart {
+  animation-delay: 0ms;
+}
+
+.wishlist {
+  animation-delay: 100ms;
+}
+
+.compare {
+  animation-delay: 200ms;
+}
+
+.review {
+  animation-delay: 300ms;
+}
