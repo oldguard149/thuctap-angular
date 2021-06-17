@@ -1,32 +1,46 @@
-<div class="dropdown p-1 inline-block relative">
-  <button
-    *ngIf="updateTitleWhenValueChange; else notUpdateTitle"
-    class="dropdown-button p-1 focus:outline-none"
-    (click)="show = !show"
-  >
-    {{ (choosedItem$ | async) }}
-  </button>
-  <ng-template #notUpdateTitle>
+<div>
     <button
-      class="dropdown-button p-1 focus:outline-none"
-      (click)="show = !show"
+      *ngIf="updateTitleWhenValueChange; else notUpdateTitle"
+      class="dropdown-button ml-3 focus:outline-none focus:text-brand"
+      nz-dropdown
+      nzTrigger="click"
+      [nzDropdownMenu]="menu"
     >
-      {{ displayTitle }}
+      {{ choosedItem$ | async }}
+      <span class="zmdi zmdi-chevron-down pl-1"></span>
     </button>
-  </ng-template>
-
-  <div class="dropdown-content absolute bg-gray-300 z-10" *ngIf="show">
-    <div class="flex flex-col w-full rounded-md shadow-lg p-1">
-      <button class="hover:cursor-pointer" *ngFor="let item of dropdownItems" (click)="chooseAction(item)">
-        {{item.displayName}}
+  <nz-dropdown-menu #menu="nzDropdownMenu">
+    <div
+      class="
+        bg-white
+        flex flex-col
+        items-start
+        pl-4
+        rounded-md
+        shadow-lg
+        p-1
+      "
+      style="min-width: 120px"
+    >
+      <button
+        class="hover:cursor-pointer hover:text-brand focus:outline-none"
+        *ngFor="let item of dropdownItems"
+        (click)="chooseAction(item)"
+      >
+        {{ item.displayName }}
       </button>
     </div>
-  </div>
-
-  <div
-    id="backdrop"
-    *ngIf="show"
-    class="fixed inset-0"
-    (click)="backdropClick()"
-  ></div>
+  </nz-dropdown-menu>
 </div>
+
+<ng-template #notUpdateTitle>
+  <button
+    class="dropdown-button pl-4 focus:outline-none focus:text-brand"
+    nz-dropdown
+    nzTrigger="click"
+    [nzDropdownMenu]="menu"
+  >
+    {{ displayTitle }}
+    <span class="zmdi zmdi-chevron-down pl-1"></span>
+  </button>
+</ng-template>

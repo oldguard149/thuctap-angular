@@ -1,13 +1,18 @@
-<div>
-  <div class="flex justify-between items-center bg-gray-800 py-4 relative">
+<div class="bg-gray-800 py-3">
+  <div class="flex justify-between items-center  relative lg:w-9/12 mx-auto">
     <h2 class="text-gray-300 text-xl ml-2 inline-block uppercase lg:hidden">
       Categories
     </h2>
 
-    <div class="hidden lg:block">
-      <div class="flex">
+    <div class="hidden lg:block w-4/6 xl:w-5/12">
+      <div class="grid grid-cols-5 items-center">
         <div class="menu-container" *ngFor="let item of items">
-          <a [routerLink]="[item.link]">{{ item.name }}</a>
+          <a [routerLink]="[item.link]"
+            class="uppercase text-white hover:text-brand transition-colors"
+          >
+            {{ item.name }}
+            <span *ngIf="item.subLevel.has" class="zmdi zmdi-caret-down my-2"></span>
+          </a>
           <ng-container *ngIf="item.level === 1">
             <app-popup-menu
               class="popup-menu"
@@ -19,14 +24,16 @@
   
           <!-- cho nay de hien thi cua shop -->
           <ng-container *ngIf="item.level === 2">
-            <div class="popup-menu flex flex-row">
-              <app-popup-menu
+            <div class="popup-menu">
+              <div class="grid grid-cols-4 w-max">
+                <app-popup-menu
                 *ngFor="let subItem of item.subLevel.items"
                 [hasHeaderTitle]="true"
                 [items]="subItem.subLevel.items"
                 [parentLink]="subItem.link"
                 [headerTitle]="subItem.name"
               ></app-popup-menu>
+              </div>
             </div>
           </ng-container>
         </div>

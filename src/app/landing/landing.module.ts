@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 
-import { LandingRoutingModule } from './landing-routing.module';
 import { SharedModule } from '../shared/shared.module';
+import { LandingRoutingModule } from './landing-routing.module';
+
 import { DescriptionComponent } from './components/description/description.component';
 import { DescriptionCardComponent } from './components/description/description-card/description-card.component';
 import { ProductCardActionComponent } from './components/product-card-action/product-card-action.component';
@@ -31,6 +33,8 @@ import { HeaderSectionDropdownComponent } from './components/header-section/head
 import { CardActionContainerDirective } from './directives/card-action-container.directive';
 import { PopupMenuComponent } from './components/header-section/categories-nav/popup-menu/popup-menu.component';
 import { HeaderSectionTopComponent } from './components/header-section/header-section-top/header-section-top.component';
+
+
 
 @NgModule({
   declarations: [
@@ -62,6 +66,12 @@ import { HeaderSectionTopComponent } from './components/header-section/header-se
     PopupMenuComponent,
     HeaderSectionTopComponent,
   ],
-  imports: [CommonModule, LandingRoutingModule, SharedModule, SwiperModule],
+  imports: [
+    CommonModule,
+    LandingRoutingModule,
+    SharedModule,
+    SwiperModule,
+    NzDropDownModule,
+  ],
 })
 export class LandingModule {}

@@ -10,6 +10,7 @@ export class PopupMenuComponent implements OnInit {
   @Input() headerTitle: string;
   @Input() items: any;
   @Input() parentLink: string;
+  @Input() roundClass: string[] = ['rounded'];
   constructor() { }
 
   ngOnInit(): void {

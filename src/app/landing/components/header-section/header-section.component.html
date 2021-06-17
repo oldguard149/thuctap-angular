@@ -13,6 +13,7 @@
     lg:w-large-screen
     md:mx-auto
     grid-cols-6
+    my-6
   "
 >
   <a [routerLink]="['/']" class="cols-span-1"
@@ -39,9 +40,9 @@
   <!-- free shipping quote -->
   <div
     id="free-shipping"
-    class="flex items-center content-center justify-center col-span-2"
+    class="flex items-center justify-end col-span-2"
   >
-    <p class="text-center">Free Shipping on Orders $50+</p>
+    <p class="text-xs">Free Shipping on Orders $50+</p>
   </div>
 
   <app-three-icons class="md:hidden"></app-three-icons>

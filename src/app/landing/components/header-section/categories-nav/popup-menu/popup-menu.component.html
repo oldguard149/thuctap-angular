@@ -1,8 +1,8 @@
-<div style="width: 225px;" class="bg-gray-100">
+<div style="width: 225px;" class="bg-gray-100 py-3 pl-3" [ngClass]="roundClass">
     <h2 *ngIf="hasHeaderTitle" class="uppercase font-semibold">{{headerTitle}}</h2>
     <ul>
-        <li *ngFor="let item of items;">
-            <a [routerLink]="[parentLink, item.link]">{{item.name}}</a>   
+        <li *ngFor="let item of items;" class="py-1">
+            <a [routerLink]="[parentLink, item.link]" class="hover:text-brand">{{item.name}}</a>   
         </li>
     </ul>
 </div>
