@@ -1,0 +1,21 @@
+<ul class="w-11/12 mx-auto">
+    <li *ngFor="let item of items; let i = index" class="p-2">
+      <div class="flex justify-between">
+        <a [routerLink]="[parentLink, item.link]" class="uppercase">{{ item.name }}</a>
+        <button *ngIf="item.subLevel?.has" (click)="toggleDropdown($event.target, i)" class="zmdi focus:outline-none"
+        [ngClass]="{'zmdi-plus': !isClose.has(i), 'zmdi-minus': isClose.has(i)}">
+        </button>
+      </div>
+      <div
+        *ngIf="item.subLevel?.has"
+        class="mobile-dropdown"
+        [ngClass]="{ show: showIndexes.has(i) }"
+      >
+        <app-categories-nav-dropdown 
+          [parentLink]="item.link"
+          [items]="item.subLevel?.items"
+        ></app-categories-nav-dropdown>
+      </div>
+    </li>
+  </ul>
+  

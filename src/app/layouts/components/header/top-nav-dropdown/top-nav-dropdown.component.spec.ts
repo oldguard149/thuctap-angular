@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HeaderSectionTopComponent } from './header-section-top.component';
+import { TopNavDropdownComponent } from './top-nav-dropdown.component';
 
-describe('HeaderSectionTopComponent', () => {
-  let component: HeaderSectionTopComponent;
-  let fixture: ComponentFixture<HeaderSectionTopComponent>;
+describe('TopNavDropdownComponent', () => {
+  let component: TopNavDropdownComponent;
+  let fixture: ComponentFixture<TopNavDropdownComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HeaderSectionTopComponent ]
+      declarations: [ TopNavDropdownComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HeaderSectionTopComponent);
+    fixture = TestBed.createComponent(TopNavDropdownComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

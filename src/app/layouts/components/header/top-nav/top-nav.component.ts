@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { DropdownContent } from '../header-section-dropdown/header-section-dropdown.component';
+import { DropdownContent } from '../top-nav-dropdown/top-nav-dropdown.component';
+
 @Component({
-  selector: 'app-header-section-top',
-  templateUrl: './header-section-top.component.html',
-  styleUrls: ['./header-section-top.component.scss'],
+  selector: 'app-top-nav',
+  templateUrl: './top-nav.component.html',
+  styleUrls: ['./top-nav.component.scss']
 })
-export class HeaderSectionTopComponent implements OnInit {
+export class TopNavComponent implements OnInit {
   language: DropdownContent[] = [
     {displayName: 'English', value: 'english'},
     {displayName: 'French', value: 'french'}
@@ -44,4 +45,5 @@ export class HeaderSectionTopComponent implements OnInit {
   handleAccountActionChange(value: string) {
     // using router.navigateByUrl
   }
+
 }

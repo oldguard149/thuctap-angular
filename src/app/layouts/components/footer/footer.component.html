@@ -1,0 +1,28 @@
+<div class="bg-black">
+  <!-- new letter -->
+  <div class="flex items-center flex-col md:flex-row">
+    <h2 class="uppercase ml-4">Newletter</h2>
+    <form>
+      <input type="text" />
+      <i class="zmdi zmdi-caret-right"></i>
+    </form>
+  </div>
+
+  <!-- footer static -->
+    <app-footer-static></app-footer-static>
+
+  <!-- info -->
+  <div class="flex justify-between my-4">
+    <div>
+      <p class="text-white">
+        <i class="awesomeicon far fa-copyright"></i>
+        2016
+        <a href="https://www.masstechnologist.com/" class="text-brand">MassTechnologist.Com.</a>
+        All Rights Reserved.
+      </p>
+    </div>
+    <div>
+        <i *ngFor="let payment of payments" [ngClass]="[payment]" class="awesomeicon color-white"></i>
+    </div>
+  </div>
+</div>

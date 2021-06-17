@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HeaderSectionComponent } from './header-section.component';
+import { CategoriesNavPopupComponent } from './categories-nav-popup.component';
 
-describe('HeaderSectionComponent', () => {
-  let component: HeaderSectionComponent;
-  let fixture: ComponentFixture<HeaderSectionComponent>;
+describe('CategoriesNavPopupComponent', () => {
+  let component: CategoriesNavPopupComponent;
+  let fixture: ComponentFixture<CategoriesNavPopupComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HeaderSectionComponent ]
+      declarations: [ CategoriesNavPopupComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HeaderSectionComponent);
+    fixture = TestBed.createComponent(CategoriesNavPopupComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

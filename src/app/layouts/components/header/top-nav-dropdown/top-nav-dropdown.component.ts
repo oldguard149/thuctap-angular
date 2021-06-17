@@ -7,11 +7,11 @@ export interface DropdownContent {
 }
 
 @Component({
-  selector: 'app-header-section-dropdown',
-  templateUrl: './header-section-dropdown.component.html',
-  styleUrls: ['./header-section-dropdown.component.scss'],
+  selector: 'app-top-nav-dropdown',
+  templateUrl: './top-nav-dropdown.component.html',
+  styleUrls: ['./top-nav-dropdown.component.scss']
 })
-export class HeaderSectionDropdownComponent implements OnInit {
+export class TopNavDropdownComponent implements OnInit {
   @Input('updateTitle') updateTitleWhenValueChange: boolean = true;
   @Input() displayTitle: string; // use when you don't want update title when changed value
   @Input() dropdownItems: DropdownContent[];
@@ -35,8 +35,4 @@ export class HeaderSectionDropdownComponent implements OnInit {
     this.show = false;
   }
 
-  // use for close dropdown when click outside of dropdown
-  backdropClick() {
-    this.show = !this.show;
-  }
 }
