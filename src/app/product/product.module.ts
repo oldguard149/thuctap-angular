@@ -31,7 +31,10 @@ import { ProductCarouselComponent } from './components/product-carousel/product-
     SwiperModule
   ],
   exports: [
-    ProductCarouselComponent
+    ProductCarouselComponent,
+    StarRatingComponent,
+    ProductPriceComponent,
+    CardActionComponent
   ]
 })
 export class ProductModule { }
