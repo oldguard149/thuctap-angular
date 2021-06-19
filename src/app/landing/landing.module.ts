@@ -27,6 +27,7 @@ import { FeatureProductCardComponent } from './components/feature-products-secti
 import { ProductCarouselComponent } from './components/product-carousel/product-carousel.component';
 import { CardActionContainerDirective } from './directives/card-action-container.directive';
 import { LayoutsModule } from '../layouts/layouts.module';
+import { ProductModule } from '../product/product.module';
 
 
 
@@ -59,7 +60,8 @@ import { LayoutsModule } from '../layouts/layouts.module';
     SharedModule,
     SwiperModule,
     NzDropDownModule,
-    LayoutsModule
+    LayoutsModule,
+    ProductModule
   ],
 })
 export class LandingModule {}

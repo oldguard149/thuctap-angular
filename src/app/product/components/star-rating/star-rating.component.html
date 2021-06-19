@@ -1,1 +1,7 @@
-<p>star-rating works!</p>
+<div>
+  <!-- co the dung for, them choose event -->
+  <i *ngFor="let i of [1, 2, 3, 4, 5]"
+    class="star zmdi zmdi-star-outline"
+    (click)="triggerRating(i)"
+></i>
+</div>

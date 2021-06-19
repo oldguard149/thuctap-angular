@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CurrencyUnitService } from 'src/app/services/currency-unit.service';
 import { DropdownContent } from '../top-nav-dropdown/top-nav-dropdown.component';
 
 @Component({
@@ -14,12 +15,12 @@ export class TopNavComponent implements OnInit {
   ]
 
   currencyUnits: DropdownContent[] = [
-    {displayName: 'USD', value: 'usd'},
-    {displayName: 'EUR', value: 'eur'},
-    {displayName: 'GBP', value: 'gbp'},
-    {displayName: 'PKR', value: 'pkr'},
-    {displayName: 'CAD', value: 'cad'},
-    {displayName: 'JPY', value: 'jpy'}
+    {displayName: 'USD', value: 'USD'},
+    {displayName: 'EUR', value: 'EUR'},
+    {displayName: 'GBP', value: 'GBP'},
+    {displayName: 'PKR', value: 'PKR'},
+    {displayName: 'CAD', value: 'CAD'},
+    {displayName: 'JPY', value: 'JPY'}
   ]
 
   accountActions: DropdownContent[] = [
@@ -30,7 +31,8 @@ export class TopNavComponent implements OnInit {
     { displayName: 'Checkout', value: '/checkout'},
   ]
   constructor(
-    private router: Router
+    private router: Router,
+    private currencyService: CurrencyUnitService
   ) {}
 
   ngOnInit(): void {}
@@ -39,7 +41,7 @@ export class TopNavComponent implements OnInit {
   }
 
   handleCurrencyUnitChange(value: string) {
-
+    this.currencyService.changeCurrencyUnit(value);
   }
 
   handleAccountActionChange(value: string) {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-vertical-product-card',
@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./vertical-product-card.component.scss']
 })
 export class VerticalProductCardComponent implements OnInit {
-
+  @Input() productItem;
   constructor() { }
 
   ngOnInit(): void {

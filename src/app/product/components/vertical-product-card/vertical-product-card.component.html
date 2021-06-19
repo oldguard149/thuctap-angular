@@ -1,1 +1,38 @@
-<p>vertical-product-card works!</p>
+<div
+  class="
+    product-card
+    flex flex-col
+    bg-white
+    hover:drop-shadow-2xl
+  "
+>
+  <div class="carousel relative">
+    <div>
+      <!-- show one image at a time -->
+      <div class="h-2/3 lg:h-1/2 xl:h-full">
+        <img
+          src="https://cdn.shopify.com/s/files/1/1939/5421/products/14m-800x800_158bd5ae-972c-4d3d-95e2-49b85a5130f9_x800.jpg?v=1493998996"
+          alt=""
+        />
+      </div>
+      <div></div>
+      <div></div>
+    </div>
+
+    <app-horizontal-nav-button
+      class="prev-next hidden"
+    ></app-horizontal-nav-button>
+  </div>
+
+  <!-- info -->
+  <div class="pl-5">
+    <h3>{{ productItem.name }}</h3>
+    <app-stars></app-stars>
+    <app-product-price></app-product-price>
+    <div appCardActionContainer >
+      <app-product-card-action
+        class="card-action self-center ml-3 hidden"
+      ></app-product-card-action>
+    </div>
+  </div>
+</div>
