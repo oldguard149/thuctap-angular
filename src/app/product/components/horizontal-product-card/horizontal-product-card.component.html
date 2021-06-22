@@ -1,1 +1,39 @@
-<p>horizontal-product-card works!</p>
+<div class="grid p-3 md:grid-cols-3 hover:drop-shadow-2xl">
+  <div>
+    <a [routerLink]="['/product', product.id]">
+      <img
+      *ngFor="let imageurl of product.images"
+      [src]="imageurl"
+      [alt]="product.title"
+    />
+    </a>
+  </div>
+
+  <div class="pl-5 md:col-span-2">
+    <h3>
+      <a
+        class="text-lg font-medium hover:text-brand"
+        [routerLink]="['/product', product.id]"
+        >{{ product.title }}</a
+      >
+    </h3>
+    <app-star-rating></app-star-rating>
+    <app-product-price
+      [showSecondPrice]="false"
+      [mainPrice]="product.price"
+    ></app-product-price>
+    <div>
+      <p>{{ product.desciption }}</p>
+    </div>
+    <div appCardActionContainer class="flex items-center">
+      <a class="add-to-cart">
+        <i class="shopping-cart zmdi zmdi-shopping-cart" href=""></i>
+        ADD TO CART
+      </a>
+      <app-card-action
+        [showAddToCart]="false"
+        class="card-action self-center ml-3 hidden"
+      ></app-card-action>
+    </div>
+  </div>
+</div>

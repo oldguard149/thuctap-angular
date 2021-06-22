@@ -24,7 +24,6 @@ export class TopNavDropdownComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    console.log(this.dropdownItems[0].displayName)
     this.choosedItemSubject = new BehaviorSubject(this.dropdownItems[0].displayName);
     this.choosedItem$ = this.choosedItemSubject.asObservable();
   }

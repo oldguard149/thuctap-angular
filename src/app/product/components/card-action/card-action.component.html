@@ -1,8 +1,11 @@
 <!-- 15px + 0.75rem + 0.5rem -->
 <div class="product-card-action flex space-x-2 m-2">
-    <a class="shopping-cart zmdi zmdi-shopping-cart" href=""></a>
-    <a class="wishlist zmdi zmdi-favorite-outline" href=""></a>
-    <a class="compare zmdi zmdi-refresh" href=""></a>
-    <a *ngIf="showReview" class="review hidden lg:block zmdi-eye" href=""></a>
-  </div>
-  
+  <a
+    *ngIf="showAddToCart"
+    class="shopping-cart zmdi zmdi-shopping-cart"
+    href=""
+  ></a>
+  <a class="wishlist zmdi zmdi-favorite-outline" href=""></a>
+  <a class="compare zmdi zmdi-refresh" href=""></a>
+  <a *ngIf="showReview" class="review hidden lg:block zmdi-eye" href=""></a>
+</div>

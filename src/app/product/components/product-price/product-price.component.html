@@ -1,6 +1,23 @@
 <div class="flex space-x-4 items-end mb-2 flex-wrap">
-  <span class="text-red-600 text-xl">{{ mainPrice | currency: (locale$ | async) }}</span>
-  <span class="text-gray-400" *ngIf="showSecondPrice">{{
+  <span
+    class="text-xl"
+    [ngClass]="showSecondPrice ? 'text-red-600' : 'text-gray-800'"
+    >{{ mainPrice | currency: (locale$ | async) }}</span
+  >
+
+  <span class="text-gray-40" *ngIf="showSecondPrice">{{
     secondPrice | currency: (locale$ | async)
   }}</span>
 </div>
+
+<!-- <ng-container *ngIf="showSecondPrice">
+  <ng-container [ngTemplateOutlet]="mainPriceTemplate"
+  [ngTemplateOutletContext]="{color: 'text-red-600'}"></ng-container>
+</ng-container>
+<ng-container *ngIf="!showSecondPrice">
+  <ng-container [ngTemplateOutlet]="mainPriceTemplate"
+  [ngTemplateOutletContext]="{color: 'text-gray-800'}"></ng-container>
+</ng-container>
+<ng-template #mainPriceTemplate let-textcolor="color">
+  <span class="text-xl" [ngClass]="textcolor">{{ mainPrice | currency: (locale$ | async) }}</span>
+</ng-template> -->

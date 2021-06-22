@@ -1,0 +1,25 @@
+button {
+    height: 25px;
+    width: 25px;
+    border: 1px solid #e5e5e5;
+    color: #6a6a6a;
+    text-align: center;
+    margin: 0 5px;
+    padding: 0 5px;
+    transition: all 150ms;
+}
+
+button:hover, .selected {
+    background-color: #6a6a6a;
+    border: 1px solid #6a6a6a;
+    color: white;
+    cursor: pointer;
+}
+
+button:focus {
+    outline: none;
+}
+
+.selected {
+    cursor: context-menu;
+}

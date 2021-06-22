@@ -23,7 +23,7 @@ import { ProductCarouselComponent } from './components/product-carousel/product-
     VerticalProductCardComponent,
     CardActionContainerDirective,
     HorizontalNavButtonComponent,
-    ProductCarouselComponent
+    ProductCarouselComponent,
   ],
   imports: [
     CommonModule,
@@ -34,7 +34,9 @@ import { ProductCarouselComponent } from './components/product-carousel/product-
     ProductCarouselComponent,
     StarRatingComponent,
     ProductPriceComponent,
-    CardActionComponent
+    CardActionComponent,
+    VerticalProductCardComponent,
+    HorizontalProductCardComponent
   ]
 })
 export class ProductModule { }

@@ -1,0 +1,24 @@
+:host:hover .card-action {
+  display: block;
+}
+.add-to-cart {
+  font-family: "Material-Design-Iconic-Font";
+  font-size: 15px;
+  line-height: 15px;
+  background-color: #111827;
+  color: white;
+  padding: 0.75rem;
+  border-radius: 30px;
+  transition: background-color 300ms;
+  height: max-content;
+}
+
+.add-to-cart:hover {
+  background-color: var(--brand-color);
+}
+
+img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: atrr(width) / atr(height);
+}

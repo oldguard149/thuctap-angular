@@ -1,0 +1,9 @@
+<nz-radio-group
+  class="flex flex-col"
+  [ngModel]="defaultValue"
+  (ngModelChange)="handleChange($event)"
+>
+  <label class="hover:text-brand transition-colors pb-1" nz-radio *ngFor="let item of items" [nzValue]="item.value">{{
+    item.label
+  }}</label>
+</nz-radio-group>

@@ -13,7 +13,6 @@ export class CategoriesNavDropdownComponent implements OnInit {
   // isClosed = true;
 
   toggleDropdown(event, i: number) {
-    console.log(event);
     this.showIndexes.has(i)
       ? this.showIndexes.delete(i)
       : this.showIndexes.add(i);

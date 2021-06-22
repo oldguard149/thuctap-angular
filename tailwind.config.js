@@ -1,4 +1,5 @@
 const { guessProductionMode } = require("@ngneat/tailwind");
+const defaultTheme = require('tailwindcss/defaultTheme')
 
 module.exports = {
     prefix: '',
@@ -10,13 +11,17 @@ module.exports = {
     },
     darkMode: 'class', // or 'media' or 'class'
     theme: {
+      screens: {
+        'xs': '480px',
+        ...defaultTheme.screens
+      },
       extend: {
         colors: {
           brand: '#c1d72d'
         },
         width: (theme) => ({
           'large-screen': '75%',
-        })
+        })        
       },
     },
     variants: {

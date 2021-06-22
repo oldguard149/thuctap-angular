@@ -7,6 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class CardActionComponent implements OnInit {
   @Input() showReview: boolean = true;
+  @Input() showAddToCart: boolean = true;
   constructor() { }
 
   ngOnInit(): void {

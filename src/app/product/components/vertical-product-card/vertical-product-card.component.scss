@@ -1,8 +1,10 @@
-.carousel:hover .prev-next {
-    display: block;
-    // z-index: 19999;
-}
-
 .product-card:hover .card-action {
     display: block;
 }
+
+img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: atrr(width) / atr(height);
+  }
+  

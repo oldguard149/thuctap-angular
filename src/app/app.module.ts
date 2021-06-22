@@ -16,7 +16,7 @@ registerLocaleData(vi);
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,

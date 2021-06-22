@@ -1,0 +1,7 @@
+<nz-select [ngModel]="defaultValue" (ngModelChange)="handleChange($event)" [style]="{width: width}">
+  <nz-option
+    *ngFor="let item of items;"
+    [nzValue]="item.value"
+    [nzLabel]="item.label"
+  ></nz-option>
+</nz-select>

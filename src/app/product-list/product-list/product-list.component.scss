@@ -1,0 +1,23 @@
+.toolbar-btn {
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    color: white;
+    background-color: #8e8e8e;
+    height: 37px;
+    width: 37px;
+    -webkit-transition: ease .3s all;
+    -moz-transition: ease .3s all;
+    transition: ease .3s all;
+}
+
+.toolbar-btn:focus {
+    outline: none;
+}
+
+.toolbar-btn.selected {
+    background-color: #000;
+}
+.fas {
+    font-family: 'FONTAWESOME';
+}

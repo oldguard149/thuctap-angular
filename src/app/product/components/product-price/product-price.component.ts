@@ -8,7 +8,6 @@ import { CurrencyUnitService } from 'src/app/services/currency-unit.service';
   styleUrls: ['./product-price.component.scss']
 })
 export class ProductPriceComponent implements OnInit {
-  // @Input() locale: string = 'USD';
   @Input() mainPrice: number = 34977;
   @Input() secondPrice: number = 34224;
   @Input() showSecondPrice: boolean = true;
