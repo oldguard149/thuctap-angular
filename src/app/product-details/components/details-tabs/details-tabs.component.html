@@ -1,0 +1,121 @@
+<ng-container *ngIf="activatedTab$ | async as activatedTab">
+  <!-- tabs button -->
+  <div class="flex flex-col md:flex-row md:justify-between mb-10">
+    <h2
+      class="relative tab-title font-bold text-gray-500 cursor-pointer text-xl uppercase"
+      *ngFor="let tab of tabsName"
+      (click)="showTab(tab.value)"
+      [ngClass]="{ activeTitle: activatedTab === tab.value }"
+    >
+      {{ tab.label }}
+    </h2>
+  </div>
+
+  <!-- tab contents -->
+  <div>
+    <!-- description -->
+    <div
+      class="hidden w-full"
+      [ngClass]="{ active: activatedTab === tabsName[0].value }"
+    >
+      {{ product.desciption }}
+    </div>
+
+    <!-- reviews -->
+    <div
+      class="hidden w-full"
+      [ngClass]="{ active: activatedTab === tabsName[1].value }"
+    >
+      <div class="border border-gray-300 p-4 pb-0">
+        <h2 class="uppercase text-lg mb-7">customer reviews</h2>
+        <div class="flex justify-between border-b border-gray-300 pb-7">
+          <p>No review yet</p>
+          <button
+            class="focus:outline-none hover:text-brand transition-colors"
+            (click)="showWriteReview = !showWriteReview"
+          >
+            Write a review
+          </button>
+        </div>
+
+        <form *ngIf="showWriteReview" [formGroup]="reviewForm">
+          <h3 class="text-lg text-gray-500">Write a review</h3>
+          <div class="mt-4">
+            <app-label [id]="'name'">Name</app-label>
+            <app-input
+              [id]="'name'"
+              [parentForm]="reviewForm"
+              [controlName]="'name'"
+            ></app-input>
+          </div>
+          <div class="mt-4">
+            <app-label [id]="'email'">Email</app-label>
+            <app-input
+              [id]="'email'"
+              [parentForm]="reviewForm"
+              [controlName]="'email'"
+              [inputType]="'email'"
+            ></app-input>
+          </div>
+          <div class="mt-4">
+            <app-label>Rating</app-label>
+            <app-star-rating
+              (onRating)="handleRating($event)"
+            ></app-star-rating>
+          </div>
+          <div class="mt-4">
+            <app-label [id]="'review-title'">Review Title</app-label>
+            <app-input
+              [id]="'review-title'"
+              [parentForm]="reviewForm"
+              [controlName]="'title'"
+              [inputType]="'email'"
+            ></app-input>
+          </div>
+          <div class="mt-4">
+            <app-label [id]="desciption">Description</app-label>
+            <textarea
+              class="w-full rounded"
+              formControlName="description"
+              id="description"
+              rows="10"
+            ></textarea>
+          </div>
+          <app-button
+            class="my-6 w-full mx-auto"
+            [className]="
+              'uppercase bg-gray-600 text-white rounded-full hover:bg-brand focus:outline-none px-3 py-2 transition-colors text-bold'
+            "
+            (click)="submit()"
+            >Submit Review</app-button
+          >
+        </form>
+      </div>
+    </div>
+
+    <!-- additional infomation -->
+    <div
+      class="hidden w-full"
+      [ngClass]="{ active: activatedTab === tabsName[2].value }"
+    >
+      <iframe
+        *ngFor="let videoUrl of trustedVideoUrls"
+        width="100%"
+        height="480"
+        [src]="videoUrl"
+        allowfullscreen
+      ></iframe>
+    </div>
+
+    <!-- Tags -->
+    <div
+      class="hidden w-full"
+      [ngClass]="{ active: activatedTab === tabsName[3].value }"
+    >
+      Tags:
+      <span *ngFor="let category of product.category">
+        <a [routerLink]="['/collections', category._id]">{{ category.name }}</a>
+      </span>
+    </div>
+  </div>
+</ng-container>

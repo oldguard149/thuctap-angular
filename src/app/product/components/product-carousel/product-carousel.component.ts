@@ -6,6 +6,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./product-carousel.component.scss']
 })
 export class ProductCarouselComponent implements OnInit {
+  @Input() slidesPerView = 2;
   @Input() breakpoints = {
     824: { slidesPerView: 3 },
     1280: { slidesPerView: 4 },

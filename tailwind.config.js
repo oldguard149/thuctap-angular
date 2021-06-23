@@ -3,8 +3,9 @@ const defaultTheme = require('tailwindcss/defaultTheme')
 
 module.exports = {
     prefix: '',
+    mode: 'jit',
     purge: {
-      enabled: guessProductionMode(),
+      // enabled: guessProductionMode(),
       content: [
         './src/**/*.{html,ts}',
       ]

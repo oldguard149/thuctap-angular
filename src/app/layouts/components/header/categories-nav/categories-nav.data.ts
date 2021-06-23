@@ -18,7 +18,7 @@ export const items = [
     },
     {
       name: 'catalog',
-      link: 'collections',
+      link: 'collections/all',
       level: 0,
       subLevel: {
         has: false,

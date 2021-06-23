@@ -16,6 +16,7 @@ export class PaginationComponent implements OnInit {
   isLast: boolean;
   paginationList: number[];
   showingItemsFrom: number;
+  showingItemsTo: number;
   constructor(
   ) {
 
@@ -33,7 +34,7 @@ export class PaginationComponent implements OnInit {
     this.currentPage === this.totalPages ? this.isLast = true : this.isLast = false;
     this.calculatePaginationList();
     this.showingItemsFrom = this.currentPage * this.pageSize - this.pageSize + 1;
-    
+    this.showingItemsTo = this.currentPage * this.pageSize;
   }
 
 

@@ -1,0 +1,61 @@
+<app-breadcrumb [items]="breadcrumbData"></app-breadcrumb>
+<div class="w-11/12 md:w-9/12 mx-auto">
+  <div class="flex flex-col md:flex-row">
+    <div class="md:w-1/2">
+      <app-images-section></app-images-section>
+    </div>
+
+    <div class="md:w-1/2">
+      <h2 class="text-2xl text-gray-700 mb-3">{{ product.title }}</h2>
+      <div class="mb-3">
+        <app-star-rating></app-star-rating>
+      </div>
+      <div class="mb-3">
+        <app-product-price
+          [mainPrice]="product.price"
+          [showSecondPrice]="false"
+        ></app-product-price>
+      </div>
+      <p class="py-5 border-t border-b border-gray-200">
+        {{ product.desciption }}
+      </p>
+      <!-- actions -->
+      <div class="flex items-center py-5">
+        <form [formGroup]="cartForm" class="flex mr-4">
+          <input type="text" formControlName="quantity" id="quantity" />
+          <div class="flex flex-col">
+            <button id="plus" (click)="changeQuantity('plus')">+</button>
+            <button id="minus" (click)="changeQuantity('minus')">-</button>
+          </div>
+        </form>
+        <a class="add-to-cart mr-4" (click)="addToCart()">
+          <i class="shopping-cart zmdi zmdi-shopping-cart" href=""></i>
+          ADD TO CART
+        </a>
+        <a class="wishlist zmdi zmdi-favorite-outline" href=""></a>
+      </div>
+      <!-- end of action -->
+      <p class="text-gray-700 mb-3 font-semibold">
+        Brand: <a class="hover:text-brand" [routerLink]="['/']">Appla</a>
+      </p>
+      <p class="font-semibold">
+        Availability: <span class="text-green-500">{{ product.status }}</span>
+      </p>
+      <div>
+        <app-social-icons></app-social-icons>
+      </div>
+    </div>
+  </div>
+
+  <!-- tab -->
+  <div class="mt-20">
+    <app-details-tabs></app-details-tabs>
+  </div>
+  
+<!-- we also recommend -->
+  <div class="mt-16">
+    <h2 class="recommendProducts relative uppercase text-xl mb-8 font-medium">We aslso recommends</h2>
+    <app-product-carousel [slidesPerView]="1" [breakpoints]="recommendProductsBreakpoint"></app-product-carousel>
+  </div>
+</div>
+

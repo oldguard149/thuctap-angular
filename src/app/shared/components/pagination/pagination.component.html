@@ -1,24 +1,33 @@
 <div class="flex justify-between">
   <div class="flex">
-    <a *ngIf="!isFirst" [routerLink]="[parentLink, currentPage-1]">
+    <a
+      *ngIf="!isFirst"
+      [routerLink]="[parentLink]"
+      [queryParams]="{ page: currentPage - 1 }"
+    >
       <i class="zmdi zmdi-chevron-left"></i>
     </a>
     <a
       *ngFor="let page of paginationList"
-      [routerLink]="[parentLink, page]"
-      [ngClass]="{'selected': page === currentPage}"
+      [routerLink]="[parentLink]"
+      [queryParams]="{ page: page }"
+      [ngClass]="{ selected: page === currentPage }"
     >
       {{ page }}
     </a>
-    <a *ngIf="!isLast" [routerLink]="[parentLink, currentPage+1]">
+    <a
+      *ngIf="!isLast"
+      [routerLink]="[parentLink]"
+      [queryParams]="{ page: currentPage - 1 }"
+    >
       <i class="zmdi zmdi-chevron-right"></i>
     </a>
   </div>
 
   <div>
     <p>
-      Showing {{  currentPage * pageSize - pageSize + 1 }} to {{ currentPage * pageSize }} of
-      {{ totalItems }} items
+      Showing {{ showingItemsFrom }} to
+      {{ showingItemsTo }} of {{ totalItems }} items
     </p>
   </div>
 </div>

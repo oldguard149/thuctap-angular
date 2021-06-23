@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
@@ -28,7 +27,6 @@ import { RadioGroupComponent } from './components/radio-group/radio-group.compon
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    NzBreadCrumbModule,
     NzSelectModule,
     FormsModule,
     NzRadioModule

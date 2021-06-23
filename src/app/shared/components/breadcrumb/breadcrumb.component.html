@@ -1,5 +1,13 @@
-<nz-breadcrumb nzSeparator=">">
-  <nz-breadcrumb-item *ngFor="let item of items">
-    <a [routerLink]="[item.link]">{{ item.name }}</a>
-  </nz-breadcrumb-item>
-</nz-breadcrumb>
+<div class="breadscrumb-container">
+  <div>
+    <ng-container *ngFor="let item of breadcrumbItems; let isLast = last">
+      <a
+        class="hover:text-brand transition-colors ml-1"
+        [class]="[isLast ? 'text-brand' : 'text-white']"
+        [routerLink]="[item.link]"
+        >{{ item.label }}</a
+      >
+      <span *ngIf="!isLast" class="text-white pl-1"> > </span>
+    </ng-container>
+  </div>
+</div>

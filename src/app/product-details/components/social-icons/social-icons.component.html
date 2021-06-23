@@ -1,0 +1,20 @@
+<div class="mt-4">
+  <ng-container *ngFor="let icon of socialIcons; let first = first;">
+    <a
+      class="
+        border border-gray-500
+        text-brand
+        hover:border-brand hover:text-white hover:bg-brand
+        p-3
+        px-4
+        transition-colors
+      "
+      [ngClass]="{'ml-3': !first}"
+      *ngIf="icon.label !== 'instagram'"
+      [href]="icon.link"
+      target="_blank"
+    >
+      <i [ngClass]="[icon.iconClass]"></i>
+    </a>
+  </ng-container>
+</div>

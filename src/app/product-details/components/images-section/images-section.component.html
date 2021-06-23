@@ -1,0 +1,21 @@
+<div class="px-4">
+  <img [src]="imageUrl$ | async" alt="Image" />
+  <div>
+    <swiper
+      #swipercontainer
+      [slidesPerView]="3"
+      [spaceBetween]="5"
+      [breakpoints]="breakpoints"
+      [loop]="false"
+    >
+      <ng-template swiperSlide let-data *ngFor="let imgUrl of images">
+        <img
+          class="border-gray-500 border hover:border-brand w-full h-auto"
+          [src]="imgUrl"
+          alt="Image"
+          (click)="changeImage(imgUrl)"
+        />
+      </ng-template>
+    </swiper>
+  </div>
+</div>
