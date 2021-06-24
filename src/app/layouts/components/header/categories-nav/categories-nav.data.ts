@@ -1,4 +1,4 @@
-export const items = [
+export const staticMenuData = [
     {
       name: 'home',
       link: '',

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { items } from './categories-nav.data';
+import { staticMenuData } from './categories-nav.data';
 
 @Component({
   selector: 'app-categories-nav',
@@ -11,9 +11,7 @@ export class CategoriesNavComponent implements OnInit {
   showSubMenu = false;
   items;
 
-  constructor() {}
-
   ngOnInit(): void {
-    this.items = items;
+    this.items = staticMenuData;
   }
 }

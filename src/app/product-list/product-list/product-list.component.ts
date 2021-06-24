@@ -15,6 +15,10 @@ export class ProductListComponent implements OnInit {
   sort = sortOptions;
   displayTypes = displayTypes;
   productArray = Array.from({ length: 10 });
+  breadcrumbData = [
+    {label: 'Home', link: '/'},
+    {label: 'Products', link: `/collections/all`}
+  ]
 
   private displayTypeSubject = new BehaviorSubject('grid');
   displayType$ = this.displayTypeSubject.asObservable();
@@ -41,12 +45,12 @@ export class ProductListComponent implements OnInit {
     });
   }
 
-  handleColorAndPriceChange(value: string) {
-    console.log(`Handle color and price ${value}`);
-  }
-
   handleProductListTypeChange(value: string) {
     this.displayTypeSubject.next(value);
+  }
+
+  handleColorAndPriceChange(value: string) {
+    console.log(`Handle color and price ${value}`);
   }
 
   handlePageChange(page: number) {

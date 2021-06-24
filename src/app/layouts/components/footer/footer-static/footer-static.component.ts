@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { socialIconsData } from 'src/app/shared/socialIcons';
+import { staticMenuData } from '../../header/categories-nav/categories-nav.data';
 
 @Component({
   selector: 'app-footer-static',
@@ -6,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./footer-static.component.scss']
 })
 export class FooterStaticComponent implements OnInit {
+  socialIcons = socialIconsData;
+  menuData = staticMenuData;
 
   constructor() { }
 

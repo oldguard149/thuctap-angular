@@ -1,9 +1,44 @@
-.header {
+.social-icons {
+  font-family: 'FONTAWESOME';
+  width: 50px;
+  height: 50px;
+}
+
+.menu-items::first-letter {
+  text-transform: uppercase;
+}
+
+.menu-items {
+  transition: transform 300ms;
+}
+
+.menu-items:hover {
+  transform: translate3d(10px, 0, 0);
+}
+
+:host ::ng-deep .ant-collapse-header, .menu-header {
+  color: white !important;
+  // padding: 0 20px;
+  position: relative;
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+
+:host ::ng-deep .ant-collapse-header::before, .menu-header::before {
   content: "";
-  height: 2px;
+  height: 0.5px;
   width: 90px;
   background: var(--brand-color);
   position: absolute;
   left: 0;
-  bottom: -2px;
+  bottom: -1px;
+}
+
+:host ::ng-deep .ant-collapse-content, :host ::ng-deep .ant-collapse-header, .static-footer {
+  background-color: #1f1f1f !important;
+  color: white;
+}
+
+.ant-collapse>.ant-collapse-item {
+  border: none;
 }

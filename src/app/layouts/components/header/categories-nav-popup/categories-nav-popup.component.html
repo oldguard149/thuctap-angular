@@ -1,4 +1,4 @@
-<div style="width: 225px;" class="bg-gray-100 py-3 pl-3" [ngClass]="roundClass">
+<div style="width: 225px;" class="bg-gray-100 py-3 pl-3" [ngClass]="[roundClass]">
     <h2 *ngIf="hasHeaderTitle" class="uppercase font-semibold">{{headerTitle}}</h2>
     <ul>
         <li *ngFor="let item of items;" class="py-1">

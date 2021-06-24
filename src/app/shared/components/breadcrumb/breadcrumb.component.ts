@@ -8,5 +8,6 @@ import { Component, Input } from '@angular/core';
 export class BreadcrumbComponent {
   @Input('items') breadcrumbItems : {label: string, link: string}[];
 
-  constructor() { }
+  ngOnInit() {
+  }
 }

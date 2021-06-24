@@ -1,94 +1,82 @@
-<div class="py-4">
-  <!-- collapsible -->
-  <nz-collapse [nzExpandIconPosition]="'right'">
+<div class="py-4 static-footer">
+  <!-- collapse -->
+  <nz-collapse class="lg:hidden" [nzExpandIconPosition]="'right'" [nzBordered]="false">
     <nz-collapse-panel [nzHeader]="'Contact us'">
-      <!-- <h3 collapse-title class="header uppercase">Contact Us</h3> -->
-      <div class="ml-4">
-        <div class="logo-footer">
-          <a href="/" itemprop="url">
-            <img
-              src="//cdn.shopify.com/s/files/1/1939/5421/files/logo_0f565a2a-5d1f-4243-9e4c-708062768608@2x.png?v=1493115910"
-              alt="legend-1"
-              itemprop="logo"
-            />
-          </a>
-        </div>
+      <ng-container *ngTemplateOutlet="infomation"></ng-container>
+    </nz-collapse-panel>
 
-        <p class="desc-footer">
-          It is a long established fact that reader will distract by the
-          readable content of a page...
-        </p>
-        <div class="address">
-          <label>Address :</label>No 40 Baria Sreet 133/2 NewYork City, NY,
-          United States.
-        </div>
-        <div class="email"><label>Email :</label>demo@masstechnologist.com</div>
-        <div class="telephone"><label>Phone :</label>0(1234) 567 890</div>
-      </div>
+    <nz-collapse-panel [nzHeader]="'Main menu'" *ngFor="let i of [1, 2, 3]">
+      <ng-container *ngTemplateOutlet="menu">{{i}}</ng-container>
     </nz-collapse-panel>
   </nz-collapse>
+<!-- end of collapse -->
 
-  <!-- <div class="footer-content">
-        <div id="cmsblock-39" class="cmsblock">
-          <div class="description">
-            <ul class="social-footer">
-              <li class="first">
-                <a
-                  data-toggle="tooltip"
-                  data-placement="bottom"
-                  href="https://facebook.com/shopify"
-                  title="legend-1 on Facebook"
-                >
-                  <i class="fa fa-facebook"></i>
-                </a>
-              </li>
 
-              <li>
-                <a
-                  data-toggle="tooltip"
-                  data-placement="bottom"
-                  href="https://twitter.com/shopify"
-                  title="legend-1 on Twitter"
-                >
-                  <i class="fa fa-twitter"></i>
-                </a>
-              </li>
-
-              <li>
-                <a
-                  data-toggle="tooltip"
-                  data-placement="bottom"
-                  href="https://pinterest.com/shopify"
-                  title="legend-1 on Pinterest"
-                >
-                  <i class="fa fa-pinterest-square"></i>
-                </a>
-              </li>
-
-              <li>
-                <a
-                  data-toggle="tooltip"
-                  data-placement="bottom"
-                  href="https://plus.google.com/+shopify"
-                  title="legend-1 on Google"
-                  rel="publisher"
-                >
-                  <i class="fa fa-google-plus"></i>
-                </a>
-              </li>
-
-              <li>
-                <a
-                  data-toggle="tooltip"
-                  data-placement="bottom"
-                  href="https://instagram.com/shopify"
-                  title="legend-1 on Instagram"
-                >
-                  <i class="fa fa-instagram"></i>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div> -->
+  <div class="hidden lg:block w-9/12 mx-auto">
+    <div class="grid grid-cols-5">
+      <ng-container *ngTemplateOutlet="infomation"></ng-container>
+      <div *ngFor="let i of [1, 2, 3]">
+        <h2 class="menu-header relative">Main menu</h2>
+        <ng-container *ngTemplateOutlet="menu">{{i}}</ng-container>
+      </div>
+    </div>
+  </div>
 </div>
+
+<ng-template #infomation>
+  <div class="ml-4 col-span-2 lg:pr-6">
+    <div class="logo-footer py-4">
+      <a [routerLink]="['/']" itemprop="url">
+        <img
+          src="//cdn.shopify.com/s/files/1/1939/5421/files/logo_0f565a2a-5d1f-4243-9e4c-708062768608@2x.png?v=1493115910"
+          alt="legend-1"
+          itemprop="logo"
+        />
+      </a>
+    </div>
+
+    <p class="desc-footer py-1">
+      It is a long established fact that reader will distract by the readable
+      content of a page...
+    </p>
+    <div class="address py-1">
+      <label>Address :</label>No 40 Baria Sreet 133/2 NewYork City, NY, United
+      States.
+    </div>
+    <div class="email py-1"><label>Email :</label>demo@masstechnologist.com</div>
+    <div class="telephone py-1"><label>Phone :</label>0(1234) 567 890</div>
+    <!-- social icons -->
+    <div class="my-4">
+      <ng-container *ngFor="let icon of socialIcons; let first = first">
+        <a
+          class="
+            social-icons
+            border border-gray-500
+            text-brand
+            hover:border-brand hover:text-white hover:bg-brand
+            p-3
+            px-4
+            transition-colors
+            rounded-full
+          "
+          [ngClass]="{ 'ml-3': !first }"
+          [href]="icon.link"
+          target="_blank"
+        >
+          <i [ngClass]="[icon.iconClass]"></i>
+        </a>
+      </ng-container>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #menu>
+  <div class="flex flex-col">
+    <a
+      class="menu-items hover:text-brand py-2"
+      *ngFor="let menuItem of menuData"
+      [routerLink]="menuItem.link"
+      >{{ menuItem.name }}</a
+    >
+  </div>
+</ng-template>

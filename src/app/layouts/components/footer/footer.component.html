@@ -1,28 +1,63 @@
 <div class="bg-black">
   <!-- new letter -->
-  <div class="flex items-center flex-col md:flex-row">
-    <h2 class="uppercase ml-4">Newletter</h2>
-    <form>
-      <input type="text" />
-      <i class="zmdi zmdi-caret-right"></i>
+  <div
+    class="
+      flex
+      items-center
+      flex-col
+      md:flex-row
+      w-11/12
+      md:w-9/12
+      mx-auto
+      py-4
+      content-center
+      justify-center
+    "
+  >
+    <h2 class="uppercase ml-4 text-white text-xl font-semibold">Newletter</h2>
+    <form class="flex items-center bg-gray-700 rounded-full px-4 md:ml-8">
+      <input
+        type="text"
+        class="bg-gray-700 border-none"
+        style="outline: none; outline-width: 0; box-shadow: none"
+      />
+      <button><i class="zmdi zmdi-caret-right text-2xl text-brand"></i></button>
     </form>
   </div>
 
   <!-- footer static -->
-    <app-footer-static></app-footer-static>
+  <app-footer-static></app-footer-static>
 
   <!-- info -->
-  <div class="flex flex-col justify-between my-4 md:flex-row">
+  <div
+    class="
+      flex flex-col
+      justify-between
+      py-4
+      md:flex-row
+      w-11/12
+      md:w-9/12
+      mx-auto
+    "
+  >
     <div>
       <p class="text-white">
         <i class="awesomeicon far fa-copyright"></i>
         2016
-        <a href="https://www.masstechnologist.com/" class="text-brand hover:text-white">MassTechnologist.Com.</a>
+        <a
+          href="https://www.masstechnologist.com/"
+          class="text-brand hover:text-white"
+          >MassTechnologist.Com.</a
+        >
         All Rights Reserved.
       </p>
     </div>
     <div>
-        <i *ngFor="let payment of payments" [ngClass]="[payment]" class="awesomeicon color-white"></i>
+      <i
+        *ngFor="let payment of payments"
+        [ngClass]="[payment]"
+        class="awesomeicon color-white"
+      ></i>
     </div>
   </div>
 </div>

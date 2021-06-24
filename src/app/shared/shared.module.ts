@@ -11,6 +11,7 @@ import { PaginationComponent } from './components/pagination/pagination.componen
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { SelectComponent } from './components/select/select.component';
 import { RadioGroupComponent } from './components/radio-group/radio-group.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -29,7 +30,8 @@ import { RadioGroupComponent } from './components/radio-group/radio-group.compon
     ReactiveFormsModule,
     NzSelectModule,
     FormsModule,
-    NzRadioModule
+    NzRadioModule,
+    RouterModule
   ],
   exports: [
     ButtonComponent,
