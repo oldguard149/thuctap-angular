@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
+import { NgxPaginationModule } from "ngx-pagination";
 
 import { InputComponent } from './components/input/input.component';
 import { ButtonComponent } from './components/button/button.component';
@@ -31,7 +32,8 @@ import { RouterModule } from '@angular/router';
     NzSelectModule,
     FormsModule,
     NzRadioModule,
-    RouterModule
+    RouterModule,
+    NgxPaginationModule
   ],
   exports: [
     ButtonComponent,

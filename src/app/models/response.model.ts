@@ -1,3 +1,6 @@
+import { Category } from "./category.model";
+import { Product } from "./product.model";
+
 export interface Response {
     docs: any[],
     totalDocs: number,
@@ -9,4 +12,12 @@ export interface Response {
     hasNextPage: boolean,
     prevPage: number | null,
     nextPage: number | null
+}
+
+export interface ProductsResponse extends Response {
+    docs: Product[];
+}
+
+export interface CategoryResponse extends Response {
+    docs: Category[];
 }

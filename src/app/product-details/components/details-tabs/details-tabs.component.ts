@@ -1,9 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { BehaviorSubject } from 'rxjs';
 import { Product } from 'src/app/models/product.model';
-import { ExampleProduct } from 'src/app/product/components/mock-data';
 
 @Component({
   selector: 'app-details-tabs',
@@ -11,7 +10,7 @@ import { ExampleProduct } from 'src/app/product/components/mock-data';
   styleUrls: ['./details-tabs.component.scss'],
 })
 export class DetailsTabsComponent implements OnInit {
-  @Input() product: Product = ExampleProduct;
+  @Input() product: Product;
   tabsName = [
     { label: 'product description', value: 'description' },
     { label: 'reviews', value: 'reviews' },
@@ -25,10 +24,14 @@ export class DetailsTabsComponent implements OnInit {
     title: ['', Validators.required],
     description: ['']
   });
+  trustedVideoUrls: any[] = [];
+
   private activatedTabSubject = new BehaviorSubject(this.tabsName[0].value);
   activatedTab$ = this.activatedTabSubject.asObservable();
-  trustedVideoUrls: any[] = [];
-  showWriteReview = false;
+  private showWriteReviewSubject = new BehaviorSubject(false);
+  showWriteReview$ = this.showWriteReviewSubject.asObservable();
+
+
   constructor(
     private fb: FormBuilder,
     private sanitizer: DomSanitizer
@@ -40,6 +43,10 @@ export class DetailsTabsComponent implements OnInit {
 
   showTab(value: string ) {
     this.activatedTabSubject.next(value);
+  }
+
+  showWriteReview() {
+    this.showWriteReviewSubject.next(!this.showWriteReviewSubject.value);
   }
 
   sanitizerVideoUrls() {

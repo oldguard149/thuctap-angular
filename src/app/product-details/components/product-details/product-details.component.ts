@@ -1,6 +1,16 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ExampleProduct } from 'src/app/product/components/mock-data';
+import { ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
+import {
+  addToCart,
+  loadProductDetails,
+} from '../../state/product-details.actions';
+import {
+  selectProductDetails,
+  selectProductDetailsBreadcrumb,
+  selectProductQuantity,
+} from '../../state/product-details.selectors';
 
 @Component({
   selector: 'app-product-details',
@@ -8,41 +18,55 @@ import { ExampleProduct } from 'src/app/product/components/mock-data';
   styleUrls: ['./product-details.component.scss'],
 })
 export class ProductDetailsComponent implements OnInit {
-  @Input() product = ExampleProduct;
+  private currentProductId: string = null;
   cartForm: FormGroup = this.fb.group({
     quantity: ['1', Validators.required],
   });
-  recommendProductsBreakpoint = {
-    485: { slidesPerView: 2 },
-    650: { slidesPerView: 3 },
-    1024: { slidesPerView: 4 },
-  };
-  breadcrumbData = [
-    {label: 'Home', link: '/'},
-    {label: this.product.title, link: `/product/${this.product.id}`}
-  ]
-  constructor(private fb: FormBuilder) {}
+ 
+  product$ = this.store.select(selectProductDetails);
+  productQuantity$ = this.store.select(selectProductQuantity);
+  breadcrumb$ = this.store.select(selectProductDetailsBreadcrumb);
 
-  ngOnInit(): void {}
-
-  addToCart() {
-    console.log(this.cartForm.value);
+  ngOnInit(): void {
+    const currentProductId = this.route.snapshot.params['id'];
+    this.store.dispatch(
+      loadProductDetails({ productId: currentProductId })
+    );
   }
 
-  changeQuantity(action: 'minus' | 'plus') {
+  addToCart() {
+    const orderQuantity = this.cartForm.value;
+    this.store.dispatch(
+      addToCart({ ...orderQuantity, productId: this.currentProductId })
+    );
+  }
+
+  changeQuantity(action: 'minus' | 'plus', quantity: number) {
     const currentQuantity = parseInt(this.quantity.value);
     if (action === 'minus') {
       currentQuantity === 1
         ? alert('Minimun quantity: 1')
         : this.quantity.setValue(currentQuantity - 1);
     } else {
-      currentQuantity < this.product.quantity
+      currentQuantity < quantity
         ? this.quantity.setValue(currentQuantity + 1)
-        : alert(`Only ${this.product.quantity} items available`);
+        : alert(`Only ${quantity} items available`);
     }
   }
 
   get quantity() {
     return this.cartForm.get('quantity');
   }
+
+  constructor(
+    private fb: FormBuilder,
+    private store: Store,
+    private route: ActivatedRoute,
+  ) {}
+
+  recommendProductsBreakpoint = {
+    485: { slidesPerView: 2 },
+    650: { slidesPerView: 3 },
+    1024: { slidesPerView: 4 },
+  };
 }

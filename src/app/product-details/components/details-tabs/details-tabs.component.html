@@ -32,13 +32,13 @@
           <p>No review yet</p>
           <button
             class="focus:outline-none hover:text-brand transition-colors"
-            (click)="showWriteReview = !showWriteReview"
+            (click)="showWriteReview()"
           >
             Write a review
           </button>
         </div>
 
-        <form *ngIf="showWriteReview" [formGroup]="reviewForm">
+        <form *ngIf="showWriteReview$ | async" [formGroup]="reviewForm">
           <h3 class="text-lg text-gray-500">Write a review</h3>
           <div class="mt-4">
             <app-label [id]="'name'">Name</app-label>
