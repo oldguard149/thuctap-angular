@@ -12,8 +12,11 @@
   <div class="pl-5 md:col-span-2">
     <h3>
       <a
-        class="text-lg font-medium hover:text-brand"
+        class="text-lg font-medium hover:text-brand line-clamp-1"
         [routerLink]="['/product', product.id]"
+        nz-tooltip
+        [nzTooltipTitle]="product.title"
+        [nzTooltipMouseEnterDelay]="0.75"
         >{{ product.title }}</a
       >
     </h3>
@@ -23,15 +26,16 @@
       [mainPrice]="product.price"
     ></app-product-price>
     <div>
-      <p>{{ product.desciption }}</p>
+      <p class="line-clamp-3">{{ product.desciption }}</p>
     </div>
     <div appCardActionContainer class="flex items-center">
-      <a class="add-to-cart">
-        <i class="shopping-cart zmdi zmdi-shopping-cart" href=""></i>
+      <a class="add-to-cart" (click)="addToCart()">
+        <i class="shopping-cart zmdi zmdi-shopping-cart"></i>
         ADD TO CART
       </a>
       <app-card-action
         [showAddToCart]="false"
+        [productId]="product.id"
         class="card-action self-center ml-3 hidden"
       ></app-card-action>
     </div>

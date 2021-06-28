@@ -1,11 +1,15 @@
 <!-- 15px + 0.75rem + 0.5rem -->
 <div class="product-card-action flex space-x-2 m-2">
+  <!-- add to cart -->
   <a
     *ngIf="showAddToCart"
     class="shopping-cart zmdi zmdi-shopping-cart"
-    href=""
+    (click)="handleClick('addToCart')"
   ></a>
-  <a class="wishlist zmdi zmdi-favorite-outline" href=""></a>
-  <a class="compare zmdi zmdi-refresh" href=""></a>
-  <a *ngIf="showReview" class="review hidden lg:block zmdi-eye" href=""></a>
+  <!-- wish list -->
+  <a class="wishlist zmdi zmdi-favorite-outline" (click)="handleClick('wishlist')"></a>
+  <!-- view detail -->
+  <a class="compare zmdi zmdi-refresh" [routerLink]="['/product', productId]"></a>
+  <!-- review -->
+  <a *ngIf="showReview" class="review hidden lg:block zmdi-eye" (click)="handleClick('review')"></a>
 </div>

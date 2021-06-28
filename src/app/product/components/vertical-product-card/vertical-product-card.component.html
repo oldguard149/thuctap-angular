@@ -10,10 +10,13 @@
   </div>
 
   <!-- info -->
-  <div class="pl-5">
+  <div class="pl-3">
     <h3>
       <a
-        class="text-lg font-medium hover:text-brand"
+        nz-tooltip
+        [nzTooltipTitle]="product.title"
+        [nzTooltipMouseEnterDelay]="0.75"
+        class="text-lg font-medium hover:text-brand line-clamp-1"
         [routerLink]="['/product', product.id]"
         >{{ product.title }}</a
       >
@@ -26,6 +29,8 @@
     <div appCardActionContainer>
       <app-card-action
         class="card-action self-center ml-3 hidden"
+        [productId]="product.id"
+        (addToCart)="handleAddToCart()"
       ></app-card-action>
     </div>
   </div>

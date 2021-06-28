@@ -18,7 +18,7 @@ export const staticMenuData = [
     },
     {
       name: 'catalog',
-      link: 'collections/all',
+      link: 'collections',
       level: 0,
       subLevel: {
         has: false,

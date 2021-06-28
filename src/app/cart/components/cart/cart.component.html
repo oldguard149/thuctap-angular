@@ -1,0 +1,55 @@
+<div *ngIf="cart$ | async as cart">
+  {{cart | json}}
+</div>
+<!-- <app-breadcrumb></app-breadcrumb>
+<h1 class="uppercase p-5 bg-gray-400 mb-5">SHOPPING CART</h1>
+<div>
+    <h1 class="uppercase p-5 bg-gray-400 mb-5">YOUR CART IS CURRENTLY EMPTY</h1>
+    <p>Continue browsing <a routerLink="'/'" class="hover:text-brand">here</a></p>
+</div>
+<div class="table-container mb-5">
+  <table>
+    <tr>
+      <th>Image</th>
+      <th>Product Name</th>
+      <th>Quantity</th>
+      <th>Unit Price</th>
+      <th>Total</th>
+    </tr>
+    <tr *ngFor="let item of cartItems">
+      <td>
+        <a [routerLink]="['/product', 'item.id']"
+          ><img [src]="item.images[0]" [alt]="item.title"
+        /></a>
+      </td>
+      <td>
+        <h5>{{ item.title }}</h5>
+      </td>
+      <td>
+        <div>
+          <input type="number" />
+          <div><button>Update</button>Remove<button></button></div>
+        </div>
+      </td>
+      <td><app-product-price></app-product-price></td>
+      <td><app-product-price></app-product-price></td>
+    </tr>
+  </table>
+</div>
+
+<div class="table-container mb-5">
+    <table>
+        <tr>
+            <td rowspan="2">Shipping, taxes, and discounts will be calculated at checkout</td>
+        </tr>
+        <tr>
+            <td>Sub totals</td>
+            <td></td>
+        </tr>
+    </table>
+</div>
+
+<div class="flex flex-col items-center sm:flex-row sm:justify-between">
+    <app-button>CONTINUE SHOPPING</app-button>
+    <app-button>PROCEED TO CHECKOUT</app-button>
+</div> -->

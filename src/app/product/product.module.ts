@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SwiperModule } from 'swiper/angular';
+import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 
 
 import { ProductRoutingModule } from './product-routing.module';
@@ -12,7 +13,6 @@ import { VerticalProductCardComponent } from './components/vertical-product-card
 import { CardActionContainerDirective } from './directives/card-action-container.directive';
 import { HorizontalNavButtonComponent } from './components/horizontal-nav-button/horizontal-nav-button.component';
 import { ProductCarouselComponent } from './components/product-carousel/product-carousel.component';
-
 
 @NgModule({
   declarations: [
@@ -28,7 +28,8 @@ import { ProductCarouselComponent } from './components/product-carousel/product-
   imports: [
     CommonModule,
     ProductRoutingModule,
-    SwiperModule
+    SwiperModule,
+    NzToolTipModule
   ],
   exports: [
     ProductCarouselComponent,

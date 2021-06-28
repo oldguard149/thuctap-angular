@@ -33,7 +33,7 @@ import { RouterModule } from '@angular/router';
     FormsModule,
     NzRadioModule,
     RouterModule,
-    NgxPaginationModule
+    NgxPaginationModule,
   ],
   exports: [
     ButtonComponent,
@@ -42,7 +42,7 @@ import { RouterModule } from '@angular/router';
     PaginationComponent,
     BreadcrumbComponent,
     SelectComponent,
-    RadioGroupComponent
-  ]
+    RadioGroupComponent,
+  ],
 })
 export class SharedModule { }

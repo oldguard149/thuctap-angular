@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { loadCartFromLocalStorage } from './cart/state/cart.actions';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'thuctap-angular';
+  ngOnInit() {
+    this.store.dispatch(loadCartFromLocalStorage())
+  }
+
+  constructor(private store: Store) {}
 }

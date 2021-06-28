@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { concat } from 'rxjs';
 import { exhaustMap, map, tap } from 'rxjs/operators';
 import { ProductsResponse } from 'src/app/models/response.model';
 import { ProductService } from 'src/app/product/services/product.service';
@@ -81,7 +80,7 @@ export class ProductsEffects {
   ) {}
 
   private getQueryParamValue(key: string, defaulValue: any) {
-    const value = this.route.snapshot.paramMap.get(key);
+    const value = this.route.snapshot.queryParamMap.get(key);
     return !!value ? value : defaulValue;
   }
 

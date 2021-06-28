@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CurrencyUnitService } from 'src/app/services/currency-unit.service';
 import { DropdownContent } from '../top-nav-dropdown/top-nav-dropdown.component';
@@ -8,7 +8,7 @@ import { DropdownContent } from '../top-nav-dropdown/top-nav-dropdown.component'
   templateUrl: './top-nav.component.html',
   styleUrls: ['./top-nav.component.scss']
 })
-export class TopNavComponent implements OnInit {
+export class TopNavComponent {
   language: DropdownContent[] = [
     {displayName: 'English', value: 'english'},
     {displayName: 'French', value: 'french'}
@@ -35,9 +35,7 @@ export class TopNavComponent implements OnInit {
     private currencyService: CurrencyUnitService
   ) {}
 
-  ngOnInit(): void {}
   handleLanguageChange(languageValue: string) {
-
   }
 
   handleCurrencyUnitChange(value: string) {
@@ -45,7 +43,7 @@ export class TopNavComponent implements OnInit {
   }
 
   handleAccountActionChange(value: string) {
-    // using router.navigateByUrl
+    this.router.navigateByUrl(value);
   }
 
 }

@@ -46,34 +46,31 @@
       </div>
       <!-- end of list type, page limit and sort -->
 
-        <ng-container
-          *ngIf="vm.displayType === 'grid'; else columnList"
-        >
-          <div class="grid xs:grid-cols-2 lg:grid-cols-3 mt-4">
-              <app-vertical-product-card
-                *ngFor="
-                  let product of vm.products
-                    | paginate
-                      : {
-                          itemsPerPage: vm.paginationInfo.limit,
-                          currentPage: vm.paginationInfo.page,
-                          totalItems: vm.paginationInfo.totalProducts
-                        }
-                "
-                [product]="product"
-              ></app-vertical-product-card>
-          </div>
-        </ng-container>
-        <ng-template #columnList>
-          <div class="flex flex-col mt-4">
-            <app-horizontal-product-card
-              *ngFor="let product of vm.products"
-              [product]="product"
-            ></app-horizontal-product-card>
-          </div>
-        </ng-template>
+      <ng-container *ngIf="vm.displayType === 'grid'; else columnList">
+        <div class="grid xs:grid-cols-2 lg:grid-cols-3 mt-4">
+          <app-vertical-product-card
+            *ngFor="
+              let product of vm.products
+                | paginate
+                  : {
+                      itemsPerPage: vm.paginationInfo.limit,
+                      currentPage: vm.paginationInfo.page,
+                      totalItems: vm.paginationInfo.totalProducts
+                    }
+            "
+            [product]="product"
+          ></app-vertical-product-card>
+        </div>
+      </ng-container>
+      <ng-template #columnList>
+        <div class="flex flex-col mt-4">
+          <app-horizontal-product-card
+            *ngFor="let product of vm.products"
+            [product]="product"
+          ></app-horizontal-product-card>
+        </div>
+      </ng-template>
+      <app-pagination (pageChange)="handlePageChange($event)"></app-pagination>
     </div>
-
-    <app-pagination (pageChange)="handlePageChange($event)"></app-pagination>
   </div>
 </ng-container>
