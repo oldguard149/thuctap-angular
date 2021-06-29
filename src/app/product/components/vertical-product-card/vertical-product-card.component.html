@@ -2,9 +2,11 @@
   <div>
     <a [routerLink]="['/product', product.id]">
       <img
-        *ngFor="let imageurl of product.images"
+        class="object-contain h-48 w-full"
+        *ngFor="let imageurl of product.images; let isFirst = first;"
         [src]="imageurl"
         [alt]="product.title"
+        [ngClass]="{'hidden': !isFirst}"
       />
     </a>
   </div>

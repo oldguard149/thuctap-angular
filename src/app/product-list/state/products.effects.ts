@@ -3,10 +3,15 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { exhaustMap, map, tap } from 'rxjs/operators';
+import { Product } from 'src/app/models/product.model';
 import { ProductsResponse } from 'src/app/models/response.model';
 import { ProductService } from 'src/app/product/services/product.service';
 import * as ProductsActions from './products.actions';
-import { selectPaginationInfo, selectQueryParams } from './products.selectors';
+import {
+  selectPaginationInfo,
+  selectProducts,
+  selectQueryParams,
+} from './products.selectors';
 
 @Injectable()
 export class ProductsEffects {
@@ -35,6 +40,70 @@ export class ProductsEffects {
             )
           )
       )
+    )
+  );
+
+  loadCategories$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ProductsActions.loadCategories),
+      exhaustMap((action) =>
+        this.productService
+          .fetchCategories()
+          .pipe(
+            map((res) => ProductsActions.loadCategoriesSuccess({ res: res }))
+          )
+      )
+    )
+  );
+
+  sortProducts$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ProductsActions.changeSortType),
+      concatLatestFrom((action) => this.store.select(selectProducts)),
+      map(([action, products]) => {
+        let newProducts: Product[] = JSON.parse(JSON.stringify(products));
+        switch (action.sortType) {
+          case 'price-ascending':
+            newProducts.sort((a, b) => a.price - b.price);
+            break;
+          case 'price-descending':
+            newProducts.sort((a, b) => b.price - a.price);
+            break;
+          case 'title-ascending':
+            newProducts.sort((a, b) => {
+              const firstTitle = a.title.toLowerCase();
+              const secondTitle = b.title.toLowerCase();
+              return firstTitle < secondTitle ? -1 : 1;
+            });
+            break;
+          case 'title-descending':
+            newProducts.sort((a, b) => {
+              const firstTitle = a.title.toLowerCase();
+              const secondTitle = b.title.toLowerCase();
+              return firstTitle > secondTitle ? -1 : 1;
+            });
+            break;
+          case 'date-ascending':
+            newProducts.sort((a, b) => {
+              const firstDate = new Date(a.updatedAt);
+              const secondDate = new Date(b.updatedAt);
+              return firstDate < secondDate ? -1 : 1;
+            });
+            break;
+          case 'date-descending':
+            newProducts.sort((a, b) => {
+              const firstDate = new Date(a.updatedAt);
+              const secondDate = new Date(b.updatedAt);
+              return firstDate > secondDate ? -1 : 1;
+            });
+            break;
+          default:
+            newProducts = products;
+        }
+        return ProductsActions.updateProductsAfterSort({
+          products: newProducts,
+        });
+      })
     )
   );
 

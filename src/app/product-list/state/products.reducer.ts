@@ -1,7 +1,18 @@
 import { state } from '@angular/animations';
 import { createReducer, on } from '@ngrx/store';
+import { Category } from 'src/app/models/category.model';
 import { Product } from 'src/app/models/product.model';
 import * as ProductsActions from './products.actions';
+
+export type SortTypes =
+  | 'manual'
+  | 'best-selling'
+  | 'title-ascending'
+  | 'title-descending'
+  | 'price-ascending'
+  | 'price-descending'
+  | 'date-ascending'
+  | 'date-descending';
 
 export interface ProductsState {
   docs: Product[];
@@ -10,7 +21,8 @@ export interface ProductsState {
   totalDocs: number;
   loading: boolean;
   displayListType: 'grid' | 'column';
-  sortType: string;
+  sortType: SortTypes;
+  catetories: Category[];
 }
 
 const initialState: ProductsState = {
@@ -21,6 +33,7 @@ const initialState: ProductsState = {
   loading: true,
   displayListType: 'grid',
   sortType: 'manual',
+  catetories: [],
 };
 
 export const productsReducer = createReducer(
@@ -42,6 +55,10 @@ export const productsReducer = createReducer(
     totalDocs: res.totalDocs,
     loading: false,
   })),
+  on(ProductsActions.loadCategoriesSuccess, (state, { res }) => ({
+    ...state,
+    catetories: res.docs,
+  })),
   on(
     ProductsActions.changeListDisplayType,
     (state: ProductsState, { listType }) => ({
@@ -49,10 +66,6 @@ export const productsReducer = createReducer(
       displayListType: listType,
     })
   ),
-  on(ProductsActions.changeSortType, (state: ProductsState, { sortType }) => ({
-    ...state,
-    sortType,
-  })),
   on(ProductsActions.changePage, (state: ProductsState, { page }) => ({
     ...state,
     page,
@@ -60,6 +73,14 @@ export const productsReducer = createReducer(
   on(ProductsActions.changePageLimit, (state: ProductsState, { limit }) => ({
     ...state,
     limit,
+  })),
+  on(ProductsActions.changeSortType, (state: ProductsState, { sortType }) => ({
+    ...state,
+    sortType,
+  })),
+  on(ProductsActions.updateProductsAfterSort, (state, { products }) => ({
+    ...state,
+    docs: products,
   })),
   on(ProductsActions.resetPage, (state) => ({ ...state, page: 1 }))
 );

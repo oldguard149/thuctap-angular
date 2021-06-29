@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { ProductsResponse } from 'src/app/models/response.model';
+import { CategoriesResponse, ProductsResponse } from 'src/app/models/response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +23,10 @@ export class ProductService {
         .set('limit', limit)
     }
     return this.http.get<ProductsResponse>(`${this.api_url}/api/v1/products/list`, options);
+  }
+
+  fetchCategories() {
+    return this.http.get<CategoriesResponse>(`${this.api_url}/api/v1/categories/list`)
   }
 
   searchProduct(key: string, page: number = 1, limit: number = 10) {

@@ -1,3 +1,20 @@
-<button [class]="className" (click)="emitClickEvent()" [type]="inputType">
+<button
+  [class]="className"
+  class="
+    text-white text-base
+    bg-gray-900
+    py-2
+    px-4
+    rounded-3xl
+    font-bold 
+    hover:bg-brand
+    transition-colors
+    duration-300
+    focus:outline-none focus:shadow-outline
+  "
+  (click)="emitClickEvent()"
+  [type]="inputType"
+>
   <ng-content></ng-content>
 </button>
+<div class="h-2"></div>

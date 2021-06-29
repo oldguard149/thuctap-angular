@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { displayTypes, pageLimits, sortOptions } from './static.data';
 import * as ProductsActions from '../../state/products.actions';
 import {
+  selectCategories,
   selectDisplayListType,
   selectPageLimit,
   selectPaginationInfo,
@@ -11,6 +12,8 @@ import {
 } from '../../state/products.selectors';
 import { combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { BreadCrumb } from 'src/app/shared/components/breadcrumb/breadcrumb.component';
+import { SortTypes } from '../../state/products.reducer';
 
 @Component({
   selector: 'app-product-list',
@@ -23,24 +26,28 @@ export class ProductListComponent implements OnInit {
   sortType$ = this.store.select(selectSortType);
   pageLimit$ = this.store.select(selectPageLimit);
   paginationInfo$ = this.store.select(selectPaginationInfo);
+  categories$ = this.store.select(selectCategories);
 
   vm$ = combineLatest([
     this.products$,
     this.displayType$,
     this.sortType$,
     this.paginationInfo$,
+    this.categories$
   ]).pipe(
-    map(([products, displayType, sortType, paginationInfo]) => ({
+    map(([products, displayType, sortType, paginationInfo, categories]) => ({
       products,
       displayType,
       sortType,
       paginationInfo,
+      categories
     }))
   );
 
   ngOnInit(): void {
     this.store.dispatch(ProductsActions.initializeQueryParams());
     this.loadProducts();
+    this.store.dispatch(ProductsActions.loadCategories());
   }
 
   ngOnDestroy(): void {
@@ -63,7 +70,7 @@ export class ProductListComponent implements OnInit {
     );
   }
 
-  handleSortTypeChange(value: string) {
+  handleSortTypeChange(value: SortTypes) {
     this.store.dispatch(ProductsActions.changeSortType({ sortType: value }));
   }
 
@@ -73,7 +80,7 @@ export class ProductListComponent implements OnInit {
 
   constructor(private store: Store) {}
   sort = sortOptions;
-  breadcrumbData = [
+  breadcrumbData: BreadCrumb[] = [
     { label: 'Home', link: '/' },
     { label: 'Products', link: `/collections/all` },
   ];

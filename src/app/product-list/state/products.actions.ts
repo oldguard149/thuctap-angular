@@ -1,5 +1,7 @@
 import { createAction, props } from "@ngrx/store";
-import { ProductsResponse } from "src/app/models/response.model";
+import { Product } from "src/app/models/product.model";
+import { CategoriesResponse, ProductsResponse } from "src/app/models/response.model";
+import { SortTypes } from "./products.reducer";
 
 
 // look at url and update (page, limit, sortType) if they exist in query params 
@@ -9,7 +11,7 @@ export const initializeQueryParams = createAction(
 
 export const updateQueryParams = createAction(
     '[Product List] Update Query Params',
-    props<{page: number, limit: number, sortType: string}>()
+    props<{page: number, limit: number, sortType: SortTypes}>()
 )
 
 // page and limit will select from store
@@ -21,6 +23,15 @@ export const loadProductsSuccess = createAction(
     '[Products List / Backend API] Load Products Success',
     props<{res: ProductsResponse}>()
 );
+
+export const loadCategories = createAction(
+    '[Products List / Backend API] Load Categories'
+);
+
+export const loadCategoriesSuccess = createAction(
+    '[Products List / Backend API] Load Categories Success',
+    props<{res: CategoriesResponse}>()
+)
 
 export const loadProductsFailure = createAction(
     '[Products List / Backend API] Load Products Failure',
@@ -34,7 +45,12 @@ export const changeListDisplayType = createAction(
 
 export const changeSortType = createAction(
     '[Product List] Change Sort Type',
-    props<{sortType: string}>()
+    props<{sortType: SortTypes}>()
+)
+
+export const updateProductsAfterSort = createAction(
+    '[Product List] Update Products After Sort',
+    props<{products: Product[]}>()
 )
 
 export const addToCart = createAction(

@@ -1,0 +1,9 @@
+<div>
+  <p
+    *ngFor="let msg of messages"
+    [ngClass]="[msg.type === 'success' ? 'success' : 'failure']"
+    class="p-3"
+  >
+    {{ msg.content }}
+  </p>
+</div>

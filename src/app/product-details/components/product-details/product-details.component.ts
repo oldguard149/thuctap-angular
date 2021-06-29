@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { productDetailAddToCart } from 'src/app/cart/state/cart.actions';
 import { CartItem } from 'src/app/models/cartItem.model';
 import { Product } from 'src/app/models/product.model';
@@ -19,7 +21,7 @@ import {
   templateUrl: './product-details.component.html',
   styleUrls: ['./product-details.component.scss'],
 })
-export class ProductDetailsComponent implements OnInit {
+export class ProductDetailsComponent implements OnInit, OnDestroy {
   cartForm: FormGroup = this.fb.group({
     quantity: ['1', Validators.required],
   });
@@ -28,17 +30,9 @@ export class ProductDetailsComponent implements OnInit {
   productQuantity$ = this.store.select(selectProductQuantity);
   breadcrumb$ = this.store.select(selectProductDetailsBreadcrumb);
   private product: Product;
-  ngOnInit(): void {
-    const currentProductId = this.route.snapshot.params['id'];
-    this.store.dispatch(
-      loadProductDetails({ productId: currentProductId })
-    );
-    this.product$.subscribe(product => this.product = product);
-  }
 
   addToCart() {
     const orderQuantity = parseInt(this.quantity.value);
-    console.log(this.product)
     const item = {
       id: this.product._id,
       title: this.product.title,
@@ -72,7 +66,20 @@ export class ProductDetailsComponent implements OnInit {
     private store: Store,
     private route: ActivatedRoute,
   ) {}
+  destroyed = new Subject<void>();
 
+  ngOnInit(): void {
+    const currentProductId = this.route.snapshot.params['id'];
+    this.store.dispatch(
+      loadProductDetails({ productId: currentProductId })
+    );
+    this.product$.pipe(takeUntil(this.destroyed)).subscribe(product => this.product = product);
+  }
+
+  ngOnDestroy() {
+    this.destroyed.next();
+    this.destroyed.complete();
+  }
   recommendProductsBreakpoint = {
     485: { slidesPerView: 2 },
     650: { slidesPerView: 3 },

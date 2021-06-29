@@ -3,45 +3,50 @@ import { ProductsState } from './products.reducer';
 
 export const productsFeatureKey = 'products';
 export const selectProductsFeatureState =
-  createFeatureSelector(productsFeatureKey);
+  createFeatureSelector<ProductsState>(productsFeatureKey);
 
 export const selectProducts = createSelector(
   selectProductsFeatureState,
-  (state: ProductsState) => state.docs
+  (state) => state.docs
 );
+
+export const selectCategories = createSelector(
+  selectProductsFeatureState,
+  (state) => state.catetories
+)
 
 export const selectDisplayListType = createSelector(
   selectProductsFeatureState,
-  (state: ProductsState) => state.displayListType
+  (state) => state.displayListType
 );
 
 export const selectSortType = createSelector(
   selectProductsFeatureState,
-  (state: ProductsState) => state.sortType
-);
-
-export const selectCurrentPage = createSelector(
-  selectProductsFeatureState,
-  (state: ProductsState) => state.page
-);
-
-export const selectPageLimit = createSelector(
-  selectProductsFeatureState,
-  (state: ProductsState) => state.limit
-);
-
-export const selectTotalNumberOfProducts = createSelector(
-  selectProductsFeatureState,
-  (state: ProductsState) => state.totalDocs
+  (state) => state.sortType
 );
 
 export const selectQueryParams = createSelector(
   selectProductsFeatureState,
-  (state: ProductsState) => ({
+  (state) => ({
     page: state.page,
     limit: state.limit,
     sortType: state.sortType,
   })
+);
+
+export const selectCurrentPage = createSelector(
+  selectProductsFeatureState,
+  (state) => state.page
+);
+
+export const selectPageLimit = createSelector(
+  selectProductsFeatureState,
+  (state) => state.limit
+);
+
+export const selectTotalNumberOfProducts = createSelector(
+  selectProductsFeatureState,
+  (state) => state.totalDocs
 );
 
 export const selectPaginationInfo = createSelector(

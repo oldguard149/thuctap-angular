@@ -1,0 +1,32 @@
+<div class="w-full max-w-xs">
+    <form
+      class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+      [formGroup]="registerForm"
+    >
+      <h2 class="text-2xl font-bold text-center">Register</h2>
+      <app-messages [messages]="(authMessages$ | async)"></app-messages>
+      <div class="mb-4">
+        <app-label [id]="'fullname'">Fullname</app-label>
+        <app-input
+          [id]="'fullname'"
+          [parentForm]="registerForm"
+          [controlName]="'fullname'"
+        ></app-input>
+      </div>
+      <div class="mb-4">
+        <app-label [id]="'email'">Email</app-label>
+        <app-input [id]="'email'" [parentForm]="registerForm" [controlName]="'email'"></app-input>
+      </div>
+      <div class="mb-6">
+        <app-label [id]="'password'"> Password </app-label>
+        <app-input
+          [id]="'password'"
+          [parentForm]="registerForm"
+          [controlName]="'password'"
+          [inputType]="'password'"
+        ></app-input>
+      </div>
+      <app-button (buttonClick)="submit()">Register</app-button>
+    </form>
+  </div>
+  

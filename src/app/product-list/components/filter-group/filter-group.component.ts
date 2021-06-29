@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Category } from 'src/app/models/category.model';
-import { exampleCategories } from './mock-data';
 
 @Component({
   selector: 'app-filter-group',
@@ -8,7 +7,7 @@ import { exampleCategories } from './mock-data';
   styleUrls: ['./filter-group.component.scss']
 })
 export class FilterGroupComponent implements OnInit {
-  @Input() categories: Category[] = exampleCategories;
+  @Input() categories: Category[]
   @Input() colors = [
     {label: 'Blue', value: 'color_blue'},
     {label: 'Red', value: 'color_red'},
@@ -20,9 +19,9 @@ export class FilterGroupComponent implements OnInit {
     {label: '200', value: 'price_200'}
   ]
   @Output() colorAndPrice = new EventEmitter();
-  constructor() { }
 
   ngOnInit(): void {
+    console.log(this.categories);
   }
 
   handleColorAndPriceChange(value: string) {

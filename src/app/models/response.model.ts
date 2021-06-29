@@ -18,7 +18,7 @@ export interface ProductsResponse extends Response {
     docs: Product[];
 }
 
-export interface CategoryResponse extends Response {
+export interface CategoriesResponse extends Response {
     docs: Category[];
 }
 

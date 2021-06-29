@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { combineLatest, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { combineLatest, Subject, Subscription } from 'rxjs';
+import { map, takeUntil } from 'rxjs/operators';
+import { BreadCrumb } from 'src/app/shared/components/breadcrumb/breadcrumb.component';
 import { removeCartItem, updateOrderQuantity } from '../../state/cart.actions';
 import {
   selectCartItems,
@@ -28,10 +29,9 @@ export class CartComponent implements OnInit {
     cart: this.fb.array([]),
   });
 
-  private cartSupscription: Subscription;
 
   handleUpdateOrderQuantity(id: string, index: number) {
-    const orderQty = this.cartFormArray.controls[index].value;
+    const orderQty = parseInt(this.cartFormArray.controls[index].value);
     this.store.dispatch(updateOrderQuantity({ id, orderQty }));
   }
 
@@ -48,7 +48,7 @@ export class CartComponent implements OnInit {
     return this.form.get('cart') as FormArray;
   }
 
-  breadcrumbData = [
+  breadcrumbData: BreadCrumb[] = [
     { label: 'Home', link: '/' },
     { label: 'Your Shopping Cart', link: `/cart` },
   ];
@@ -59,7 +59,7 @@ export class CartComponent implements OnInit {
     private router: Router
   ) {}
   ngOnInit(): void {
-    this.cartSupscription = this.cart$.subscribe((items) => {
+    this.cart$.pipe(takeUntil(this.destroyed)).subscribe((items) => {
       items.forEach((item) => {
         this.cartFormArray.push(new FormControl(item.orderQuantity));
       });
@@ -67,6 +67,9 @@ export class CartComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    this.cartSupscription.unsubscribe();
+    this.destroyed.next();
+    this.destroyed.complete();
   }
+
+  private destroyed = new Subject<void>();
 }

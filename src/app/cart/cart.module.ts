@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 
 import { CartRoutingModule } from './cart-routing.module';
 import { CartComponent } from './components/cart/cart.component';
@@ -19,7 +20,8 @@ import { ProductModule } from '../product/product.module';
     CartRoutingModule,
     SharedModule,
     ReactiveFormsModule,
-    ProductModule
+    ProductModule,
+    NzToolTipModule
   ]
 })
 export class CartModule { }
