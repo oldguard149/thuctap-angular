@@ -15,9 +15,10 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
-import * as fromCart from './cart/state/cart.reducer';
+import { cartReducer } from './cart/state/cart.reducer';
 import { CartEffects } from './cart/state/cart.effects';
-
+import { authReducer } from './auth/state/auth.reducer';
+import { AuthEffects } from './auth/state/auth.effects';
 registerLocaleData(vi);
 
 @NgModule({
@@ -29,9 +30,12 @@ registerLocaleData(vi);
     FormsModule,
     HttpClientModule,
     LayoutsModule,
-    StoreModule.forRoot({cart: fromCart.cartReducer}, {}),
-    EffectsModule.forRoot([CartEffects]),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    StoreModule.forRoot({ cart: cartReducer, auth: authReducer }, {}),
+    EffectsModule.forRoot([CartEffects, AuthEffects]),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production,
+    }),
   ],
   providers: [
     { provide: NZ_I18N, useValue: vi_VN },

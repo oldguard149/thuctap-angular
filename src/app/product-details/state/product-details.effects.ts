@@ -15,7 +15,7 @@ export class ProductDetailsEffects {
       ofType(loadProductDetails),
       exhaustMap((action) =>
         this.productService
-          .getProductDetails(action.productId)
+          .fetchProductDetails(action.productId)
           .pipe(
             map((product: Product) => loadProductDetailsSuccess({ product }))
           )

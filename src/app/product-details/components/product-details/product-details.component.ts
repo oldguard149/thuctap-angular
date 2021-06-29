@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { productDetailAddToCart } from 'src/app/cart/state/cart.actions';
+import { CartItem } from 'src/app/models/cartItem.model';
+import { Product } from 'src/app/models/product.model';
 import {
-  addToCart,
   loadProductDetails,
 } from '../../state/product-details.actions';
 import {
@@ -18,7 +20,6 @@ import {
   styleUrls: ['./product-details.component.scss'],
 })
 export class ProductDetailsComponent implements OnInit {
-  private currentProductId: string = null;
   cartForm: FormGroup = this.fb.group({
     quantity: ['1', Validators.required],
   });
@@ -26,19 +27,27 @@ export class ProductDetailsComponent implements OnInit {
   product$ = this.store.select(selectProductDetails);
   productQuantity$ = this.store.select(selectProductQuantity);
   breadcrumb$ = this.store.select(selectProductDetailsBreadcrumb);
-
+  private product: Product;
   ngOnInit(): void {
     const currentProductId = this.route.snapshot.params['id'];
     this.store.dispatch(
       loadProductDetails({ productId: currentProductId })
     );
+    this.product$.subscribe(product => this.product = product);
   }
 
   addToCart() {
-    const orderQuantity = this.cartForm.value;
-    this.store.dispatch(
-      addToCart({ ...orderQuantity, productId: this.currentProductId })
-    );
+    const orderQuantity = parseInt(this.quantity.value);
+    console.log(this.product)
+    const item = {
+      id: this.product._id,
+      title: this.product.title,
+      quantity: this.product.quantity,
+      orderQuantity: orderQuantity,
+      images: this.product.images,
+      price: this.product.price
+    } as CartItem;
+    this.store.dispatch(productDetailAddToCart({ item: item }));
   }
 
   changeQuantity(action: 'minus' | 'plus', quantity: number) {

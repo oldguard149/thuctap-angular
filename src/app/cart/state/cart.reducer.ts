@@ -3,10 +3,11 @@ import { createReducer, on } from '@ngrx/store';
 import { CartItem } from 'src/app/models/cartItem.model';
 import * as CartActions from './cart.actions';
 
+export const cartLocalStorageKey = 'cart';
+export const cartFeatureKey = 'cart';
 export interface CartState extends EntityState<CartItem> {}
 export const adapter: EntityAdapter<CartItem> = createEntityAdapter<CartItem>();
 const initialState: CartState = adapter.getInitialState();
-export const cartLocalStorageKey = 'cart';
 
 export const cartReducer = createReducer(
   initialState,
@@ -19,6 +20,9 @@ export const cartReducer = createReducer(
   on(CartActions.productDetailAddToCart, (state, { item }) => {
     return handleAddToCart(state, item);
   }),
+  on(CartActions.updateOrderQuantity, (state, {id, orderQty}) => {
+    return adapter.updateOne({id, changes: {orderQuantity: orderQty}}, state);
+  }),
   on(CartActions.removeCartItem, (state, { id }) => {
     return adapter.removeOne(id, state);
   }),
@@ -27,6 +31,19 @@ export const cartReducer = createReducer(
   })
 );
 
+
+
+// ====================== entities selector =============================== 
+const {
+  selectIds,
+  selectEntities,
+  selectAll,
+  selectTotal,
+} = adapter.getSelectors();
+export const selectCartId = selectIds;
+export const selectCartEntities = selectEntities;
+export const selectCartItems = selectAll;
+export const selectTotalCartItems = selectTotal;
 
 
 // ====================== helper function ===============================

@@ -21,3 +21,8 @@ export interface ProductsResponse extends Response {
 export interface CategoryResponse extends Response {
     docs: Category[];
 }
+
+export interface ResponseMessage {
+    type: 'success' | 'failure';
+    content: string;
+}

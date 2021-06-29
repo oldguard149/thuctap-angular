@@ -12,11 +12,11 @@ export class ProductService {
     @Inject('API_URL') private api_url
   ) { }
 
-  getProductDetails(productId: string) {
+  fetchProductDetails(productId: string) {
     return this.http.get(`${this.api_url}/api/v1/products/details/${productId}`);
   }
 
-  getProducts(page: number = 1, limit: number = 10) {
+  fetchProducts(page: number = 1, limit: number = 10) {
     const options = {
       params: new HttpParams()
         .set('page', page)
@@ -32,7 +32,27 @@ export class ProductService {
         .set('page', page)
         .set('limit', limit)
     }
-
     return this.http.get(`${this.api_url}/api/v1/products/list`, options)
+  }
+
+
+  fetchNewProducts() {
+    return this.fetchProducts(1, 10);
+  }
+
+  fetchTodayDealProducts() {
+    return this.fetchProducts(1, 3);
+  }
+
+  fetchBestSellerProducts() {
+    return this.fetchProducts(1, 3);
+  }
+
+  fetchNewArrivalProducts() {
+    return this.fetchProducts(1, 3);
+  }
+
+  fetchFeatureProducts() {
+    return this.fetchProducts(1, 7);
   }
 }

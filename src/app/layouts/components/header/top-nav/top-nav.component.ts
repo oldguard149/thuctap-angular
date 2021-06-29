@@ -24,7 +24,7 @@ export class TopNavComponent {
   ]
 
   accountActions: DropdownContent[] = [
-    { displayName: 'Sign In', value: '/sign-in'},
+    { displayName: 'Log In', value: '/login'},
     { displayName: 'Register', value: '/register'},
     { displayName: 'Wishlist', value: '/wishlist'},
     { displayName: 'Cart', value: '/cart'},

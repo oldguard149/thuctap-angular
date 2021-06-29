@@ -7,10 +7,15 @@ export const loadCartFromLocalStorage = createAction(
 );
 
 export const loadCartFromLocalStorageSuccess = createAction(
-    '[App Component / Local Storage] Load Cart From LocalStorage Success',
+    '[Local Storage] Load Cart From LocalStorage Success',
     props<{items: CartItem[]}>()
 );
 
+export const localStorageEmpty = createAction(
+    '[Local Storage] Local Storage Empty'
+);
+
+// after perform (add, update, remove) item, call saveCart
 export const saveCartToLocalStorage = createAction(
     '[Local Storage] Save Cart To Local Storage'
 );
@@ -26,7 +31,8 @@ export const productDetailAddToCart = createAction(
 );
 
 export const updateOrderQuantity = createAction(
-    '[Cart] Update Quantity'
+    '[Cart] Update Quantity',
+    props<{id: string, orderQty: number}>()
 );
 
 export const removeCartItemInHeader = createAction(
@@ -38,14 +44,3 @@ export const removeCartItem = createAction(
     '[Cart] Remove Cart Item',
     props<{id: string}>()
 )
-
-
-export const landingPageAddToCart = createAction(
-    '[Landing Page] Add To Cart',
-    props<{item: CartItem}>()
-);
-
-export const productListAddToCart = createAction(
-    '[Product List] Add To Cart',
-    props<{item: CartItem}>()
-);

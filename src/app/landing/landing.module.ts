@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { SwiperModule } from 'swiper/angular';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
 import { SharedModule } from '../shared/shared.module';
 import { LandingRoutingModule } from './landing-routing.module';
@@ -22,8 +24,9 @@ import { SectionTitleComponent } from './components/section-title/section-title.
 import { FeatureProductCardComponent } from './components/feature-products-section/feature-product-card/feature-product-card.component';
 import { LayoutsModule } from '../layouts/layouts.module';
 import { ProductModule } from '../product/product.module';
-
-
+import { landingPageFeatureKey } from './state/landing.selectors';
+import { landingPageReducer } from './state/landing.reducer';
+import { LandingPageEffects } from './state/landing.effects';
 
 @NgModule({
   declarations: [
@@ -49,7 +52,9 @@ import { ProductModule } from '../product/product.module';
     SwiperModule,
     NzDropDownModule,
     LayoutsModule,
-    ProductModule
+    ProductModule,
+    StoreModule.forFeature(landingPageFeatureKey, landingPageReducer),
+    EffectsModule.forFeature([LandingPageEffects]),
   ],
 })
 export class LandingModule {}

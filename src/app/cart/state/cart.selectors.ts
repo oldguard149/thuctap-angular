@@ -1,20 +1,31 @@
-import { adapter } from "./cart.reducer";
+import * as fromCart from './cart.reducer';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
 
-const {
-    selectIds,
-    selectEntities,
-    selectAll,
-    selectTotal,
-  } = adapter.getSelectors();
-  
-  
-  // ====================== entities selector =============================== 
-  export const selectCartId = selectIds;
-  
-  // object key: CartItem.id; value: CartItem
-  export const selectCartEntities = selectEntities;
-  
-  export const selectCartItems = selectAll;
-  
-  export const selectTotalCartItems = selectTotal;
-  
+const selectCartFeatureState = createFeatureSelector<fromCart.CartState>(
+  fromCart.cartFeatureKey
+);
+
+export const selectCartId = createSelector(
+  selectCartFeatureState,
+  fromCart.selectCartId
+);
+
+export const selectCartEntities = createSelector(
+  selectCartFeatureState,
+  fromCart.selectCartEntities
+);
+
+export const selectCartItems = createSelector(
+  selectCartFeatureState,
+  fromCart.selectCartItems
+);
+
+export const selectTotalCartItems = createSelector(
+  selectCartFeatureState,
+  fromCart.selectTotalCartItems
+);
+
+export const selectTotalPrice = createSelector(
+  selectCartItems,
+  (items) => items.reduce((total, item) => total += item.orderQuantity * item.price, 0)
+)

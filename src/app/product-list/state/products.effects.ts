@@ -28,7 +28,7 @@ export class ProductsEffects {
       concatLatestFrom((action) => this.store.select(selectPaginationInfo)),
       exhaustMap(([action, paginationInfo]) =>
         this.productService
-          .getProducts(paginationInfo.page, paginationInfo.limit)
+          .fetchProducts(paginationInfo.page, paginationInfo.limit)
           .pipe(
             map((res: ProductsResponse) =>
               ProductsActions.loadProductsSuccess({ res: res })

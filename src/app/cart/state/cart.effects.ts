@@ -19,28 +19,47 @@ export class CartEffects {
         if (items !== null) {
           return CartActions.loadCartFromLocalStorageSuccess({ items });
         }
-        return CartActions.loadCartFromLocalStorageSuccess({ items: [] });
+        return CartActions.localStorageEmpty();
       })
     )
   );
 
-  saveCartToLocalStorage$ = createEffect(
+  saveCartToLocalStorage2$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(CartActions.saveCartToLocalStorage),
+        ofType(
+          CartActions.productCardAddToCart,
+          CartActions.productDetailAddToCart,
+          CartActions.updateOrderQuantity,
+          CartActions.removeCartItem,
+          CartActions.removeCartItemInHeader
+        ),
         concatLatestFrom((action) =>
           this.store.select(CartSelectors.selectCartItems)
         ),
-        map((action, items) => {
+        map(([action, items]) => {
           localStorage.removeItem(cartLocalStorageKey);
-          localStorage.setItem(
-            cartLocalStorageKey,
-            JSON.stringify(items)
-          );
+          localStorage.setItem(cartLocalStorageKey, JSON.stringify(items));
         })
       ),
     { dispatch: false }
   );
+
+   // saveCartToLocalStorage$ = createEffect(
+  //   () =>
+  //     this.actions$.pipe(
+  //       ofType(CartActions.saveCartToLocalStorage),
+  //       concatLatestFrom((action) =>
+  //         this.store.select(CartSelectors.selectCartItems)
+  //       ),
+  //       map(([action, items]) => {
+  //         localStorage.removeItem(cartLocalStorageKey);
+  //         localStorage.setItem(cartLocalStorageKey, JSON.stringify(items));
+  //         console.log(JSON.stringify(items));
+  //       })
+  //     ),
+  //   { dispatch: false }
+  // );
 
   constructor(private actions$: Actions, private store: Store) {}
 }
