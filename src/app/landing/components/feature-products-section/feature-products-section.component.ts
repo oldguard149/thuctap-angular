@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { selectFeatureProducts } from '../../state/landing.selectors';
 
 @Component({
   selector: 'app-feature-products-section',
   templateUrl: './feature-products-section.component.html',
   styleUrls: ['./feature-products-section.component.scss']
 })
-export class FeatureProductsSectionComponent implements OnInit {
+export class FeatureProductsSectionComponent {
   breakpointsProductCard = {
     824: { slidesPerView: 3 },
     1280: { slidesPerView: 6 },
@@ -15,9 +17,7 @@ export class FeatureProductsSectionComponent implements OnInit {
     824: {slidesPerView: 4},
     1280: {slidesPerView: 6}
   }
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+  constructor(private store: Store) { }
+  featureProducts$ = this.store.select(selectFeatureProducts);
 
 }

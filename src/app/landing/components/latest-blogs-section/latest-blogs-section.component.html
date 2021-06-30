@@ -2,12 +2,23 @@
   <div class="w-9/12 mx-auto py-5">
     <app-section-title>Latest blogs</app-section-title>
 
-    <div
-      class="grid grid-cols-2 lg:grid-cols-3 place-items-center gap-4"
-    >
-      <app-latest-blogs-card></app-latest-blogs-card>
-      <app-latest-blogs-card></app-latest-blogs-card>
-      <app-latest-blogs-card></app-latest-blogs-card>
-    </div>
+    <swiper
+        #swipercontainer
+        [slidesPerView]="1"
+        [spaceBetween]="20"
+        [breakpoints]="breakpoints"
+        [loop]="false"
+      >
+        <ng-template swiperSlide let-data>
+          <app-latest-blogs-card></app-latest-blogs-card>
+        </ng-template>
+        <ng-template swiperSlide let-data>
+          <app-latest-blogs-card></app-latest-blogs-card>
+        </ng-template>
+        <ng-template swiperSlide let-data>
+          <app-latest-blogs-card></app-latest-blogs-card>
+        </ng-template>
+      </swiper>
   </div>
 </div>
+ 

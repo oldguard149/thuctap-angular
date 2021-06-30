@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { selectNewProducts } from '../../state/landing.selectors';
 import { DescriptionItem } from './description-card/description-card.component';
 
 @Component({
@@ -6,7 +8,7 @@ import { DescriptionItem } from './description-card/description-card.component';
   templateUrl: './description.component.html',
   styleUrls: ['./description.component.scss'],
 })
-export class DescriptionComponent implements OnInit {
+export class DescriptionComponent {
   descriptionItems: DescriptionItem[] = [
     {
       image_url:
@@ -35,8 +37,6 @@ export class DescriptionComponent implements OnInit {
   ];
 
 
-
-  constructor() {}
-
-  ngOnInit(): void {}
+  newProducts$ = this.store.select(selectNewProducts);
+  constructor(private store: Store) {}
 }

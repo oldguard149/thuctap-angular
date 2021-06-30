@@ -1,0 +1,39 @@
+<div class="p-5">
+  <div class="relative">
+    <img
+      class="object-contain w-full h-60 lg:h-96"
+      *ngFor="let imageurl of product.images; let isFirst = first"
+      [src]="imageurl"
+      [alt]="product.title"
+      [ngClass]="{ hidden: !isFirst }"
+    />
+    <app-box-countdown></app-box-countdown>
+  </div>
+  <div class="grid grid-cols-2 m-5 place-items-center">
+    <div>
+      <h2>
+        <a
+          nz-tooltip
+          [nzTooltipTitle]="product.title"
+          [nzTooltipMouseEnterDelay]="0.75"
+          class="text-lg font-medium hover:text-brand line-clamp-1"
+          [routerLink]="['/product', product.id]"
+        >
+          {{ product.title }}
+        </a>
+      </h2>
+      <app-star-rating></app-star-rating>
+      <app-product-price
+        [showSecondPrice]="false"
+        [mainPrice]="product.price"
+      ></app-product-price>
+    </div>
+    <div appCardActionContainer>
+      <app-card-action
+        class="card-action self-center ml-3 hidden"
+        [productId]="product.id"
+        (addToCart)="handleAddToCart()"
+      ></app-card-action>
+    </div>
+  </div>
+</div>

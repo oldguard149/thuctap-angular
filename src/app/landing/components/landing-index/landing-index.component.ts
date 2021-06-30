@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { loadProductsForLandingPage } from '../../state/landing.actions';
 
 @Component({
   selector: 'app-landing-index',
@@ -7,9 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LandingIndexComponent implements OnInit {
 
-  constructor() { }
+  constructor(private store: Store) { }
 
   ngOnInit(): void {
+    this.store.dispatch(loadProductsForLandingPage());
   }
 
 }

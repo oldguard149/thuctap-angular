@@ -1,4 +1,4 @@
-<div class="w-11/12 lg:w-9/12 mx-auto">
+<div class="w-11/12 lg:w-9/12 mx-auto" *ngIf="(featureProducts$ | async) as products">
   <div>
     <div><app-section-title>Feature products</app-section-title></div>
     <div>
@@ -10,8 +10,8 @@
         [breakpoints]="breakpointsProductCard"
         [loop]="false"
       >
-        <ng-template swiperSlide let-data *ngFor="let i of [1, 2, 3, 4, 5, 6, 7]">
-          <app-feature-product-card>{{ i }}</app-feature-product-card>
+        <ng-template swiperSlide let-data *ngFor="let product of products;">
+          <app-feature-product-card [product]="product"></app-feature-product-card>
         </ng-template>
       </swiper>
       <!-- <div class="grid grid-cols-2 gap-2 md:grid-cols-3 xl:grid-cols-6">

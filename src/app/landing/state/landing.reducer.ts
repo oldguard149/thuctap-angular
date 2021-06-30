@@ -11,11 +11,11 @@ export interface LandingPageState {
 }
 
 const initalState: LandingPageState = {
-  newProducts: [],
-  totayDealProducts: [],
-  bestSellerProducts: [],
-  newArrivalProducts: [],
-  featureProducts: [],
+  newProducts: null,
+  totayDealProducts: null,
+  bestSellerProducts: null,
+  newArrivalProducts: null,
+  featureProducts: null,
 };
 
 export const landingPageReducer = createReducer(

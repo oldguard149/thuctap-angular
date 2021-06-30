@@ -1,8 +1,8 @@
 import { createAction, props } from "@ngrx/store";
 import { Product } from "src/app/models/product.model";
 
-export const loadAllTypeOfProducts = createAction(
-    '[Landing Page / Backend API] Load All Type Of Products'
+export const loadProductsForLandingPage = createAction(
+    '[Landing Page / Backend API] Load Products For Landing Page'
 )
 
 export const loadNewProducts = createAction(

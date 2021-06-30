@@ -3,35 +3,19 @@
     <div class="justify-self-start">
       <app-section-title>today deals</app-section-title>
     </div>
-  
-    <div class="grid grid-cols-1 mt-11 mb-11 bg-white lg:grid-cols-2">
+
+    <div
+      *ngIf="(todayDealProducts$ | async) as products"
+      class="grid grid-cols-1 mt-11 mb-11 bg-white lg:grid-cols-2"
+    >
       <!-- two cards on the side -->
       <div class="grid grid-cols-1">
-        <app-todaydeals-product-card></app-todaydeals-product-card>
-        <app-todaydeals-product-card></app-todaydeals-product-card>
+        <app-todaydeals-product-card [product]="products[0]"></app-todaydeals-product-card>
+        <app-todaydeals-product-card [product]="products[1]"></app-todaydeals-product-card>
       </div>
-  
+
       <!-- large card -->
-      <div class="p-5">
-        <div class="relative">
-          <img
-            class="w-full"
-            src="https://cdn.shopify.com/s/files/1/1939/5421/products/14m-800x800_158bd5ae-972c-4d3d-95e2-49b85a5130f9_x800.jpg?v=1493998996"
-            alt=""
-          />
-          <app-box-countdown></app-box-countdown>
-        </div>
-        <div class="grid grid-cols-2 m-5 place-items-center">
-          <div>
-            <h2>product name</h2>
-            <app-star-rating></app-star-rating>
-            <app-product-price></app-product-price>
-          </div>
-          <div appCardActionContainer>
-            <app-card-action></app-card-action>
-          </div>
-        </div>
-      </div>
+      <app-todaydeals-large-product-card [product]="products[2]"></app-todaydeals-large-product-card>
     </div>
   </div>
 </div>

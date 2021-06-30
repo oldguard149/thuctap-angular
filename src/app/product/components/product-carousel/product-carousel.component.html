@@ -10,9 +10,9 @@
       <ng-template
         swiperSlide
         let-data
-        *ngFor="let slide of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; index as i"
+        *ngFor="let product of products;"
       >
-        <app-vertical-product-card [productItem]="{ title: i }"></app-vertical-product-card>
+        <app-vertical-product-card [product]="product"></app-vertical-product-card>
       </ng-template>
     </swiper>
 

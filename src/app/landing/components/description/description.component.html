@@ -1,4 +1,4 @@
-<div class="w-11/12 mx-auto lg:w-9/12 my-3">
+<div class="w-11/12 mx-auto lg:w-9/12 my-10">
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 my-3">
     <app-description-card
       *ngFor="let item of descriptionItems"
@@ -30,7 +30,7 @@
 
   <div>
     <div><app-section-title>New product</app-section-title></div>
-    <app-product-carousel></app-product-carousel>
+    <app-product-carousel [products]="(newProducts$ | async)"></app-product-carousel>
 </div>
 <!-- <div>
     <div><app-section-title>New product</app-section-title></div>

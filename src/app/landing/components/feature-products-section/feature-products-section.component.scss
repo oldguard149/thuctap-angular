@@ -5,3 +5,7 @@
 .owl-item {
     float: left;
 }
+
+:host ::ng-deep .swiper-wrapper {
+  padding: 20px 0;
+}

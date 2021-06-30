@@ -1,22 +1,54 @@
 <div class="grid grid-cols-3 hover:shadow-md">
   <!-- left -->
-  <div class="w-9/12 lg:w-11/12 col-span-1 place-self-center flex justify-center items-center">
-    <a href=""
-      ><img
-        src="https://cdn.shopify.com/s/files/1/1939/5421/products/16-800x800_x800.jpg?v=1493127624"
-        alt=""
-    /></a>
+  <div
+    class="
+      w-9/12
+      lg:w-11/12
+      col-span-1
+      place-self-center
+      flex
+      justify-center
+      items-center
+    "
+  >
+    <a [routerLink]="['/product', product.id]">
+      <img
+        class="object-contain w-full h-36"
+        *ngFor="let imageurl of product.images; let isFirst = first"
+        [src]="imageurl"
+        [alt]="product.title"
+        [ngClass]="{ hidden: !isFirst }"
+      />
+    </a>
   </div>
 
   <!-- right -->
   <div class="col-span-2">
-    <h2>Donec app temppus</h2>
+    <h2>
+      <a
+        nz-tooltip
+        [nzTooltipTitle]="product.title"
+        [nzTooltipMouseEnterDelay]="0.75"
+        class="text-lg font-medium hover:text-brand line-clamp-1"
+        [routerLink]="['/product', product.id]"
+      >
+        {{ product.title }}
+      </a>
+    </h2>
     <div class="star-price">
       <app-star-rating></app-star-rating>
-      <app-product-price></app-product-price>
+      <app-product-price
+        [showSecondPrice]="false"
+        [mainPrice]="product.price"
+      ></app-product-price>
     </div>
-    <app-card-action
-      class="card-action hidden mt-2"
-    ></app-card-action>
+    <div appCardActionContainer>
+      <app-card-action
+        class="card-action hidden mt-2"
+        [productId]="product.id"
+        (addToCart)="handleAddToCart()"
+      ></app-card-action>
+    </div>
   </div>
 </div>
+ 

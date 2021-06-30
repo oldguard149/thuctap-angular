@@ -5,16 +5,16 @@ import { getCartInfoFromProduct } from 'src/app/cart/state/cart.reducer';
 import { Product } from 'src/app/models/product.model';
 
 @Component({
-  selector: 'app-best-seller-card',
-  templateUrl: './best-seller-card.component.html',
-  styleUrls: ['./best-seller-card.component.scss'],
+  selector: 'app-todaydeals-large-product-card',
+  templateUrl: './todaydeals-large-product-card.component.html',
+  styleUrls: ['./todaydeals-large-product-card.component.scss']
 })
-export class BestSellerCardComponent {
+export class TodaydealsLargeProductCardComponent {
   @Input() product: Product;
-  constructor(private store: Store) {}
+  constructor(private store: Store) { }
 
   handleAddToCart() {
     const item = getCartInfoFromProduct(this.product);
-    this.store.dispatch(productCardAddToCart({ item }));
+    this.store.dispatch(productCardAddToCart({item}));
   }
 }

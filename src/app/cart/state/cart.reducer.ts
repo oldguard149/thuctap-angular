@@ -1,6 +1,7 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
 import { CartItem } from 'src/app/models/cartItem.model';
+import { Product } from 'src/app/models/product.model';
 import * as CartActions from './cart.actions';
 
 export const cartLocalStorageKey = 'cart';
@@ -65,4 +66,15 @@ function isEntityExist(state: CartState, item: CartItem) {
 
 function getNewOrderQty(state: CartState, item: CartItem) {
   return item['orderQuantity'] + state.entities[item.id].orderQuantity;
+}
+
+export function getCartInfoFromProduct(product: Product) {
+  return {
+    id: product.id,
+    title: product.title,
+    images: product.images,
+    quantity: product.quantity,
+    orderQuantity: 1,
+    price: product.price,
+  } as CartItem;
 }

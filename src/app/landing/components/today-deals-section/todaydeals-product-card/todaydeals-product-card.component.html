@@ -1,34 +1,48 @@
-<div class="grid grid-cols-3   bg-white">
-    <div class="carousel flex items-center relative">
-      <img
-        class="object-cover w-full self-start"
-        src="//cdn.shopify.com/s/files/1/1939/5421/products/14m-800x800_x800.jpg?v=1493999021"
-        alt=""
-      />
+<div class="grid grid-cols-1 xs:grid-cols-3 bg-white">
+  <div class="carousel flex items-center relative">
+    <img
+      class="object-contain h-48 w-full"
+      *ngFor="let imageurl of product.images; let isFirst = first"
+      [src]="imageurl"
+      [alt]="product.title"
+      [ngClass]="{ hidden: !isFirst }"
+    />
+    <app-box-countdown class="box-countdown hidden"></app-box-countdown>
+  </div>
 
-      <app-box-countdown></app-box-countdown>
+  <!-- info -->
+  <div class="my-4 ml-5 p-4 col-span-2">
+    <h2>
+      <a
+        nz-tooltip
+        [nzTooltipTitle]="product.title"
+        [nzTooltipMouseEnterDelay]="0.75"
+        class="text-lg font-medium hover:text-brand line-clamp-1"
+        [routerLink]="['/product', product.id]"
+      >
+        {{ product.title }}
+      </a>
+    </h2>
+
+    <!-- stars -->
+    <app-star-rating></app-star-rating>
+
+    <app-product-price
+      [showSecondPrice]="false"
+      [mainPrice]="product.price"
+    ></app-product-price>
+
+    <div>
+      <p class="line-clamp-3 text-sm mb-6">{{ product.desciption }}</p>
     </div>
 
-    <!-- info -->
-    <div class="my-4 ml-5 p-4 col-span-2">
-      <h3 class="hover:text-brand cursor-pointer">Nunce Failadf</h3>
-
-      <!-- stars -->
-      <app-star-rating></app-star-rating>
-
-      <!-- price: using currency pipe -->
-      <app-product-price></app-product-price>
-
-      <p class="text-sm mb-6">
-        Nunc facilisis sagittis ullamcorper. Proin lectus ipsum, gravida et
-        mattis vulputate, tristique ut lectus. Sed et lorem nunc. Vestibulum
-        ante ipsum primis in faucibus orci luctus et ultrices posuere
-        cubilia.....
-      </p>
-
-      <!-- product-card-action -->
-      <div appCardActionContainer>
-        <app-card-action></app-card-action>
-      </div>
+    <!-- product-card-action -->
+    <div appCardActionContainer>
+      <app-card-action
+        class="card-action self-center ml-3 hidden"
+        [productId]="product.id"
+        (addToCart)="handleAddToCart()"
+      ></app-card-action>
     </div>
   </div>
+</div>

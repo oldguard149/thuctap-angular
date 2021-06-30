@@ -17,7 +17,7 @@ export const selectTodayDealsProducts = createSelector(
     state => state.totayDealProducts
 );
 
-export const selectBestSeller = createSelector(
+export const selectBestSellerProducts = createSelector(
     selectLandingPageFeatureState,
     state => state.bestSellerProducts
 );

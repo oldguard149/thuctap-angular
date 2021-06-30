@@ -9,7 +9,7 @@ import * as LandingPageActions from './landing.actions';
 export class LandingPageEffects {
   loadNewProducts$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(LandingPageActions.loadAllTypeOfProducts),
+      ofType(LandingPageActions.loadProductsForLandingPage),
       mergeMap((action) =>
         this.productService
           .fetchNewProducts()
@@ -24,7 +24,7 @@ export class LandingPageEffects {
 
   loadTodayDealProducts$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(LandingPageActions.loadAllTypeOfProducts),
+      ofType(LandingPageActions.loadProductsForLandingPage),
       mergeMap((action) =>
         this.productService
           .fetchTodayDealProducts()
@@ -39,7 +39,7 @@ export class LandingPageEffects {
 
   loadBestSellerProducts$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(LandingPageActions.loadAllTypeOfProducts),
+      ofType(LandingPageActions.loadProductsForLandingPage),
       mergeMap((action) =>
         this.productService
           .fetchBestSellerProducts()
@@ -54,7 +54,7 @@ export class LandingPageEffects {
 
   loadNewArrivalProducts$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(LandingPageActions.loadAllTypeOfProducts),
+      ofType(LandingPageActions.loadProductsForLandingPage),
       mergeMap((action) =>
         this.productService
           .fetchNewArrivalProducts()
@@ -69,7 +69,7 @@ export class LandingPageEffects {
 
   loadFeatureProducts$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(LandingPageActions.loadAllTypeOfProducts),
+      ofType(LandingPageActions.loadProductsForLandingPage),
       mergeMap((action) =>
         this.productService
           .fetchFeatureProducts()

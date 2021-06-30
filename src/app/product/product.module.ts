@@ -37,7 +37,8 @@ import { ProductCarouselComponent } from './components/product-carousel/product-
     ProductPriceComponent,
     CardActionComponent,
     VerticalProductCardComponent,
-    HorizontalProductCardComponent
+    HorizontalProductCardComponent,
+    CardActionContainerDirective,
   ]
 })
 export class ProductModule { }

@@ -6,7 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./latest-blogs-section.component.scss']
 })
 export class LatestBlogsSectionComponent implements OnInit {
-
+  breakpoints = {
+    524: { slidesPerView: 2 },
+    998: { slidesPerView: 3 },
+  };
   constructor() { }
 
   ngOnInit(): void {
