@@ -1,8 +1,10 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, exhaustMap, map } from 'rxjs/operators';
+import { ResponseMessage } from 'src/app/models/response.model';
 import { AuthService } from 'src/app/services/auth.service';
 import * as AuthActions from './auth.actions';
 import { authLocalStorageKey } from './auth.reducer';
@@ -25,6 +27,17 @@ export class AuthEffects {
     )
   );
 
+  saveTokenToLocalStorage$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.loginSuccess),
+      map((action) => {
+        const token = action.token;
+        localStorage.removeItem(authLocalStorageKey);
+        localStorage.setItem(authLocalStorageKey, token);
+      })
+    ), {dispatch: false}
+  );
+
   login$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.login),
@@ -34,7 +47,7 @@ export class AuthEffects {
             this.router.navigateByUrl('/');
             return AuthActions.loginSuccess({ token: res.token });
           }),
-          catchError((error) => {
+          catchError((error: ResponseMessage[]) => {
             return of(AuthActions.loginFailure({ error: error }));
           })
         )
@@ -47,32 +60,37 @@ export class AuthEffects {
       ofType(AuthActions.register),
       exhaustMap((action) =>
         this.authService.register(action.body).pipe(
-          map((res) => {
+          map((res: any) => {
             this.router.navigateByUrl('/login');
             return AuthActions.registerSuccess({
-              msg: [{ content: 'sdf', type: 'success' }],
+              msg: [{ content: res.msg, type: 'success' }],
             });
           }),
-          catchError((error) => {
-            const messages = error.message.map(msg => ({type: 'failure', content: msg.msg}))
+          catchError((error: HttpErrorResponse) => {
+            const messages = error.error.message.map((msg) => ({
+              type: 'failure',
+              content: msg.msg,
+            }));
             return of(
               AuthActions.registerFailure({
                 error: messages,
               })
-            )
+            );
           })
         )
       )
     )
   );
 
-  logout$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(AuthActions.logout),
-      map(() => {
-        localStorage.removeItem(authLocalStorageKey)
-      })
-    ), {dispatch: false}
+  logout$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(AuthActions.logout),
+        map(() => {
+          localStorage.removeItem(authLocalStorageKey);
+        })
+      ),
+    { dispatch: false }
   );
 
   constructor(

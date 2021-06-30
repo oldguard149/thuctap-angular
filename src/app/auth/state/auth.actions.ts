@@ -15,10 +15,6 @@ export const localStorageEmpty = createAction(
     '[Local Storage] Auth Token From Local Storage Is Empty'
 )
 
-export const saveAuthTokenToLocalStorage = createAction(
-    '[Local Storage] Save Auth Token To LocalStorage'
-)
-
 export const login = createAction(
     '[Login / Backend API] Login',
     props<{body: LoginBodyObject}>()

@@ -12,7 +12,7 @@ export interface AuthState {
 const initialState: AuthState = {
   isLoggedIn: false,
   token: null,
-  messages: [],
+  messages: null,
 };
 
 export const authLocalStorageKey = 'auth';
@@ -41,6 +41,6 @@ export const authReducer = createReducer(
     ...state,
     messages: error,
   })),
-  on(AuthActions.resetMessages, (state) => ({ ...state, messages: [] })),
-  on(AuthActions.logout, (state) => ({...state, token: null, isLoggedIn: false, message: []}))
+  on(AuthActions.resetMessages, (state) => ({ ...state, messages: null })),
+  on(AuthActions.logout, (state) => ({...state, token: null, isLoggedIn: false, message: null}))
 );

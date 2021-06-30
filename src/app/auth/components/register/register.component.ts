@@ -15,13 +15,18 @@ export class RegisterComponent implements OnInit {
   constructor(private fb: FormBuilder, private store: Store) {}
   ngOnInit(): void {
     this.registerForm = this.fb.group({
-      fullname: ['', Validators.required],
-      email: ['', Validators.required],
-      password: ['', Validators.required],
+      email: ['', ],
+      first_name: ['', ],
+      last_name: ['', ],
+      address: ['', ],
+      phone: ['', ],
+      password: ['', ],
+      confirmPassword: ['', ]
     });
   }
 
   submit() {
-    this.store.dispatch(register(this.registerForm.value));
+    console.log(this.registerForm.value);
+    this.store.dispatch(register({body: this.registerForm.value}));
   }
 }

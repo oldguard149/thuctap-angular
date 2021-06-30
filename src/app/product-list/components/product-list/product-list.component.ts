@@ -5,6 +5,7 @@ import * as ProductsActions from '../../state/products.actions';
 import {
   selectCategories,
   selectDisplayListType,
+  selectProductListIsLoading,
   selectPageLimit,
   selectPaginationInfo,
   selectProducts,
@@ -27,20 +28,22 @@ export class ProductListComponent implements OnInit {
   pageLimit$ = this.store.select(selectPageLimit);
   paginationInfo$ = this.store.select(selectPaginationInfo);
   categories$ = this.store.select(selectCategories);
-
+  isLoading$ = this.store.select(selectProductListIsLoading);
   vm$ = combineLatest([
     this.products$,
     this.displayType$,
     this.sortType$,
     this.paginationInfo$,
-    this.categories$
+    this.categories$,
+    this.isLoading$
   ]).pipe(
-    map(([products, displayType, sortType, paginationInfo, categories]) => ({
+    map(([products, displayType, sortType, paginationInfo, categories, isLoading]) => ({
       products,
       displayType,
       sortType,
       paginationInfo,
-      categories
+      categories,
+      isLoading
     }))
   );
 

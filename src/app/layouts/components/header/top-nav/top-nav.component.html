@@ -17,12 +17,22 @@
           [dropdownItems]="currencyUnits"
           (onSelect)="handleCurrencyUnitChange($event)"
         ></app-top-nav-dropdown>
-        <app-top-nav-dropdown
+        <ng-container *ngIf="(isLoggedIn$ | async); else notLoggedIn">
+          <app-top-nav-dropdown
+          [updateTitle]="false"
+          [displayTitle]="'Account'"
+          [dropdownItems]="accountActionsWhenLoggedIn"
+          (onSelect)="handleAccountActionChange($event)"
+        ></app-top-nav-dropdown>
+        </ng-container>
+        <ng-template #notLoggedIn>
+          <app-top-nav-dropdown
           [updateTitle]="false"
           [displayTitle]="'Account'"
           [dropdownItems]="accountActions"
           (onSelect)="handleAccountActionChange($event)"
         ></app-top-nav-dropdown>
+        </ng-template>
       </div>
     
       <div class="right flex justify-center divide-x-2 divide-gray-200">

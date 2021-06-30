@@ -4,6 +4,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { NgxPaginationModule } from "ngx-pagination";
+import { NzSpinModule } from 'ng-zorro-antd/spin';
 
 import { InputComponent } from './components/input/input.component';
 import { ButtonComponent } from './components/button/button.component';
@@ -13,6 +14,7 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
 import { SelectComponent } from './components/select/select.component';
 import { RadioGroupComponent } from './components/radio-group/radio-group.component';
 import { RouterModule } from '@angular/router';
+import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 
 
 
@@ -25,6 +27,7 @@ import { RouterModule } from '@angular/router';
     BreadcrumbComponent,
     SelectComponent,
     RadioGroupComponent,
+    LoadingSpinnerComponent,
   ],
   imports: [
     CommonModule,
@@ -34,6 +37,7 @@ import { RouterModule } from '@angular/router';
     NzRadioModule,
     RouterModule,
     NgxPaginationModule,
+    NzSpinModule
   ],
   exports: [
     ButtonComponent,
@@ -43,6 +47,7 @@ import { RouterModule } from '@angular/router';
     BreadcrumbComponent,
     SelectComponent,
     RadioGroupComponent,
+    LoadingSpinnerComponent
   ],
 })
 export class SharedModule { }

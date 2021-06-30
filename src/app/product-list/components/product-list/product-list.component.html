@@ -1,5 +1,6 @@
 <ng-container *ngIf="vm$ | async as vm">
   <app-breadcrumb [items]="breadcrumbData"></app-breadcrumb>
+  <app-loading-spinner [isLoading]="vm.isLoading"></app-loading-spinner>
   <div class="flex w-11/12 md:w-9/12 mx-auto my-8">
     <!-- side filer group -->
     <div class="hidden md:block w-1/4">

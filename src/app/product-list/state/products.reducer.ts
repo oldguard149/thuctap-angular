@@ -19,21 +19,21 @@ export interface ProductsState {
   page: number;
   limit: number;
   totalDocs: number;
-  loading: boolean;
+  isLoading: boolean;
   displayListType: 'grid' | 'column';
   sortType: SortTypes;
   catetories: Category[];
 }
 
 const initialState: ProductsState = {
-  docs: [],
+  docs: null,
   page: 1,
   limit: 10,
   totalDocs: 0,
-  loading: true,
+  isLoading: true,
   displayListType: 'grid',
   sortType: 'manual',
-  catetories: [],
+  catetories: null,
 };
 
 export const productsReducer = createReducer(
@@ -47,13 +47,14 @@ export const productsReducer = createReducer(
       sortType,
     })
   ),
+  on(ProductsActions.loadProducts, (state) => ({...state, isLoading: true})),
   on(ProductsActions.loadProductsSuccess, (state: ProductsState, { res }) => ({
     ...state,
     limit: res.limit,
     docs: res.docs,
     totalPages: res.totalPages,
     totalDocs: res.totalDocs,
-    loading: false,
+    isLoading: false,
   })),
   on(ProductsActions.loadCategoriesSuccess, (state, { res }) => ({
     ...state,

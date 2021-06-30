@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { loadAuthTokenFromLocalStorage } from './auth/state/auth.actions';
 import { loadCartFromLocalStorage } from './cart/state/cart.actions';
 
 @Component({
@@ -10,7 +11,8 @@ import { loadCartFromLocalStorage } from './cart/state/cart.actions';
 export class AppComponent {
   title = 'thuctap-angular';
   ngOnInit() {
-    this.store.dispatch(loadCartFromLocalStorage())
+    this.store.dispatch(loadCartFromLocalStorage());
+    this.store.dispatch(loadAuthTokenFromLocalStorage());
   }
 
   constructor(private store: Store) {}

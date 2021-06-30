@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { logout } from 'src/app/auth/state/auth.actions';
+import { selectIsLoggedIn } from 'src/app/auth/state/auth.selectors';
 import { CurrencyUnitService } from 'src/app/services/currency-unit.service';
 import { DropdownContent } from '../top-nav-dropdown/top-nav-dropdown.component';
 
@@ -9,6 +12,27 @@ import { DropdownContent } from '../top-nav-dropdown/top-nav-dropdown.component'
   styleUrls: ['./top-nav.component.scss']
 })
 export class TopNavComponent {
+  isLoggedIn$ = this.store.select(selectIsLoggedIn);
+  constructor(
+    private router: Router,
+    private currencyService: CurrencyUnitService,
+    private store: Store
+  ) {}
+
+  handleLanguageChange(languageValue: string) {
+  }
+
+  handleCurrencyUnitChange(value: string) {
+    this.currencyService.changeCurrencyUnit(value);
+  }
+
+  handleAccountActionChange(value: string) {
+    if (value === '/logout') {
+      return this.store.dispatch(logout());
+    }
+    this.router.navigateByUrl(value);
+  }
+
   language: DropdownContent[] = [
     {displayName: 'English', value: 'english'},
     {displayName: 'French', value: 'french'}
@@ -30,20 +54,13 @@ export class TopNavComponent {
     { displayName: 'Cart', value: '/cart'},
     { displayName: 'Checkout', value: '/checkout'},
   ]
-  constructor(
-    private router: Router,
-    private currencyService: CurrencyUnitService
-  ) {}
 
-  handleLanguageChange(languageValue: string) {
-  }
-
-  handleCurrencyUnitChange(value: string) {
-    this.currencyService.changeCurrencyUnit(value);
-  }
-
-  handleAccountActionChange(value: string) {
-    this.router.navigateByUrl(value);
-  }
+  accountActionsWhenLoggedIn: DropdownContent[] = [
+    { displayName: 'Acount', value: '/account'},
+    { displayName: 'Log out', value: '/logout'},
+    { displayName: 'Wishlist', value: '/wishlist'},
+    { displayName: 'Cart', value: '/cart'},
+    { displayName: 'Checkout', value: '/checkout'},
+  ]
 
 }

@@ -1,22 +1,57 @@
-<div class="w-full max-w-xs">
-    <form
-      class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
-      [formGroup]="registerForm"
-    >
-      <h2 class="text-2xl font-bold text-center">Register</h2>
-      <app-messages [messages]="(authMessages$ | async)"></app-messages>
-      <div class="mb-4">
-        <app-label [id]="'fullname'">Fullname</app-label>
+<div class="w-full max-w-md">
+  <form
+    class="bg-white shadow-md rounded px-8 pt-6 pb-8 my-8"
+    [formGroup]="registerForm"
+  >
+    <h2 class="text-2xl font-bold text-center">Register</h2>
+    <app-messages [messages]="authMessages$ | async"></app-messages>
+    <div class="form-container grid grid-cols-2 gap-x-3">
+      <div class="mb-4 col-span-2">
+        <app-label [id]="'email'">Email</app-label>
         <app-input
-          [id]="'fullname'"
+          [id]="'email'"
           [parentForm]="registerForm"
-          [controlName]="'fullname'"
+          [controlName]="'email'"
         ></app-input>
       </div>
+
       <div class="mb-4">
-        <app-label [id]="'email'">Email</app-label>
-        <app-input [id]="'email'" [parentForm]="registerForm" [controlName]="'email'"></app-input>
+        <app-label [id]="'first_name'">First name</app-label>
+        <app-input
+          [id]="'first_name'"
+          [parentForm]="registerForm"
+          [controlName]="'first_name'"
+        ></app-input>
       </div>
+
+      <div class="mb-4">
+        <app-label [id]="'last_name'">Last name</app-label>
+        <app-input
+          [id]="'last_name'"
+          [parentForm]="registerForm"
+          [controlName]="'last_name'"
+        ></app-input>
+      </div>
+
+      <div class="mb-4 col-span-2">
+        <app-label [id]="'address'">Address</app-label>
+        <app-input
+          [id]="'address'"
+          [parentForm]="registerForm"
+          [controlName]="'address'"
+        ></app-input>
+      </div>
+
+      <div class="mb-4 col-span-2">
+        <app-label [id]="'phone'">Phone</app-label>
+        <app-input
+          [id]="'phone'"
+          [parentForm]="registerForm"
+          [controlName]="'phone'"
+          [inputType]="'tel'"
+        ></app-input>
+      </div>
+
       <div class="mb-6">
         <app-label [id]="'password'"> Password </app-label>
         <app-input
@@ -26,7 +61,18 @@
           [inputType]="'password'"
         ></app-input>
       </div>
-      <app-button (buttonClick)="submit()">Register</app-button>
-    </form>
-  </div>
-  
+
+      <div class="mb-6">
+        <app-label [id]="'confirmPassword'"> Confirm Password </app-label>
+        <app-input
+          [id]="'confirmPassword'"
+          [parentForm]="registerForm"
+          [controlName]="'confirmPassword'"
+          [inputType]="'password'"
+        ></app-input>
+      </div>
+
+    </div>
+    <app-button (buttonClick)="submit()">Register</app-button>
+  </form>
+</div>

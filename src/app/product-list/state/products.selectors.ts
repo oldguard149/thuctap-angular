@@ -55,3 +55,8 @@ export const selectPaginationInfo = createSelector(
   selectTotalNumberOfProducts,
   (page, limit, totalProducts) => ({ page, limit, totalProducts })
 );
+
+export const selectProductListIsLoading = createSelector(
+  selectProductsFeatureState,
+  state => state.isLoading
+)
