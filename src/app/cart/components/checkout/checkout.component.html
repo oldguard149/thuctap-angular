@@ -1,1 +1,153 @@
-<p>checkout works!</p>
+<ng-container *ngIf="vm$ | async as vm">
+  <div class="w-11/12 md:w-9/12 mx-auto lg:flex">
+    <div class="lg:hidden border-b border-gray-300">
+      <nz-collapse nzGhost class="border-t border-b border-gray-400">
+        <nz-collapse-panel
+          [nzHeader]="collapseHeader$ | async"
+          (nzActiveChange)="changeCollapePanelHeader($event)"
+        >
+          <ng-container [ngTemplateOutlet]="cartSummaryTpl"> </ng-container>
+        </nz-collapse-panel>
+      </nz-collapse>
+    </div>
+  
+    <div class="lg:w-7/12 lg:pt-8">
+      <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 my-8 w-full max-w-md mx-auto">
+        <h2 class="text-2xl font-bold text-center">Shipping Information</h2>
+        <div class="form-container">
+          <div class="mb-4">
+            <app-label [id]="'email'">Email</app-label>
+            <app-input
+              [id]="'email'"
+              [parentForm]="checkoutForm"
+              [controlName]="'email'"
+            ></app-input>
+          </div>
+    
+          <div class="mb-4">
+            <app-label [id]="'name'">Fullname</app-label>
+            <app-input
+              [id]="'name'"
+              [parentForm]="checkoutForm"
+              [controlName]="'name'"
+            ></app-input>
+          </div>
+    
+          <div class="mb-4 col-span-2">
+            <app-label [id]="'address'">Address</app-label>
+            <app-input
+              [id]="'address'"
+              [parentForm]="checkoutForm"
+              [controlName]="'address'"
+            ></app-input>
+          </div>
+    
+          <div class="mb-4 col-span-2">
+            <app-label [id]="'phone'">Phone</app-label>
+            <app-input
+              [id]="'phone'"
+              [parentForm]="checkoutForm"
+              [controlName]="'phone'"
+              [inputType]="'tel'"
+            ></app-input>
+          </div>
+    
+          <div class="mb-4 col-span-2">
+            <app-label [id]="'postcode'">Post Code</app-label>
+            <app-input
+              [id]="'postcode'"
+              [parentForm]="checkoutForm"
+              [controlName]="'postcode'"
+            ></app-input>
+          </div>
+    
+          <div class="mb-4 col-span-2">
+            <app-label [id]="'description'">Description</app-label>
+            <app-input
+              [id]="'description'"
+              [parentForm]="checkoutForm"
+              [controlName]="'description'"
+            ></app-input>
+          </div>
+        </div>
+        <app-button (buttonClick)="submit()">Complete Order</app-button>
+      </form>
+    </div>
+
+    <div class="hiden lg:block w-5/12 border-l border-gray-300 lg:pt-8 pl-4">
+      <ng-container [ngTemplateOutlet]="cartSummaryTpl"> </ng-container>
+    </div>
+  </div>
+
+  <ng-template #cartSummaryTpl>
+    <!-- cart items -->
+    <table class="my-4 w-full">
+      <tr *ngFor="let item of vm.cartItems" class="py-4">
+        <td class="w-1/5 pb-4">
+          <nz-badge
+            [nzCount]="item.orderQuantity"
+            [nzStyle]="{ backgroundColor: '#999', color: '#fff' }"
+          >
+            <div
+              class="
+                h-20
+                w-20
+                flex
+                justify-center
+                items-center
+                border
+                rounded-lg
+                border-gray-500
+              "
+            >
+              <img
+                class="h-16 w-16 object-contain"
+                *ngFor="let img of item.images; let isFirst = first"
+                [src]="img"
+                [ngClass]="{ hidden: !isFirst }"
+              />
+            </div>
+          </nz-badge>
+        </td>
+        <td>
+          <div class="flex flex-wrap px-2">
+            {{ item.title }}
+          </div>
+        </td>
+        <td class="w-1/5">
+          <div class="flex justify-end">
+            <app-product-price
+              [mainPrice]="item.orderQuantity * item.price"
+              [showSecondPrice]="false"
+            ></app-product-price>
+          </div>
+        </td>
+      </tr>
+    </table>
+    <!-- price summary -->
+    <div>
+      <div class="border-t border-b border-gray-300 py-4">
+        <div class="flex justify-between items-center">
+          <p>Subtotal</p>
+          <app-product-price
+            [mainPrice]="vm.totalPrice"
+            [showSecondPrice]="false"
+          ></app-product-price>
+        </div>
+        <div class="flex justify-between items-center">
+          <p>Shipping cost</p>
+          <p>Calculated at next step</p>
+        </div>
+      </div>
+      <div class="flex justify-between items-center py-5">
+        <p>Total</p>
+        <app-product-price
+          [mainPrice]="456"
+          [showSecondPrice]="false"
+        ></app-product-price>
+      </div>
+    </div>
+  </ng-template>
+</ng-container>
+
+

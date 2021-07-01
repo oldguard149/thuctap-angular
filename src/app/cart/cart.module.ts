@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { NzBadgeModule } from 'ng-zorro-antd/badge';
 
 import { CartRoutingModule } from './cart-routing.module';
 import { CartComponent } from './components/cart/cart.component';
@@ -21,7 +23,9 @@ import { ProductModule } from '../product/product.module';
     SharedModule,
     ReactiveFormsModule,
     ProductModule,
-    NzToolTipModule
+    NzToolTipModule,
+    NzCollapseModule,
+    NzBadgeModule
   ]
 })
 export class CartModule { }
