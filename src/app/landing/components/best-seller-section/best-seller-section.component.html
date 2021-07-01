@@ -13,14 +13,14 @@
       /></a>
     </div>
     <div id="best-seller" class="gap-2 grid mt-5">
-      <h2 class="text-bg-800 text-lg font-medium">Best seller</h2>
+      <h2 class="text-bg-800 text-lg font-medium relative">Best seller</h2>
       <app-best-seller-card
         *ngFor="let product of vm.bestSellerProducts"
         [product]="product"
       ></app-best-seller-card>
     </div>
     <div id="new-arrivals" class="gap-2 grid mt-5">
-      <h2 class="text-bg-800 text-lg font-medium">New arrival</h2>
+      <h2 class="text-bg-800 text-lg font-medium relative">New arrival</h2>
       <app-best-seller-card
         *ngFor="let product of vm.newArrivalsProducts"
         [product]="product"

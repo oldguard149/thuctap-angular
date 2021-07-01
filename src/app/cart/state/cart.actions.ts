@@ -1,5 +1,7 @@
 import { createAction, props } from "@ngrx/store";
 import { CartItem } from "src/app/models/cartItem.model";
+import { Order } from "src/app/models/order.model";
+import { ResponseMessage } from "src/app/models/response.model";
 
 
 export const loadCartFromLocalStorage = createAction(
@@ -43,4 +45,24 @@ export const removeCartItemInHeader = createAction(
 export const removeCartItem = createAction(
     '[Cart] Remove Cart Item',
     props<{id: string}>()
+)
+
+export const checkOut = createAction(
+    '[Check Out / Backend API] Check Out',
+    props<{body: any}>()
+);
+
+// when success, clear entity and localStorage
+export const checkOutSuccess = createAction(
+    '[Check Out / Backend API] Check Out Success',
+    props<{res: Order, messages: ResponseMessage[]}>()
+);
+
+export const checkOutFailure = createAction(
+    '[Check Out / Backend API] Check Out Failure',
+    props<{error: ResponseMessage[]}>()
+);
+
+export const clearCheckOutMessages = createAction(
+    '[Check Out] Clear Messages'
 )

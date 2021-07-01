@@ -17,4 +17,9 @@ export const selectIsLoggedIn = createSelector(
 export const selectAuthMessages = createSelector(
     selectAuthFeatureState,
     state => state.messages
+);
+
+export const selectUserProfile = createSelector(
+    selectAuthFeatureState,
+    state => state.userProfile
 )

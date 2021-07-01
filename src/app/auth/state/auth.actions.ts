@@ -1,5 +1,6 @@
 import { createAction, props } from "@ngrx/store";
 import { ResponseMessage } from "src/app/models/response.model";
+import { UserProfile } from "src/app/models/userProfile.model";
 import { LoginBodyObject, RegisterBodyObject } from "src/app/services/auth.service";
 
 export const loadAuthTokenFromLocalStorage = createAction(
@@ -47,8 +48,19 @@ export const registerFailure = createAction(
 
 export const resetMessages = createAction(
     '[Login] Reset Messages'
-)
+);
 
 export const logout = createAction(
     '[Logout] Logout'
-)
+);
+
+// trigger when login success or load token from localStorage success
+export const loadUserProfileSuccess = createAction(
+    '[Backend API] Load User Profile Success',
+    props<{userProfile: UserProfile}>()
+);
+
+export const loadUserProfileFailure = createAction(
+    '[Backend API] Load User Profile Failure',
+    props<{error: ResponseMessage[]}>()
+);

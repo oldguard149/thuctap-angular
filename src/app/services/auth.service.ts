@@ -2,6 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { ResponseMessage } from '../models/response.model';
 
 export interface RegisterBodyObject {
   email: string;
@@ -31,8 +32,19 @@ export class AuthService {
   constructor(private http: HttpClient, @Inject('API_URL') private api_url) {}
 
   register(body: RegisterBodyObject) {
-    console.log(body);
-    return this.http.post(`${this.api_url}/api/v2/public/auth/register`, body);
+    return this.http
+      .post(`${this.api_url}/api/v2/public/auth/register`, body)
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          const messages: ResponseMessage[] = error.error.message.map(
+            (msg) => ({
+              type: 'failure',
+              content: msg.msg,
+            })
+          );
+          return throwError(messages);
+        })
+      );
   }
 
   login(body: LoginBodyObject) {
@@ -43,11 +55,13 @@ export class AuthService {
           console.log(errorRes.error);
           if (errorRes.error.msg) {
             // error: {msg: string}
-            return throwError([{type: 'failure', content: errorRes.error.msg}]);
+            return throwError([
+              { type: 'failure', content: errorRes.error.msg },
+            ]);
           }
-          if (typeof errorRes.error ===  'string') {
+          if (typeof errorRes.error === 'string') {
             // error: string
-            return throwError([{type: 'failure', content: errorRes.error}])
+            return throwError([{ type: 'failure', content: errorRes.error }]);
           }
           // error: [{msg: string}]
           const errorList = errorRes.error.message.map((err: any) => ({
@@ -68,6 +82,12 @@ export class AuthService {
   }
 
   getProfile() {
-    return this.http.get(`${this.api_url}/api/v2/public/auth/profile`);
+    return this.http
+      .get(`${this.api_url}/api/v2/public/auth/profile`)
+      .pipe(catchError((error: HttpErrorResponse) => {
+        const errorMessage = error.error;
+        console.log(errorMessage);
+        return throwError(errorMessage);
+      }));
   }
 }

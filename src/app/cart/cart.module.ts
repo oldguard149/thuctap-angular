@@ -4,7 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
-
+import { NgxStripeModule } from 'ngx-stripe';
 import { CartRoutingModule } from './cart-routing.module';
 import { CartComponent } from './components/cart/cart.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
@@ -25,7 +25,8 @@ import { ProductModule } from '../product/product.module';
     ProductModule,
     NzToolTipModule,
     NzCollapseModule,
-    NzBadgeModule
+    NzBadgeModule,
+    NgxStripeModule
   ]
 })
 export class CartModule { }

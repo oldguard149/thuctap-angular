@@ -10,10 +10,22 @@
         </nz-collapse-panel>
       </nz-collapse>
     </div>
-  
+
     <div class="lg:w-7/12 lg:pt-8">
-      <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 my-8 w-full max-w-md mx-auto">
+      <form
+        class="
+          bg-white
+          rounded
+          px-8
+          pb-8
+          mb-8
+          w-full
+          max-w-md
+          mx-auto
+        "
+      >
         <h2 class="text-2xl font-bold text-center">Shipping Information</h2>
+        <app-messages [messages]="vm.messages"></app-messages>
         <div class="form-container">
           <div class="mb-4">
             <app-label [id]="'email'">Email</app-label>
@@ -23,7 +35,7 @@
               [controlName]="'email'"
             ></app-input>
           </div>
-    
+
           <div class="mb-4">
             <app-label [id]="'name'">Fullname</app-label>
             <app-input
@@ -32,7 +44,7 @@
               [controlName]="'name'"
             ></app-input>
           </div>
-    
+
           <div class="mb-4 col-span-2">
             <app-label [id]="'address'">Address</app-label>
             <app-input
@@ -41,7 +53,7 @@
               [controlName]="'address'"
             ></app-input>
           </div>
-    
+
           <div class="mb-4 col-span-2">
             <app-label [id]="'phone'">Phone</app-label>
             <app-input
@@ -51,7 +63,7 @@
               [inputType]="'tel'"
             ></app-input>
           </div>
-    
+
           <div class="mb-4 col-span-2">
             <app-label [id]="'postcode'">Post Code</app-label>
             <app-input
@@ -60,7 +72,7 @@
               [controlName]="'postcode'"
             ></app-input>
           </div>
-    
+
           <div class="mb-4 col-span-2">
             <app-label [id]="'description'">Description</app-label>
             <app-input
@@ -70,11 +82,18 @@
             ></app-input>
           </div>
         </div>
+
+        <div class="mb-4 ">
+          <div class="px-3 py-4 rounded-lg border border-gray-800">
+            <ngx-stripe-card [options]="cardOptions"></ngx-stripe-card>
+          </div>
+          <app-input-error [showError]="isStripeError$ | async">{{stripeError$ | async}}</app-input-error>
+        </div>
         <app-button (buttonClick)="submit()">Complete Order</app-button>
       </form>
     </div>
 
-    <div class="hiden lg:block w-5/12 border-l border-gray-300 lg:pt-8 pl-4">
+    <div class="hidden lg:block w-5/12 border-l border-gray-300 lg:pt-8 pl-4">
       <ng-container [ngTemplateOutlet]="cartSummaryTpl"> </ng-container>
     </div>
   </div>
@@ -149,5 +168,3 @@
     </div>
   </ng-template>
 </ng-container>
-
-

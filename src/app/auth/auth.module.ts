@@ -8,7 +8,6 @@ import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
-import { MessagesComponent } from './components/messages/messages.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +15,6 @@ import { MessagesComponent } from './components/messages/messages.component';
     ResetPasswordComponent,
     LoginComponent,
     RegisterComponent,
-    MessagesComponent,
   ],
   imports: [
     CommonModule,

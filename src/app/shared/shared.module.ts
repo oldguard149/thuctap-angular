@@ -15,6 +15,8 @@ import { SelectComponent } from './components/select/select.component';
 import { RadioGroupComponent } from './components/radio-group/radio-group.component';
 import { RouterModule } from '@angular/router';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
+import { InputErrorComponent } from './components/input-error/input-error.component';
+import { MessagesComponent } from './components/messages/messages.component';
 
 
 
@@ -28,6 +30,8 @@ import { LoadingSpinnerComponent } from './components/loading-spinner/loading-sp
     SelectComponent,
     RadioGroupComponent,
     LoadingSpinnerComponent,
+    InputErrorComponent,
+    MessagesComponent,
   ],
   imports: [
     CommonModule,
@@ -47,7 +51,9 @@ import { LoadingSpinnerComponent } from './components/loading-spinner/loading-sp
     BreadcrumbComponent,
     SelectComponent,
     RadioGroupComponent,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    InputErrorComponent,
+    MessagesComponent
   ],
 })
 export class SharedModule { }

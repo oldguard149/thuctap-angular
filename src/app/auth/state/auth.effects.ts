@@ -5,6 +5,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, exhaustMap, map } from 'rxjs/operators';
 import { ResponseMessage } from 'src/app/models/response.model';
+import { UserProfile } from 'src/app/models/userProfile.model';
 import { AuthService } from 'src/app/services/auth.service';
 import * as AuthActions from './auth.actions';
 import { authLocalStorageKey } from './auth.reducer';
@@ -27,17 +28,6 @@ export class AuthEffects {
     )
   );
 
-  saveTokenToLocalStorage$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(AuthActions.loginSuccess),
-      map((action) => {
-        const token = action.token;
-        localStorage.removeItem(authLocalStorageKey);
-        localStorage.setItem(authLocalStorageKey, token);
-      })
-    ), {dispatch: false}
-  );
-
   login$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.login),
@@ -55,6 +45,38 @@ export class AuthEffects {
     )
   );
 
+  saveTokenToLocalStorage$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(AuthActions.loginSuccess),
+        map((action) => {
+          const token = action.token;
+          localStorage.removeItem(authLocalStorageKey);
+          localStorage.setItem(authLocalStorageKey, token);
+        })
+      ),
+    { dispatch: false }
+  );
+
+  getUserProfile$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(
+        AuthActions.loadAuthTokenFromLocalStorageSuccess,
+        AuthActions.loginSuccess
+      ),
+      exhaustMap((action) =>
+        this.authService.getProfile().pipe(
+          map((userProfile: UserProfile) =>
+            AuthActions.loadUserProfileSuccess({ userProfile })
+          ),
+          catchError((error: ResponseMessage[]) => {
+            return of(AuthActions.loadUserProfileFailure({ error }));
+          })
+        )
+      )
+    )
+  );
+
   register$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.register),
@@ -66,14 +88,10 @@ export class AuthEffects {
               msg: [{ content: res.msg, type: 'success' }],
             });
           }),
-          catchError((error: HttpErrorResponse) => {
-            const messages = error.error.message.map((msg) => ({
-              type: 'failure',
-              content: msg.msg,
-            }));
+          catchError((error: ResponseMessage[]) => {
             return of(
               AuthActions.registerFailure({
-                error: messages,
+                error: error,
               })
             );
           })
@@ -82,10 +100,10 @@ export class AuthEffects {
     )
   );
 
-  logout$ = createEffect(
+  removeAuthTokenFromLocalStorage$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(AuthActions.logout),
+        ofType(AuthActions.logout, AuthActions.loadUserProfileFailure),
         map(() => {
           localStorage.removeItem(authLocalStorageKey);
         })
