@@ -16,6 +16,7 @@ import { CategoriesNavDropdownComponent } from './components/header/categories-n
 import { CategoriesNavPopupComponent } from './components/header/categories-nav-popup/categories-nav-popup.component';
 import { FooterStaticComponent } from './components/footer/footer-static/footer-static.component';
 import { NzCollapseModule } from 'ng-zorro-antd/collapse';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { NzCollapseModule } from 'ng-zorro-antd/collapse';
     SharedModule,
     SwiperModule,
     NzDropDownModule,
-    NzCollapseModule
+    NzCollapseModule,
+    ReactiveFormsModule
   ],
   exports: [
     HeaderComponent,

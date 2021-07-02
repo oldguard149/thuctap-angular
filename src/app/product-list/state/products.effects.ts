@@ -56,6 +56,25 @@ export class ProductsEffects {
     )
   );
 
+  searchProducts = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ProductsActions.searchProducts),
+      concatLatestFrom((action) => this.store.select(selectPaginationInfo)),
+      exhaustMap(([action, paginationInfo]) => {
+        
+        let searchKey = action.searchKey || this.getQueryParamValue('q', '');
+        console.log(searchKey);
+        return this.productService
+          .searchProduct(searchKey, paginationInfo.page, paginationInfo.limit)
+          .pipe(
+            map((res) =>
+              ProductsActions.searchProductsSuccess({ res, searchKey })
+            )
+          );
+      })
+    )
+  );
+
   sortProducts$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ProductsActions.changeSortType),

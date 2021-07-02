@@ -23,6 +23,7 @@ export interface ProductsState {
   displayListType: 'grid' | 'column';
   sortType: SortTypes;
   catetories: Category[];
+  searchKey: string;
 }
 
 const initialState: ProductsState = {
@@ -34,6 +35,7 @@ const initialState: ProductsState = {
   displayListType: 'grid',
   sortType: 'manual',
   catetories: null,
+  searchKey: null,
 };
 
 export const productsReducer = createReducer(
@@ -47,12 +49,11 @@ export const productsReducer = createReducer(
       sortType,
     })
   ),
-  on(ProductsActions.loadProducts, (state) => ({...state, isLoading: true})),
-  on(ProductsActions.loadProductsSuccess, (state: ProductsState, { res }) => ({
+  on(ProductsActions.loadProducts, (state) => ({ ...state, isLoading: true })),
+  on(ProductsActions.loadProductsSuccess, (state, { res }) => ({
     ...state,
     limit: res.limit,
     docs: res.docs,
-    totalPages: res.totalPages,
     totalDocs: res.totalDocs,
     isLoading: false,
   })),
@@ -60,22 +61,19 @@ export const productsReducer = createReducer(
     ...state,
     catetories: res.docs,
   })),
-  on(
-    ProductsActions.changeListDisplayType,
-    (state: ProductsState, { listType }) => ({
-      ...state,
-      displayListType: listType,
-    })
-  ),
-  on(ProductsActions.changePage, (state: ProductsState, { page }) => ({
+  on(ProductsActions.changeListDisplayType, (state, { listType }) => ({
+    ...state,
+    displayListType: listType,
+  })),
+  on(ProductsActions.changePage, (state, { page }) => ({
     ...state,
     page,
   })),
-  on(ProductsActions.changePageLimit, (state: ProductsState, { limit }) => ({
+  on(ProductsActions.changePageLimit, (state, { limit }) => ({
     ...state,
     limit,
   })),
-  on(ProductsActions.changeSortType, (state: ProductsState, { sortType }) => ({
+  on(ProductsActions.changeSortType, (state, { sortType }) => ({
     ...state,
     sortType,
   })),
@@ -83,5 +81,20 @@ export const productsReducer = createReducer(
     ...state,
     docs: products,
   })),
-  on(ProductsActions.resetPage, (state) => ({ ...state, page: 1 }))
+  on(ProductsActions.resetPage, (state) => ({ ...state, page: 1 })),
+  on(ProductsActions.searchProducts, (state) => ({
+    ...state,
+    isLoading: true,
+  })),  
+  on(ProductsActions.searchProductsSuccess, (state, { res, searchKey }) => ({
+    ...state,
+    docs: res.docs,
+    totalDocs: res.totalDocs,
+    isLoading: false,
+    searchKey,
+  })),
+  on(ProductsActions.changePageWhenSearchProducts, (state, { page }) => ({
+    ...state,
+    page,
+  }))
 );

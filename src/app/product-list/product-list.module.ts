@@ -14,13 +14,15 @@ import { ProductsEffects } from './state/products.effects';
 
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { FilterGroupComponent } from './components/filter-group/filter-group.component';
+import { SearchComponent } from './components/search/search.component';
 
 
 
 @NgModule({
   declarations: [
     ProductListComponent,
-    FilterGroupComponent
+    FilterGroupComponent,
+    SearchComponent
   ],
   imports: [
     CommonModule,

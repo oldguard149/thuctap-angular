@@ -1,4 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { BreadCrumb } from 'src/app/shared/components/breadcrumb/breadcrumb.component';
 import { ProductsState } from './products.reducer';
 
 export const productsFeatureKey = 'products';
@@ -13,7 +14,7 @@ export const selectProducts = createSelector(
 export const selectCategories = createSelector(
   selectProductsFeatureState,
   (state) => state.catetories
-)
+);
 
 export const selectDisplayListType = createSelector(
   selectProductsFeatureState,
@@ -58,5 +59,16 @@ export const selectPaginationInfo = createSelector(
 
 export const selectProductListIsLoading = createSelector(
   selectProductsFeatureState,
-  state => state.isLoading
-)
+  (state) => state.isLoading
+);
+
+export const selectSearchBreadCrumbData = createSelector(
+  selectProductsFeatureState,
+  (state) => ([
+    { label: 'Home', link: '/' },
+    {
+      label: `Search: ${state.totalDocs} Results Found For "${state.searchKey}"`,
+      link: `/search?q=${state.searchKey}`,
+    },
+  ] as BreadCrumb[]) 
+);

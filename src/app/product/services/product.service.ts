@@ -36,7 +36,7 @@ export class ProductService {
         .set('page', page)
         .set('limit', limit)
     }
-    return this.http.get(`${this.api_url}/api/v1/products/list`, options)
+    return this.http.get<ProductsResponse>(`${this.api_url}/api/v1/products/list`, options)
   }
 
 
