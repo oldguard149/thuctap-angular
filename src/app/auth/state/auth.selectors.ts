@@ -22,4 +22,9 @@ export const selectAuthMessages = createSelector(
 export const selectUserProfile = createSelector(
     selectAuthFeatureState,
     state => state.userProfile
+);
+
+export const selectCurrentActionUrl = createSelector(
+    selectAuthFeatureState,
+    state => state.currentActionUrl
 )

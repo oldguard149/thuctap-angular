@@ -1,3 +1,4 @@
+import { state } from '@angular/animations';
 import { createReducer, on } from '@ngrx/store';
 import { ResponseMessage } from 'src/app/models/response.model';
 import { UserProfile } from 'src/app/models/userProfile.model';
@@ -8,6 +9,7 @@ export interface AuthState {
   token: string;
   messages: ResponseMessage[];
   userProfile: UserProfile;
+  currentActionUrl: string;
 }
 
 const initialState: AuthState = {
@@ -15,6 +17,7 @@ const initialState: AuthState = {
   token: null,
   messages: null,
   userProfile: null,
+  currentActionUrl: null,
 };
 
 export const authLocalStorageKey = 'auth';
@@ -30,6 +33,7 @@ export const authReducer = createReducer(
     ...state,
     token: token,
     isLoggedIn: true,
+    currentActionUrl: null
   })),
   on(AuthActions.loginFailure, (state, { error }) => ({
     ...state,
@@ -49,7 +53,7 @@ export const authReducer = createReducer(
     token: null,
     isLoggedIn: false,
     message: null,
-    userProfile: null
+    userProfile: null,
   })),
   on(AuthActions.loadUserProfileSuccess, (state, { userProfile }) => ({
     ...state,
@@ -58,5 +62,10 @@ export const authReducer = createReducer(
   on(AuthActions.loadUserProfileFailure, (state, { error }) => ({
     ...state,
     messages: error,
+  })),
+  on(AuthActions.setCurrentAction, (state, { currentActionUrl, messages }) => ({
+    ...state,
+    currentActionUrl,
+    messages,
   }))
 );

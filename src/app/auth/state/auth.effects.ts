@@ -1,7 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
+import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
 import { catchError, exhaustMap, map } from 'rxjs/operators';
 import { ResponseMessage } from 'src/app/models/response.model';
@@ -9,6 +10,7 @@ import { UserProfile } from 'src/app/models/userProfile.model';
 import { AuthService } from 'src/app/services/auth.service';
 import * as AuthActions from './auth.actions';
 import { authLocalStorageKey } from './auth.reducer';
+import { selectCurrentActionUrl } from './auth.selectors';
 
 @Injectable()
 export class AuthEffects {
@@ -31,10 +33,15 @@ export class AuthEffects {
   login$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.login),
-      exhaustMap((action) =>
+      concatLatestFrom(action => this.store.select(selectCurrentActionUrl)),
+      exhaustMap(([action, currentActionUrl]) =>
         this.authService.login(action.body).pipe(
           map((res: any) => {
-            this.router.navigateByUrl('/');
+            if (currentActionUrl) {
+              this.router.navigateByUrl(currentActionUrl);
+            } else {
+              this.router.navigateByUrl('/');
+            }
             return AuthActions.loginSuccess({ token: res.token });
           }),
           catchError((error: ResponseMessage[]) => {
@@ -114,6 +121,7 @@ export class AuthEffects {
   constructor(
     private authService: AuthService,
     private actions$: Actions,
-    private router: Router
+    private router: Router,
+    private store: Store
   ) {}
 }

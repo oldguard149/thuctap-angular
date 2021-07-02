@@ -64,3 +64,8 @@ export const loadUserProfileFailure = createAction(
     '[Backend API] Load User Profile Failure',
     props<{error: ResponseMessage[]}>()
 );
+
+export const setCurrentAction = createAction(
+    '[Check Out / Fav Products] Set Current Action',
+    props<{currentActionUrl: string, messages: ResponseMessage[]}>()
+)
