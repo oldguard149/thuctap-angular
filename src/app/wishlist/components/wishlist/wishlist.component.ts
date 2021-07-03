@@ -12,6 +12,7 @@ import {
   loadWishlist,
 } from '../../state/wishlist.actions';
 import {
+  selectTotalWishlistItems,
   selectWishlistBreadcrumbData,
   selectWishlistItems,
   selectWishlistPaginationInfo,
@@ -27,11 +28,13 @@ export class WishlistComponent implements OnInit {
     this.store.select(selectWishlistItems),
     this.store.select(selectWishlistPaginationInfo),
     this.store.select(selectWishlistBreadcrumbData),
+    this.store.select(selectTotalWishlistItems)
   ]).pipe(
-    map(([items, paginationInfo, breadcrumbData]) => ({
+    map(([items, paginationInfo, breadcrumbData, total]) => ({
       items,
       paginationInfo,
       breadcrumbData,
+      total
     }))
   );
 

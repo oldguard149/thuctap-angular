@@ -1,20 +1,22 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { selectIsLoggedIn } from 'src/app/auth/state/auth.selectors';
 
 @Component({
   selector: 'app-card-action',
   templateUrl: './card-action.component.html',
   styleUrls: ['./card-action.component.scss'],
 })
-export class CardActionComponent implements OnInit {
+export class CardActionComponent {
   @Input() productId: string;
   @Input() showReview: boolean = true;
   @Input() showAddToCart: boolean = true;
   @Output() addToCart = new EventEmitter();
   @Output() addToWishlist = new EventEmitter();
   @Output() review = new EventEmitter();
-  constructor() {}
+  constructor(private store: Store) {}
+  isLoggedIn$ = this.store.select(selectIsLoggedIn);
 
-  ngOnInit(): void {}
 
   handleClick(value: 'addToCart' | 'wishlist' | 'viewDetail' | 'review') {
     switch (value) {

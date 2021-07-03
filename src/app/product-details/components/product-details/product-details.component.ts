@@ -2,14 +2,14 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { combineLatest, Subject } from 'rxjs';
+import { map, takeUntil } from 'rxjs/operators';
+import { selectIsLoggedIn } from 'src/app/auth/state/auth.selectors';
 import { productDetailAddToCart } from 'src/app/cart/state/cart.actions';
 import { CartItem } from 'src/app/models/cartItem.model';
 import { Product } from 'src/app/models/product.model';
-import {
-  loadProductDetails,
-} from '../../state/product-details.actions';
+import { addToWishlist } from 'src/app/wishlist/state/wishlist.actions';
+import { loadProductDetails } from '../../state/product-details.actions';
 import {
   selectProductDetails,
   selectProductDetailsBreadcrumb,
@@ -25,11 +25,10 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   cartForm: FormGroup = this.fb.group({
     quantity: ['1', Validators.required],
   });
- 
   product$ = this.store.select(selectProductDetails);
   productQuantity$ = this.store.select(selectProductQuantity);
   breadcrumb$ = this.store.select(selectProductDetailsBreadcrumb);
-  private product: Product;
+  isLoggedIn$ = this.store.select(selectIsLoggedIn);
 
   addToCart() {
     const orderQuantity = parseInt(this.quantity.value);
@@ -39,9 +38,14 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
       quantity: this.product.quantity,
       orderQuantity: orderQuantity,
       images: this.product.images,
-      price: this.product.price
+      price: this.product.price,
     } as CartItem;
     this.store.dispatch(productDetailAddToCart({ item: item }));
+  }
+
+  addProductToWishList(product: Product) {
+    console.log(product);
+    this.store.dispatch(addToWishlist({ product }));
   }
 
   changeQuantity(action: 'minus' | 'plus', quantity: number) {
@@ -57,23 +61,19 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     }
   }
 
-  get quantity() {
-    return this.cartForm.get('quantity');
-  }
-
   constructor(
     private fb: FormBuilder,
     private store: Store,
-    private route: ActivatedRoute,
+    private route: ActivatedRoute
   ) {}
-  destroyed = new Subject<void>();
-
+  private destroyed = new Subject<void>();
+  private product: Product;
   ngOnInit(): void {
     const currentProductId = this.route.snapshot.params['id'];
-    this.store.dispatch(
-      loadProductDetails({ productId: currentProductId })
-    );
-    this.product$.pipe(takeUntil(this.destroyed)).subscribe(product => this.product = product);
+    this.store.dispatch(loadProductDetails({ productId: currentProductId }));
+    this.product$
+      .pipe(takeUntil(this.destroyed))
+      .subscribe((product) => (this.product = product));
   }
 
   ngOnDestroy() {
@@ -85,4 +85,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     650: { slidesPerView: 3 },
     1024: { slidesPerView: 4 },
   };
+  get quantity() {
+    return this.cartForm.get('quantity');
+  }
 }

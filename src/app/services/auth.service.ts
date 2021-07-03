@@ -86,7 +86,6 @@ export class AuthService {
       .get(`${this.api_url}/api/v2/public/auth/profile`)
       .pipe(catchError((error: HttpErrorResponse) => {
         const errorMessage = error.error;
-        console.log(errorMessage);
         return throwError(errorMessage);
       }));
   }

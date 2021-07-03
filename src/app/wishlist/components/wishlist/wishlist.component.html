@@ -1,8 +1,17 @@
 <ng-container *ngIf="vm$ | async as vm">
   <app-breadcrumb [items]="vm.breadcrumbData"></app-breadcrumb>
   <div class="w-11/12 md:w-9/12 mx-auto my-8 flex flex-col">
-    <h2 class="text-xl font-semibold">WISHLIST</h2>
-    <div class="table-container mb-5">
+    <h2 class="text-xl font-semibold mb-5">WISHLIST</h2>
+    <h2 *ngIf="vm.total === 0">
+      You have no item in wishlist, back to collection
+      <a
+       [routerLink]="'/collections/all'"
+        class="hover:text-brand transition-colors"
+        >
+        here
+      </a>
+    </h2>
+    <div *ngIf="vm.total !== 0" class="table-container mb-5">
       <table class="min-w-max w-full">
         <tr>
           <th class="text-center text-gray-500">Image</th>

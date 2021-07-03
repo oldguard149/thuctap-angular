@@ -27,7 +27,6 @@ export const authReducer = createReducer(
   on(AuthActions.loadAuthTokenFromLocalStorageSuccess, (state, { token }) => ({
     ...state,
     token: token,
-    isLoggedIn: true,
   })),
   on(AuthActions.loginSuccess, (state, { token }) => ({
     ...state,
@@ -57,11 +56,16 @@ export const authReducer = createReducer(
   })),
   on(AuthActions.loadUserProfileSuccess, (state, { userProfile }) => ({
     ...state,
+    isLoggedIn: true,
     userProfile,
   })),
   on(AuthActions.loadUserProfileFailure, (state, { error }) => ({
     ...state,
-    messages: error,
+    isLoggedIn: false,
+    token: null,
+    messages: null,
+    currentActionUrl: null,
+    userProfile: null
   })),
   on(AuthActions.setCurrentAction, (state, { currentActionUrl, messages }) => ({
     ...state,

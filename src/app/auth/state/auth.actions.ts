@@ -7,6 +7,8 @@ export const loadAuthTokenFromLocalStorage = createAction(
     '[Local Storage] Load Auth Token From LocalStorage'
 );
 
+// the token from localStorage is not sure if valid. Use get user profile to check it
+// this action only set token property, isLoggedIn property is set from loadUserProfileSuccess/Failure
 export const loadAuthTokenFromLocalStorageSuccess = createAction(
     '[Local Storage] Load Auth Token From LocalStorage Success',
     props<{token: string}>()
@@ -60,6 +62,9 @@ export const loadUserProfileSuccess = createAction(
     props<{userProfile: UserProfile}>()
 );
 
+// token get from server is usually error free, but token from localStorage is not guarantee.
+// when the app is initialize, read token from localStorgae, use it to get user profile.
+// if error, set all auth state to initial state. else the token is valid.
 export const loadUserProfileFailure = createAction(
     '[Backend API] Load User Profile Failure',
     props<{error: ResponseMessage[]}>()

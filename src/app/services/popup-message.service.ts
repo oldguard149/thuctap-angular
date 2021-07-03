@@ -8,7 +8,7 @@ export class PopupMessageService {
   constructor(private message: NzMessageService) {}
   createMessage(
     content: string,
-    type: 'success' | 'error' | 'warning' = 'success',
+    type: 'success' | 'error' | 'warning',
     duration = 4000
   ): void {
     this.message.create(type, content, { nzDuration: duration });

@@ -7,7 +7,7 @@
     (click)="handleClick('addToCart')"
   ></a>
   <!-- wish list -->
-  <a class="wishlist zmdi zmdi-favorite-outline" (click)="handleClick('wishlist')"></a>
+  <a *ngIf="isLoggedIn$ | async" class="wishlist zmdi zmdi-favorite-outline" (click)="handleClick('wishlist')"></a>
   <!-- view detail -->
   <a class="compare zmdi zmdi-refresh" [routerLink]="['/product', productId]"></a>
   <!-- review -->

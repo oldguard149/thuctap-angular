@@ -1,12 +1,20 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
+import { of } from 'rxjs';
 import { catchError, exhaustMap, map } from 'rxjs/operators';
+import { setCurrentAction } from 'src/app/auth/state/auth.actions';
 import { PopupMessageService } from 'src/app/services/popup-message.service';
 import { WishlistService } from '../services/wishlist.service';
 
 import * as WishlistActions from './wishlist.actions';
 import { selectWishlistPaginationInfo } from './wishlist.selectors';
+
+interface WishlistUnAuthorizeError {
+  isUnAuthError: boolean;
+  message: string;
+}
 
 @Injectable()
 export class WishlistEffects {
@@ -36,8 +44,11 @@ export class WishlistEffects {
         exhaustMap((action) =>
           this.wishlistService.add(action.product.id).pipe(
             map((res) => {
-              console.log(res);
-              this.message.createMessage(res.message);
+              this.message.createMessage(res.message, 'success');
+            }),
+            catchError((error: WishlistUnAuthorizeError) => {
+              this.handleAddAndDeleteError(error);
+              return of('');
             })
           )
         )
@@ -45,26 +56,49 @@ export class WishlistEffects {
     { dispatch: false }
   );
 
-  deleteFromWishList$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(WishlistActions.deleteFromWishlist),
-      exhaustMap((action) =>
-        this.wishlistService
-          .delete(action.productId)
-          .pipe(
+  deleteFromWishList$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(WishlistActions.deleteFromWishlist),
+        exhaustMap((action) =>
+          this.wishlistService.delete(action.productId).pipe(
             map((res) => {
-              console.log(res);
-              this.message.createMessage(res.message)
+              this.message.createMessage(res.message, 'success');
+            }),
+            catchError((error: WishlistUnAuthorizeError) => {
+              this.handleAddAndDeleteError(error);
+              return of('');
             })
           )
-      )
-    ), {dispatch: false}
+        )
+      ),
+    { dispatch: false }
   );
+
+  private handleAddAndDeleteError(error: WishlistUnAuthorizeError) {
+    if (error.isUnAuthError) {
+      this.store.dispatch(
+        setCurrentAction({
+          currentActionUrl: '/wishlist',
+          messages: [
+            {
+              type: 'failure',
+              content: 'You need to login before access wishlist',
+            },
+          ],
+        })
+      );
+      this.router.navigateByUrl('/login')
+    } else {
+      this.message.createMessage(error.message, 'error', 10000);
+    }
+  }
 
   constructor(
     private actions$: Actions,
     private store: Store,
     private wishlistService: WishlistService,
-    private message: PopupMessageService
+    private message: PopupMessageService,
+    private router: Router
   ) {}
 }

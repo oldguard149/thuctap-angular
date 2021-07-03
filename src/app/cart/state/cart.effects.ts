@@ -6,6 +6,7 @@ import { catchError, exhaustMap, map } from 'rxjs/operators';
 import { CartItem } from 'src/app/models/cartItem.model';
 import { Order } from 'src/app/models/order.model';
 import { ResponseMessage } from 'src/app/models/response.model';
+import { PopupMessageService } from 'src/app/services/popup-message.service';
 import { CheckoutService } from '../services/checkout.service';
 import * as CartActions from './cart.actions';
 import { cartLocalStorageKey } from './cart.reducer';
@@ -79,9 +80,41 @@ export class CartEffects {
     { dispatch: false }
   );
 
+  showSuccessAddToCartMessage$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(
+          CartActions.productCardAddToCart,
+          CartActions.productDetailAddToCart,
+          CartActions.wishlistAddToCart
+        ),
+        map(() => this.message.createMessage('Item has been added to cart', 'success'))
+      ),
+    { dispatch: false }
+  );
+
+  showSuccessRemoveFromCartMessage$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(CartActions.removeCartItem),
+        map(() => this.message.createMessage('Item has been removed from cart', 'success'))
+      ),
+    { dispatch: false }
+  );
+
+  showSuccessUpdateCartQuantityMessage$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(CartActions.updateOrderQuantity),
+        map(() => this.message.createMessage('Item quantity has been updated', 'success'))
+      ),
+    { dispatch: false }
+  );
+
   constructor(
     private actions$: Actions,
     private store: Store,
-    private checkoutService: CheckoutService
+    private checkoutService: CheckoutService,
+    private message: PopupMessageService
   ) {}
 }
