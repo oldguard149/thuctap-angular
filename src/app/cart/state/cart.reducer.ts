@@ -1,4 +1,3 @@
-import { state } from '@angular/animations';
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
 import { CartItem } from 'src/app/models/cartItem.model';
@@ -31,6 +30,7 @@ export const cartReducer = createReducer(
   on(CartActions.productDetailAddToCart, (state, { item }) => {
     return handleAddToCart(state, item);
   }),
+  on(CartActions.wishlistAddToCart, (state, {item}) => handleAddToCart(state, item)),
   on(CartActions.updateOrderQuantity, (state, { id, orderQty }) => {
     return adapter.updateOne(
       { id, changes: { orderQuantity: orderQty } },

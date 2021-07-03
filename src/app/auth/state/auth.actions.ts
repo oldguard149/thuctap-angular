@@ -66,6 +66,6 @@ export const loadUserProfileFailure = createAction(
 );
 
 export const setCurrentAction = createAction(
-    '[Check Out / Fav Products] Set Current Action',
+    '[Check Out Guard / Fav Products Guard] Set Current Action',
     props<{currentActionUrl: string, messages: ResponseMessage[]}>()
 )

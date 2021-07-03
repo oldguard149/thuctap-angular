@@ -12,6 +12,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { NgxStripeModule } from 'ngx-stripe';
+import { NzMessageModule } from 'ng-zorro-antd/message';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,6 +24,12 @@ import { AuthEffects } from './auth/state/auth.effects';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 registerLocaleData(vi);
 
+import { NzConfig, NZ_CONFIG } from 'ng-zorro-antd/core/config';
+
+const ngZorroConfig: NzConfig = {
+  message: { nzTop: 30, nzMaxStack: 5 },
+};
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -33,17 +40,19 @@ registerLocaleData(vi);
     HttpClientModule,
     LayoutsModule,
     StoreModule.forRoot({ cart: cartReducer, auth: authReducer }, {}),
-    NgxStripeModule.forRoot('pk_test_BHUOafmeJtUMRjSTplsjt9Z9'),
     EffectsModule.forRoot([CartEffects, AuthEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
     }),
+    NgxStripeModule.forRoot('pk_test_BHUOafmeJtUMRjSTplsjt9Z9'),
+    NzMessageModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: vi_VN },
     { provide: 'API_URL', useValue: 'http://45.118.134.105:3000' },
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    { provide: NZ_CONFIG, useValue: ngZorroConfig }
   ],
   bootstrap: [AppComponent],
 })

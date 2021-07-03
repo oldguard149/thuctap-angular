@@ -1,0 +1,72 @@
+<ng-container *ngIf="vm$ | async as vm">
+  <app-breadcrumb [items]="vm.breadcrumbData"></app-breadcrumb>
+  <div class="w-11/12 md:w-9/12 mx-auto my-8 flex flex-col">
+    <h2 class="text-xl font-semibold">WISHLIST</h2>
+    <div class="table-container mb-5">
+      <table class="min-w-max w-full">
+        <tr>
+          <th class="text-center text-gray-500">Image</th>
+          <th class="text-center text-gray-500">Product Name</th>
+          <th class="text-center text-gray-500">Unit Price</th>
+          <th class="text-center text-gray-500">Add To Cart</th>
+          <th class="text-center text-gray-500">Remove</th>
+        </tr>
+        <tr
+          *ngFor="
+            let item of vm.items
+              | paginate
+                : {
+                    itemsPerPage: vm.paginationInfo.limit,
+                    currentPage: vm.paginationInfo.page,
+                    totalItems: vm.paginationInfo.totalItems
+                  }
+          "
+        >
+          <td class="p-4">
+            <div class="flex justify-center">
+              <a [routerLink]="['/product', item.id]">
+                <img
+                  class="w-14 h-auto"
+                  *ngFor="let img of item.images; let first = first"
+                  [src]="img"
+                  [alt]="item.title"
+                  [ngClass]="{ hidden: !first }"
+                />
+              </a>
+            </div>
+          </td>
+          <td class="p-4">
+            <div class="flex flex-wrap max-w-sm">
+              <a [routerLink]="['/product', item.id]">
+                <h5 class="hover:text-brand transition-colors">{{ item.title }}</h5>
+              </a>
+            </div>
+          </td>
+          <td class="p-4">
+            <div class="flex justify-center">
+              <app-product-price
+                [mainPrice]="item.price"
+                [showSecondPrice]="false"
+              ></app-product-price>
+            </div>
+          </td>
+          <td class="p-4">
+            <div class="flex justify-center">
+              <button (click)="addToCart(getCartInfoFromProduct(item))">
+                <i class="fas fa-shopping-cart"></i> Add To Cart
+              </button>
+            </div>
+          </td>
+          <td class="p-4">
+            <div class="flex justify-center">
+              <button (click)="removeFromWishlist(item.id)">
+                <i class="fas fa-times-circle"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <app-pagination (pageChange)="handlePageChange($event)"></app-pagination>
+  </div>
+</ng-container>

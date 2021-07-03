@@ -32,6 +32,11 @@ export const productDetailAddToCart = createAction(
     props<{item: CartItem}>()
 );
 
+export const wishlistAddToCart = createAction(
+    '[Wishlist] Add To Cart',
+    props<{item: CartItem}>()
+)
+
 export const updateOrderQuantity = createAction(
     '[Cart] Update Quantity',
     props<{id: string, orderQty: number}>()

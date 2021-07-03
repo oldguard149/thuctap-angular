@@ -19,8 +19,8 @@ export class CheckoutService {
       }));
   }
 
-  getErrorMessageFor403Error(error: HttpErrorResponse) {
-    if (error.status === 403 || error.error === "Forbidden") {
+  getErrorMessageFor403Error(errorRes: HttpErrorResponse) {
+    if (errorRes.status === 403 || errorRes.status === 401) {
       return [{type: 'failure', content: 'You need to login first'} as ResponseMessage];
     }
   }
