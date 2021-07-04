@@ -1,1 +1,50 @@
-<p>category-list works!</p>
+<ng-container *ngIf="vm$ | async as vm">
+    <nz-table #basicTable [nzData]="vm.categories" [nzShowPagination]="false">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th class="action">Action</th>
+          <!-- <th class="action">Active Product</th> -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="
+            let item of basicTable.data
+              | paginate
+                : {
+                    itemsPerPage: vm.paginationInfo.limit,
+                    currentPage: vm.paginationInfo.page,
+                    totalItems: vm.paginationInfo.totalItems
+                  };
+            let index = index
+          "
+        >
+          <td>{{ item.name }}</td>
+          <td class="w-1/5">
+            <div class="flex justify-around">
+              <app-button
+                (click)="handleUpdate(index)"
+                [className]="'bg-blue-700 hover:bg-blue-400'"
+              >
+                Update
+              </app-button>
+              <app-button 
+                (click)="handleDelete(index)"
+                [className]="'bg-red-700 hover:bg-red-400'">
+                Delete
+              </app-button>
+            </div>
+          </td>
+          <!-- <td class="w-1/5">
+            <div class="flex justify-around">
+              <app-button>Active</app-button>
+              <app-button>Deactive</app-button>
+            </div>
+          </td> -->
+        </tr>
+      </tbody>
+    </nz-table>
+    <app-pagination (pageChange)="handlePageChange($event)"></app-pagination>
+  </ng-container>
+  

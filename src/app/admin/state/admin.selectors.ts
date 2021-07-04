@@ -15,6 +15,16 @@ export const selectSelectedProduct = createSelector(
   (state) => state.selectedProduct
 );
 
+export const selectCategories = createSelector(
+  adminFeatureState,
+  state => state.categories
+);
+
+export const selectSelectedCategory = createSelector(
+  adminFeatureState,
+  state => state.selectedCategory
+)
+
 export const selectPaginationInfo = createSelector(
   adminFeatureState,
   (state) => ({

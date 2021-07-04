@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
-import { vi_VN } from 'ng-zorro-antd/i18n';
+import { en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
-import vi from '@angular/common/locales/vi';
+import en from '@angular/common/locales/en';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LayoutsModule } from './layouts/layouts.module';
@@ -27,7 +27,7 @@ import { WishlistEffects } from './wishlist/state/wishlist.effects';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 
 
-registerLocaleData(vi);
+registerLocaleData(en);
 const ngZorroConfig: NzConfig = {
   message: { nzTop: 30, nzMaxStack: 5 },
 };
@@ -54,7 +54,7 @@ const ngZorroConfig: NzConfig = {
     NzMessageModule,
   ],
   providers: [
-    { provide: NZ_I18N, useValue: vi_VN },
+    { provide: NZ_I18N, useValue: en_US },
     { provide: 'API_URL', useValue: 'http://45.118.134.105:3000' },
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     { provide: NZ_CONFIG, useValue: ngZorroConfig },

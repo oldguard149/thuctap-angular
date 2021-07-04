@@ -6,7 +6,12 @@ import {
   selectPaginationInfo,
   selectProducts,
 } from '../../state/admin.selectors';
-import { changePage, loadProducts } from '../../state/admin.actions';
+import {
+  changePage,
+  loadProducts,
+  setSelectedProduct,
+} from '../../state/admin.actions';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-list',
@@ -17,20 +22,30 @@ export class ProductListComponent implements OnInit {
   vm$ = combineLatest([
     this.store.select(selectProducts),
     this.store.select(selectPaginationInfo),
-  ]).pipe(map(([products, paginationInfo]) => {
-    console.log(paginationInfo)
-    return { products, paginationInfo }
-  }));
-  constructor(private store: Store) {}
-
-  ngOnInit(): void {
-    this.store.dispatch(loadProducts());
-  }
+  ]).pipe(
+    map(([products, paginationInfo]) => {
+      return { products, paginationInfo };
+    })
+  );
 
   handlePageChange(page: number) {
     this.store.dispatch(changePage({ page }));
     this.store.dispatch(loadProducts());
   }
 
-  handleUpdate(index: number) {}
+  handleUpdate(index: number) {
+    this.store.dispatch(setSelectedProduct({ index }));
+    this.router.navigateByUrl('/admin/product-update');
+  }
+
+  handleRemove(index: number) {
+    this.store.dispatch(setSelectedProduct({ index }));
+    this.router.navigateByUrl('/admin/product-delete');
+  }
+
+  constructor(private store: Store, private router: Router) {}
+
+  ngOnInit(): void {
+    this.store.dispatch(loadProducts());
+  }
 }

@@ -15,9 +15,13 @@ export class CategoryEffects {
     this.actions$.pipe(
       ofType(AdminActions.loadCategories),
       exhaustMap(() =>
-        this.categoryService
-          .getAll()
-          .pipe(map((res) => AdminActions.loadCategoriesSuccess({ res })))
+        this.categoryService.getAll().pipe(
+          map((res) => AdminActions.loadCategoriesSuccess({ res })),
+          catchError((error) => {
+            console.log(error);
+            return of(AdminActions.adminErorr());
+          })
+        )
       )
     )
   );

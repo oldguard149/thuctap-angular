@@ -1,0 +1,10 @@
+<nz-modal
+  [nzVisible]="isVisible"
+  nzTitle="Confirm Delete"
+  (nzOnCancel)="handleCancel()"
+  (nzOnOk)="handleOk()"
+>
+  <ng-container *nzModalContent>
+    <p>{{content}}</p>
+  </ng-container>
+</nz-modal>

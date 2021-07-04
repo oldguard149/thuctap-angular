@@ -1,0 +1,8 @@
+<ng-container *ngIf="selectedProduct$ | async as product">
+    <div>
+        <app-product-form
+          [product]="product"
+          (submit)="formSubmit($event)"
+        ></app-product-form>
+      </div>    
+</ng-container>

@@ -24,6 +24,10 @@ export const changePageLimit = createAction(
   props<{ limit: number }>()
 );
 
+export const adminErorr = createAction(
+  '[Admin] Error'
+)
+
 // ============================================= PRODUCT ===============================================
 export const loadProducts = createAction('[Admin Product] Load Products');
 
@@ -32,7 +36,7 @@ export const loadProductsSuccess = createAction(
   props<{ res: ProductsResponse }>()
 );
 
-export const selectProduct = createAction(
+export const setSelectedProduct = createAction(
   '[Admin Product] Select Product',
   props<{ index: number }>()
 );
@@ -68,9 +72,14 @@ export const activeProduct = createAction(
 export const loadCategories = createAction('[Admin Catagory] Load Categories');
 
 export const loadCategoriesSuccess = createAction(
-  '[Admin Catagory] Load Categories Success',
+  '[Admin Category] Load Categories Success',
   props<{ res: CategoriesResponse }>()
 );
+
+export const setSelectedCategory = createAction(
+  '[Admin Category] Set Selected Category',
+  props<{index: number}>()
+)
 
 export const createCategory = createAction(
   '[Admin Category] Create Category',

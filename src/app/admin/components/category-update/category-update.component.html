@@ -1,1 +1,6 @@
-<p>category-update works!</p>
+<ng-container *ngIf="selectedCategory$ | async as category">
+  <app-category-form
+    (submit)="formSubmit($event)"
+    [category]="category"
+  ></app-category-form>
+</ng-container>

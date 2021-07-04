@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { selectSelectedCategory } from '../../state/admin.selectors';
 
 @Component({
   selector: 'app-category-update',
@@ -6,8 +8,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./category-update.component.scss']
 })
 export class CategoryUpdateComponent implements OnInit {
+  selectedCategory$ = this.store.select(selectSelectedCategory);
 
-  constructor() { }
+  formSubmit(body) {
+    console.log(body);
+  }
+  constructor(private store: Store) { }
 
   ngOnInit(): void {
   }

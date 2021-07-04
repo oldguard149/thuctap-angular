@@ -7,6 +7,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NzModalModule } from 'ng-zorro-antd/modal';
 
 import { ProductAdminService } from './services/product-admin.service';
 import { BuyerAdminService } from './services/buyer-admin.service';
@@ -29,6 +30,9 @@ import { ProductUpdateComponent } from './components/product-update/product-upda
 import { ProductDeleteComponent } from './components/product-delete/product-delete.component';
 import { CategoryUpdateComponent } from './components/category-update/category-update.component';
 import { CategoryDeleteComponent } from './components/category-delete/category-delete.component';
+import { CategoryEffects } from './state/category.effects';
+import { ConfirmDeleteComponent } from './components/confirm-delete/confirm-delete.component';
+import { CategoryFormComponent } from './components/category-form/category-form.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +47,8 @@ import { CategoryDeleteComponent } from './components/category-delete/category-d
     ProductDeleteComponent,
     CategoryUpdateComponent,
     CategoryDeleteComponent,
+    ConfirmDeleteComponent,
+    CategoryFormComponent,
   ],
   imports: [
     CommonModule,
@@ -53,8 +59,9 @@ import { CategoryDeleteComponent } from './components/category-delete/category-d
     SharedModule,
     NgxPaginationModule,
     ReactiveFormsModule,
+    NzModalModule,
     StoreModule.forFeature(AdminFeatureKey, adminReducer),
-    EffectsModule.forFeature([ProductEffects]),
+    EffectsModule.forFeature([ProductEffects, CategoryEffects]),
   ],
   providers: [
     { useClass: ProductAdminService, provide: ProductAdminService },

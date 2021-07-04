@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-category-create',
@@ -7,8 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CategoryCreateComponent implements OnInit {
 
-  constructor() { }
+  constructor(private store: Store) { }
 
+  formSubmit(body) {
+    console.log(body);
+  }
+  
   ngOnInit(): void {
   }
 

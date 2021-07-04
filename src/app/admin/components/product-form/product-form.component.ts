@@ -16,7 +16,7 @@ import {
 })
 export class ProductFormComponent implements OnInit {
   @Input() product: Product;
-  @Output() summit = new EventEmitter<any>();
+  @Output() submit = new EventEmitter();
   form: FormGroup;
   buttonText: string;
   vm$ = combineLatest([
@@ -28,14 +28,16 @@ export class ProductFormComponent implements OnInit {
       activeSelectData,
     }))
   );
-  constructor(private fb: FormBuilder, private store: Store) {}
 
+  defaultCategory = '';
+  defaultIsActive = true;
+  constructor(private fb: FormBuilder, private store: Store) {}
   ngOnInit(): void {
     this.initializeForm();
   }
 
   handleSubmit() {
-    this.summit.emit(this.form.value);
+    this.submit.emit(this.form.value);
   }
 
   private initializeForm() {
@@ -43,13 +45,16 @@ export class ProductFormComponent implements OnInit {
       // for update
       this.buttonText = 'Update';
       const category = this.product.category;
+      const currentCatgoryId = category.length !== 0 ? category[0]._id : '';
       this.form = this.fb.group({
         title: [this.product.title, Validators.required],
         desciption: [this.product.desciption],
         sku: [this.product.sku, Validators.required],
         images: this.fb.array([]),
         videos: this.fb.array([]),
-        category: [category.length !== 0 ? category[0] : ''],
+        category: this.fb.array([
+          this.fb.control(currentCatgoryId),
+        ]),
         status: [this.product.status, Validators.required],
         price: [this.product.price],
         quantity: [this.product.quantity],
@@ -63,23 +68,39 @@ export class ProductFormComponent implements OnInit {
       this.product.videos.forEach((video) =>
         this.videos.push(this.fb.control(video))
       );
+      this.defaultCategory = currentCatgoryId;
+      this.defaultIsActive = this.product.is_active
     } else {
       // for create
       this.buttonText = 'Create';
       this.form = this.fb.group({
-        title: [this.product.title, Validators.required],
-        description: [''],
+        title: ['', Validators.required],
+        desciption: [''],
         sku: ['', Validators.required],
         images: this.fb.array([]),
         videos: this.fb.array([]),
-        category: [''],
+        category: this.fb.array([this.fb.control(this.defaultCategory)]),
         status: ['selling', Validators.required],
         price: [''],
         quantity: [''],
-        is_active: [''],
+        is_active: [this.defaultIsActive],
         promotion: ['null'],
       });
     }
+  }
+
+  
+
+  handeCategoryChange(value: string) {
+    this.category.controls[0].setValue(value);
+  }
+
+  handleIsActiveChange(value: boolean) {
+    this.form.get('is_active').setValue(value);
+  }
+
+  get category() {
+    return this.form.get('category') as FormArray;
   }
 
   get images() {
@@ -88,5 +109,21 @@ export class ProductFormComponent implements OnInit {
 
   get videos() {
     return this.form.get('videos') as FormArray;
+  }
+
+  removeImageControl(index: number) {
+    this.images.removeAt(index);
+  }
+
+  addImageControl() {
+    this.images.push(this.fb.control(['']));
+  }
+
+  removeVideoControl(index: number) {
+    this.videos.removeAt(index);
+  }
+
+  addVideoControl() {
+    this.videos.push(this.fb.control(['']));
   }
 }

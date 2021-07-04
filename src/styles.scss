@@ -5,11 +5,13 @@
 
 :root {
   --brand-color: #c1d72d;
+  scroll-behavior: smooth;
 }
 
 @import "~swiper/swiper-bundle";
 //   /* You can add global styles to this file, and also import other style files */
 
-.fas, .fab {
+.fas,
+.fab {
   font: normal normal normal 14px/1 FontAwesome;
 }

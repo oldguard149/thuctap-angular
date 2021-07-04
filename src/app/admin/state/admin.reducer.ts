@@ -44,9 +44,9 @@ export const adminReducer = createReducer(
     totalDocs: res.totalDocs,
     limit: res.limit,
   })),
-  on(AdminActions.selectProduct, (state, { index }) => ({
+  on(AdminActions.setSelectedProduct, (state, { index }) => ({
     ...state,
-    selectProduct: state.products[index],
+    selectedProduct: state.products[index],
   })),
   on(AdminActions.changePage, (state, { page }) => ({ ...state, page })),
   on(AdminActions.loadCategoriesSuccess, (state, { res }) => ({
@@ -56,5 +56,9 @@ export const adminReducer = createReducer(
   on(AdminActions.loadOrdersSuccess, (state, { res }) => ({
     ...state,
     orders: res.docs,
+  })),
+  on(AdminActions.setSelectedCategory, (state, { index }) => ({
+    ...state,
+    selectedCategory: state.categories[index],
   }))
 );

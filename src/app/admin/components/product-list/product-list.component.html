@@ -39,7 +39,9 @@
             >
               Update
             </app-button>
-            <app-button [className]="'bg-red-700 hover:bg-red-400'">
+            <app-button 
+              (click)="handleRemove(index)"
+              [className]="'bg-red-700 hover:bg-red-400'">
               Delete
             </app-button>
           </div>
