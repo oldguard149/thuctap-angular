@@ -27,15 +27,23 @@ const routes: Routes = [
   },
   {
     path: '',
-    loadChildren: () =>
-      import('./cart/cart.module').then(
-        (m) => m.CartModule
-      ),
+    loadChildren: () => import('./cart/cart.module').then((m) => m.CartModule),
   },
   {
     path: 'wishlist',
-    loadChildren: () => import('./wishlist/wishlist.module').then(m => m.WishlistModule)
-  }
+    loadChildren: () =>
+      import('./wishlist/wishlist.module').then((m) => m.WishlistModule),
+  },
+  {
+    path: 'admin',
+    loadChildren: () =>
+      import('./admin/admin.module').then((m) => m.AdminModule),
+  },
+  {
+    path: 'admin/login',
+    redirectTo: 'login',
+    pathMatch: 'full',
+  },
 ];
 
 @NgModule({

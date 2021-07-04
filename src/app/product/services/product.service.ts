@@ -1,5 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
+import { map } from 'rxjs/operators';
+import { Product } from 'src/app/models/product.model';
 import { CategoriesResponse, ProductsResponse } from 'src/app/models/response.model';
 
 @Injectable({
@@ -13,7 +15,8 @@ export class ProductService {
   ) { }
 
   fetchProductDetails(productId: string) {
-    return this.http.get(`${this.api_url}/api/v1/products/details/${productId}`);
+    return this.http.get(`${this.api_url}/api/v1/products/details/${productId}`)
+      .pipe(map((product: Product) => ({...product, id: product._id})));
   }
 
   fetchProducts(page: number = 1, limit: number = 10) {

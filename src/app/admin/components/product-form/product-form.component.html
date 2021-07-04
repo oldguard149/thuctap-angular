@@ -1,0 +1,95 @@
+<div class="w-full max-w-xs">
+  <form
+    class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+    [formGroup]="form"
+  >
+    <h2 class="text-2xl font-bold text-center">{{ buttonText }} product</h2>
+    <div class="mb-6">
+      <app-label [id]="'title'">title</app-label>
+      <app-input
+        [id]="'title'"
+        [parentForm]="form"
+        [controlName]="'title'"
+      ></app-input>
+    </div>
+
+    <div class="mb-6">
+      <app-label [id]="'desciption'">description</app-label>
+      <app-input
+        [id]="'desciption'"
+        [parentForm]="form"
+        [controlName]="'desciption'"
+      ></app-input>
+    </div>
+
+    <div class="mb-6">
+      <app-label [id]="'sku'">sku</app-label>
+      <app-input
+        [id]="'sku'"
+        [parentForm]="form"
+        [controlName]="'sku'"
+      ></app-input>
+    </div>
+
+    <div class="mb-6">
+      <app-label [id]="'price'">price</app-label>
+      <app-input
+        [id]="'price'"
+        [parentForm]="form"
+        [controlName]="'price'"
+      ></app-input>
+    </div>
+
+    <div class="mb-6">
+      <app-label [id]="'quanity'">quanity</app-label>
+      <app-input
+        [id]="'quanity'"
+        [parentForm]="form"
+        [controlName]="'quanity'"
+      ></app-input>
+    </div>
+
+    <div class="mb-6">
+      <app-label [id]="'category'">category</app-label>
+      <app-select
+        [items]="categoriesSelectData"
+        (change)="handeCategoryChange($event)"
+      ></app-select>
+    </div>
+
+    <div class="mb-6">
+      <app-label [id]="'active'">active</app-label>
+      <app-select
+        [items]="activeSelectData"
+        (change)="handleIsActiveChange($event)"
+      ></app-select>
+    </div>
+
+    <div class="mb-6">
+      <app-label [id]="'status'">status</app-label>
+      <app-select
+        [items]="statusSelectData"
+        (change)="handleIsActiveChange($event)"
+      ></app-select>
+    </div>
+
+    <div class="mb-6">
+      <app-label [id]="'status'">status</app-label>
+      <app-input
+        [id]="'quanity'"
+        [parentForm]="form"
+        [controlName]="'quanity'"
+      ></app-input>
+    </div>
+
+    <div class="mb-6">
+        <app-label [id]="'status'">status</app-label>
+        <app-input
+          [id]="'quanity'"
+          [parentForm]="form"
+          [controlName]="'quanity'"
+        ></app-input>
+      </div>
+    <app-button (buttonClick)="handleSubmit()">{{ buttonText }}</app-button>
+  </form>
+</div>

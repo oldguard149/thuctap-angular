@@ -24,6 +24,7 @@ export class PaginationComponent implements OnInit {
 
   handlePageChange(page: number) {
     this.pageChange.emit(page);
+    window.scrollTo(0, 0);
   }
   
 

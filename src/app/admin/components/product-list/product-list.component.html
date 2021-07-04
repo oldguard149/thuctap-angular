@@ -1,0 +1,57 @@
+<ng-container *ngIf="vm$ | async as vm">
+  <nz-table #basicTable [nzData]="vm.products" [nzShowPagination]="false">
+    <thead>
+      <tr>
+        <th>Image</th>
+        <th>Name</th>
+        <th class="action">Action</th>
+        <th class="action">Active Product</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="
+          let item of basicTable.data
+            | paginate
+              : {
+                  itemsPerPage: vm.paginationInfo.limit,
+                  currentPage: vm.paginationInfo.page,
+                  totalItems: vm.paginationInfo.totalItems
+                };
+          let index = index
+        "
+      >
+        <td>
+          <img
+            *ngFor="let image of item.images; let first = first"
+            [src]="image"
+            [alt]="item.title"
+            [ngClass]="{ hidden: !first }"
+            class="h-16 w-16 object-contain"
+          />
+        </td>
+        <td>{{ item.title }}</td>
+        <td class="w-1/5">
+          <div class="flex justify-around">
+            <app-button
+              (click)="handleUpdate(index)"
+              [className]="'bg-blue-700 hover:bg-blue-400'"
+            >
+              Update
+            </app-button>
+            <app-button [className]="'bg-red-700 hover:bg-red-400'">
+              Delete
+            </app-button>
+          </div>
+        </td>
+        <td class="w-1/5">
+          <div class="flex justify-around">
+            <app-button>Active</app-button>
+            <app-button>Deactive</app-button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+  <app-pagination (pageChange)="handlePageChange($event)"></app-pagination>
+</ng-container>

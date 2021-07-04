@@ -15,7 +15,7 @@ export class SelectComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  handleChange(value: string) {
+  handleChange(value: any) {
     this.change.emit(value);
   }
 }

@@ -29,7 +29,6 @@ export class WishlistEffects {
           .get(paginationInfo.page, paginationInfo.limit)
           .pipe(
             map((res) => {
-              console.log(res);
               return WishlistActions.loadWishlistSuccess({ res });
             })
           )
