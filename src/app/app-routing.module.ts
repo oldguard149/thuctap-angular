@@ -40,9 +40,11 @@ const routes: Routes = [
       import('./admin/admin.module').then((m) => m.AdminModule),
   },
   {
-    path: 'admin/login',
-    redirectTo: 'login',
-    pathMatch: 'full',
+    path: 'orders',
+    loadChildren: () =>
+      import('./customer-order/customer-order.module').then(
+        (m) => m.CustomerOrderModule
+      ),
   },
 ];
 
