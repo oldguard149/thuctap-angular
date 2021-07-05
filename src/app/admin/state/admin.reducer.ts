@@ -60,5 +60,10 @@ export const adminReducer = createReducer(
   on(AdminActions.setSelectedCategory, (state, { index }) => ({
     ...state,
     selectedCategory: state.categories[index],
-  }))
+  })),
+  on(AdminActions.setAdminMessages, (state, { messages }) => ({
+    ...state,
+    messages,
+  })),
+  on(AdminActions.resetAdminMessages, (state) => ({...state, messages: null}))
 );

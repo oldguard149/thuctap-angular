@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Category } from 'src/app/models/category.model';
-import { selectIsActiveForSelectData } from '../../state/admin.selectors';
+import { selectAdminMessages, selectIsActiveForSelectData } from '../../state/admin.selectors';
 
 @Component({
   selector: 'app-category-form',
@@ -11,6 +11,7 @@ import { selectIsActiveForSelectData } from '../../state/admin.selectors';
 })
 export class CategoryFormComponent implements OnInit {
   activeSelectData$ = this.store.select(selectIsActiveForSelectData);
+  messages$ = this.store.select(selectAdminMessages)
   @Input() category: Category;
   @Output() submit = new EventEmitter();
   form: FormGroup;

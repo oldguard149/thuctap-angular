@@ -9,10 +9,14 @@ import { CategoryBody } from '../services/category-admin.service';
 import { CheckStatusOrderBody } from '../services/order-admin.service';
 import { ProductBody } from '../services/product-admin.service';
 
-export const setMessages = createAction(
-  '[Admin] Set Messages',
+export const setAdminMessages = createAction(
+  '[Admin] Set Admin Messages',
   props<{ messages: ResponseMessage[] }>()
 );
+
+export const resetAdminMessages = createAction(
+  '[Admin] Reset Admin Messages'
+)
 
 export const changePage = createAction(
   '[Admin] Change Page',
@@ -26,7 +30,9 @@ export const changePageLimit = createAction(
 
 export const adminErorr = createAction(
   '[Admin] Error'
-)
+);
+
+
 
 // ============================================= PRODUCT ===============================================
 export const loadProducts = createAction('[Admin Product] Load Products');
@@ -86,14 +92,14 @@ export const createCategory = createAction(
   props<{ body: CategoryBody }>()
 );
 
+// update and delete get current category id from selectedCategory
 export const updateCategory = createAction(
   '[Admin Category] Upate Category',
-  props<{ categoryId: string; body: CategoryBody }>()
+  props<{ body: CategoryBody }>()
 );
 
 export const deleteCategory = createAction(
   '[Admin Category] Delete Category',
-  props<{ categoryId: string }>()
 );
 
 export const activeCategory = createAction(

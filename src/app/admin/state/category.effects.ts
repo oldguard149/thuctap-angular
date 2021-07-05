@@ -8,6 +8,7 @@ import { ResponseMessage } from 'src/app/models/response.model';
 import { CategoryAdminService } from '../services/category-admin.service';
 
 import * as AdminActions from './admin.actions';
+import { selectSelectedCategory } from './admin.selectors';
 
 @Injectable()
 export class CategoryEffects {
@@ -33,7 +34,7 @@ export class CategoryEffects {
         this.categoryService.create(action.body).pipe(
           map((res) => {
             this.router.navigateByUrl('/admin/category-list');
-            return AdminActions.setMessages({
+            return AdminActions.setAdminMessages({
               messages: [
                 { type: 'success', content: 'Create category successfully' },
               ],
@@ -41,7 +42,7 @@ export class CategoryEffects {
           }),
           catchError((messages: ResponseMessage[]) =>
             of(
-              AdminActions.setMessages({
+              AdminActions.setAdminMessages({
                 messages,
               })
             )
@@ -54,18 +55,19 @@ export class CategoryEffects {
   updateCategory$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AdminActions.updateCategory),
-      exhaustMap((action) =>
-        this.categoryService.update(action.categoryId, action.body).pipe(
+      concatLatestFrom(action => this.store.select(selectSelectedCategory)),
+      exhaustMap(([action, selectedCategory]) =>
+        this.categoryService.update(selectedCategory._id, action.body).pipe(
           map((res) => {
-            return AdminActions.setMessages({
+            return AdminActions.setAdminMessages({
               messages: [
-                { type: 'success', content: 'Create category successfully' },
+                { type: 'success', content: 'Update category successfully' },
               ],
             });
           }),
           catchError((messages: ResponseMessage[]) =>
             of(
-              AdminActions.setMessages({
+              AdminActions.setAdminMessages({
                 messages,
               })
             )
@@ -78,18 +80,20 @@ export class CategoryEffects {
   deleteCategory$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AdminActions.deleteCategory),
-      exhaustMap((action) =>
-        this.categoryService.delete(action.categoryId).pipe(
+      concatLatestFrom(action => this.store.select(selectSelectedCategory)),
+      exhaustMap(([action, selectedCategory]) =>
+        this.categoryService.delete(selectedCategory._id).pipe(
           map((res) => {
-            return AdminActions.setMessages({
+            this.router.navigateByUrl('/admin/category-list');
+            return AdminActions.setAdminMessages({
               messages: [
-                { type: 'success', content: 'Create category successfully' },
+                { type: 'success', content: 'Delete category successfully' },
               ],
             });
           }),
           catchError((messages: ResponseMessage[]) =>
             of(
-              AdminActions.setMessages({
+              AdminActions.setAdminMessages({
                 messages,
               })
             )
@@ -105,7 +109,7 @@ export class CategoryEffects {
       exhaustMap((action) =>
         this.categoryService.active(action.categoryId).pipe(
           map((res) =>
-            AdminActions.setMessages({
+            AdminActions.setAdminMessages({
               messages: [
                 { type: 'success', content: 'Actice category successfully' },
               ],
@@ -113,7 +117,7 @@ export class CategoryEffects {
           ),
           catchError((messages: ResponseMessage[]) =>
             of(
-              AdminActions.setMessages({
+              AdminActions.setAdminMessages({
                 messages,
               })
             )
@@ -129,7 +133,7 @@ export class CategoryEffects {
       exhaustMap((action) =>
         this.categoryService.deactive(action.categoryId).pipe(
           map((res) =>
-            AdminActions.setMessages({
+            AdminActions.setAdminMessages({
               messages: [
                 { type: 'success', content: 'Deactice category successfully' },
               ],
@@ -137,7 +141,7 @@ export class CategoryEffects {
           ),
           catchError((messages: ResponseMessage[]) =>
             of(
-              AdminActions.setMessages({
+              AdminActions.setAdminMessages({
                 messages,
               })
             )

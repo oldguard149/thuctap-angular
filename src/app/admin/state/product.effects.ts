@@ -31,7 +31,7 @@ export class ProductEffects {
         this.productService.create(action.body).pipe(
           map((res) => {
             this.router.navigateByUrl('/admin/product-list');
-            return AdminActions.setMessages({
+            return AdminActions.setAdminMessages({
               messages: [
                 { type: 'success', content: 'Create product successfully' },
               ],
@@ -39,7 +39,7 @@ export class ProductEffects {
           }),
           catchError((messages: ResponseMessage[]) =>
             of(
-              AdminActions.setMessages({
+              AdminActions.setAdminMessages({
                 messages,
               })
             )
@@ -55,7 +55,7 @@ export class ProductEffects {
       exhaustMap((action) =>
         this.productService.update(action.productId, action.body).pipe(
           map((res) =>
-            AdminActions.setMessages({
+            AdminActions.setAdminMessages({
               messages: [
                 { type: 'success', content: 'Update product successfully' },
               ],
@@ -63,7 +63,7 @@ export class ProductEffects {
           ),
           catchError((messages: ResponseMessage[]) =>
             of(
-              AdminActions.setMessages({
+              AdminActions.setAdminMessages({
                 messages,
               })
             )
@@ -79,7 +79,7 @@ export class ProductEffects {
       exhaustMap((action) =>
         this.productService.delete(action.productId).pipe(
           map((res) => {
-            return AdminActions.setMessages({
+            return AdminActions.setAdminMessages({
               messages: [
                 { type: 'success', content: 'Delete product successfully' },
               ],
@@ -87,7 +87,7 @@ export class ProductEffects {
           }),
           catchError((messages: ResponseMessage[]) =>
             of(
-              AdminActions.setMessages({
+              AdminActions.setAdminMessages({
                 messages,
               })
             )
@@ -103,7 +103,7 @@ export class ProductEffects {
       exhaustMap((action) =>
         this.productService.active(action.productId).pipe(
           map((res) =>
-            AdminActions.setMessages({
+            AdminActions.setAdminMessages({
               messages: [
                 { type: 'success', content: 'Actice product successfully' },
               ],
@@ -111,7 +111,7 @@ export class ProductEffects {
           ),
           catchError((messages: ResponseMessage[]) =>
             of(
-              AdminActions.setMessages({
+              AdminActions.setAdminMessages({
                 messages,
               })
             )
@@ -127,7 +127,7 @@ export class ProductEffects {
       exhaustMap((action) =>
         this.productService.deactive(action.productId).pipe(
           map((res) =>
-            AdminActions.setMessages({
+            AdminActions.setAdminMessages({
               messages: [
                 { type: 'success', content: 'Deactice product successfully' },
               ],
@@ -135,7 +135,7 @@ export class ProductEffects {
           ),
           catchError((messages: ResponseMessage[]) =>
             of(
-              AdminActions.setMessages({
+              AdminActions.setAdminMessages({
                 messages,
               })
             )

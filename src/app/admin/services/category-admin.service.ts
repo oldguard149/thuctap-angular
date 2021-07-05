@@ -1,6 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { CategoriesResponse } from 'src/app/models/response.model';
+import { throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { CategoriesResponse, ResponseMessage } from 'src/app/models/response.model';
 
 @Injectable({
   providedIn: 'root',
@@ -15,14 +17,22 @@ export class CategoryAdminService {
   }
 
   create(body: CategoryBody) {
-    return this.http.post(`${this.api_url}/api/v1/categories/create`, body);
+    return this.http.post(`${this.api_url}/api/v1/categories/create`, body).pipe(
+      catchError((errorRes: HttpErrorResponse) => {
+        return throwError(convertErrorToResponseMessage(errorRes));
+      })
+    );
   }
 
   update(categoryId: string, body: CategoryBody) {
     return this.http.put(
       `${this.api_url}/api/v1/categories/update/${categoryId}`,
       body
-    );
+    ).pipe(
+      catchError((errorRes: HttpErrorResponse) => {
+        return throwError(convertErrorToResponseMessage(errorRes));
+      })
+    );;
   }
 
   delete(categoryId: string) {
@@ -47,4 +57,16 @@ export class CategoryAdminService {
 export interface CategoryBody {
   name: string;
   is_active: boolean;
+}
+
+
+// only use when errorRes.message has shape similar with the following type 
+// {
+//   location: "body"
+//   msg: "Category name is existing": 
+//   param: "name"
+//   value: "TV"
+// }[]
+export function convertErrorToResponseMessage(errorRes: any): ResponseMessage[] {
+  return errorRes.error.message.map(err => ({type: 'failure', content: err.msg} as ResponseMessage));
 }

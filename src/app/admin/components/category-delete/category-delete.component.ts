@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject } from 'rxjs';
+import { deleteCategory } from '../../state/admin.actions';
 import { selectSelectedCategory } from '../../state/admin.selectors';
 
 @Component({
@@ -14,12 +15,11 @@ export class CategoryDeleteComponent implements OnInit {
   isVisible$ = this.isModalVisibleSubject.asObservable();
 
   confirmDelete() {
-    console.log('delete confirm');
+    this.store.dispatch(deleteCategory())
     this.isModalVisibleSubject.next(false);
   }
 
   cancelDelete() {
-    console.log('cancel');
     this.isModalVisibleSubject.next(false);
   }
 
@@ -27,7 +27,7 @@ export class CategoryDeleteComponent implements OnInit {
     this.isModalVisibleSubject.next(true);
   }
 
-  constructor(private store: Store) { }
+  constructor(private store: Store ) { }
 
   ngOnInit(): void {
   }

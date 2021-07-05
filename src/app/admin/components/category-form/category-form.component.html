@@ -4,6 +4,7 @@
     [formGroup]="form"
   >
     <h2 class="text-2xl font-bold text-center">{{ buttonText }} product</h2>
+    <app-messages [messages]="messages$ | async"></app-messages>
     <div class="mb-6">
       <app-label [id]="'name'">Name</app-label>
       <app-input

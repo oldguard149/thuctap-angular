@@ -34,6 +34,11 @@ export const selectPaginationInfo = createSelector(
   })
 );
 
+export const selectAdminMessages = createSelector(
+  adminFeatureState,
+  state => state.messages
+)
+
 export const selectCategoriesForSelectData = createSelector(
   adminFeatureState,
   (state) =>
