@@ -1,56 +1,57 @@
-<div class="w-full max-w-2xl mx-auto">
-  <form
-    class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
-    [formGroup]="form"
-  >
-    <h2 class="text-2xl font-bold text-center">{{ buttonText }} product</h2>
-    <div class="mb-6">
-      <app-label [id]="'title'">Title</app-label>
-      <app-input
-        [id]="'title'"
-        [parentForm]="form"
-        [controlName]="'title'"
-      ></app-input>
-    </div>
+<ng-container *ngIf="vm$ | async as vm">
+  <div class="w-full max-w-2xl mx-auto">
+    <form
+      class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+      [formGroup]="form"
+    >
+      <h2 class="text-2xl font-bold text-center">{{ buttonText }} product</h2>
+      <app-messages [messages]="vm.messages"></app-messages>
+      <div class="mb-6">
+        <app-label [id]="'title'">Title</app-label>
+        <app-input
+          [id]="'title'"
+          [parentForm]="form"
+          [controlName]="'title'"
+        ></app-input>
+      </div>
 
-    <div class="mb-6">
-      <app-label [id]="'desciption'">Description</app-label>
-      <textarea
-        formControlName="desciption"
-        id="desciption"
-        rows="10"
-        class="w-full rounded-lg"
-      ></textarea>
-    </div>
+      <div class="mb-6">
+        <app-label [id]="'desciption'">Description</app-label>
+        <textarea
+          formControlName="desciption"
+          id="desciption"
+          rows="10"
+          class="w-full rounded-lg"
+        ></textarea>
+      </div>
 
-    <div class="mb-6">
-      <app-label [id]="'sku'">sku</app-label>
-      <app-input
-        [id]="'sku'"
-        [parentForm]="form"
-        [controlName]="'sku'"
-      ></app-input>
-    </div>
+      <div class="mb-6">
+        <app-label [id]="'sku'">sku</app-label>
+        <app-input
+          [id]="'sku'"
+          [parentForm]="form"
+          [controlName]="'sku'"
+        ></app-input>
+      </div>
 
-    <div class="mb-6">
-      <app-label [id]="'price'">Price</app-label>
-      <app-input
-        [id]="'price'"
-        [parentForm]="form"
-        [controlName]="'price'"
-      ></app-input>
-    </div>
+      <div class="mb-6">
+        <app-label [id]="'price'">Price</app-label>
+        <app-input
+          [id]="'price'"
+          [parentForm]="form"
+          [controlName]="'price'"
+        ></app-input>
+      </div>
 
-    <div class="mb-6">
-      <app-label [id]="'quantity'">Quantity</app-label>
-      <app-input
-        [id]="'quantity'"
-        [parentForm]="form"
-        [controlName]="'quantity'"
-      ></app-input>
-    </div>
+      <div class="mb-6">
+        <app-label [id]="'quantity'">Quantity</app-label>
+        <app-input
+          [id]="'quantity'"
+          [parentForm]="form"
+          [controlName]="'quantity'"
+        ></app-input>
+      </div>
 
-    <ng-container *ngIf="vm$ | async as vm">
       <div class="mb-6">
         <app-label [id]="'category'">Category</app-label>
         <app-select
@@ -70,50 +71,50 @@
           (change)="handleIsActiveChange($event)"
         ></app-select>
       </div>
-    </ng-container>
 
-    <div class="mb-6" formArrayName="images">
-      <app-label [id]="'images'">Image urls</app-label>
-      <div
-        *ngFor="let control of images.controls; let index = index"
-        class="flex w-full justify-between"
-      >
-        <app-input
-          class="w-10/12"
-          [parentForm]="images"
-          [controlName]="index"
-        ></app-input>
-        <app-button
-          (buttonClick)="removeImageControl(index)"
-          [className]="'bg-red-600 hover:bg-red-300'"
-          >
-          X
-        </app-button>
-      </div>
-      <app-button (buttonClick)="addImageControl()">Add new field</app-button>
-    </div>
-
-    <div class="mb-6" formArrayName="videos">
-      <app-label [id]="'videos'">Video urls</app-label>
-      <div
-        *ngFor="let control of videos.controls; let index = index"
-        class="flex w-full justify-between"
-      >
-        <app-input
-          class="w-10/12"
-          [parentForm]="videos"
-          [controlName]="index"
-        ></app-input>
-        <app-button
-          (buttonClick)="removeVideoControl(index)"
-          [className]="'bg-red-600 hover:bg-red-300'"
+      <div class="mb-6" formArrayName="images">
+        <app-label [id]="'images'">Image urls</app-label>
+        <div
+          *ngFor="let control of images.controls; let index = index"
+          class="flex w-full justify-between"
         >
-          X
-        </app-button>
+          <app-input
+            class="w-10/12"
+            [parentForm]="images"
+            [controlName]="index"
+          ></app-input>
+          <app-button
+            (buttonClick)="removeImageControl(index)"
+            [className]="'bg-red-600 hover:bg-red-300'"
+          >
+            X
+          </app-button>
+        </div>
+        <app-button (buttonClick)="addImageControl()">Add new field</app-button>
       </div>
-      <app-button (buttonClick)="addVideoControl()">Add new field</app-button>
-    </div>
 
-    <app-button (buttonClick)="handleSubmit()">{{ buttonText }}</app-button>
-  </form>
-</div>
+      <div class="mb-6" formArrayName="videos">
+        <app-label [id]="'videos'">Video urls</app-label>
+        <div
+          *ngFor="let control of videos.controls; let index = index"
+          class="flex w-full justify-between"
+        >
+          <app-input
+            class="w-10/12"
+            [parentForm]="videos"
+            [controlName]="index"
+          ></app-input>
+          <app-button
+            (buttonClick)="removeVideoControl(index)"
+            [className]="'bg-red-600 hover:bg-red-300'"
+          >
+            X
+          </app-button>
+        </div>
+        <app-button (buttonClick)="addVideoControl()">Add new field</app-button>
+      </div>
+
+      <app-button (buttonClick)="handleSubmit()">{{ buttonText }}</app-button>
+    </form>
+  </div>
+</ng-container>

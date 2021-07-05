@@ -3,12 +3,14 @@ import { Store } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {
+  selectAdminMessages,
   selectPaginationInfo,
   selectProducts,
 } from '../../state/admin.selectors';
 import {
   changePage,
   loadProducts,
+  resetAdminMessages,
   setSelectedProduct,
 } from '../../state/admin.actions';
 import { Router } from '@angular/router';
@@ -22,9 +24,10 @@ export class ProductListComponent implements OnInit {
   vm$ = combineLatest([
     this.store.select(selectProducts),
     this.store.select(selectPaginationInfo),
+    this.store.select(selectAdminMessages)
   ]).pipe(
-    map(([products, paginationInfo]) => {
-      return { products, paginationInfo };
+    map(([products, paginationInfo, messages]) => {
+      return { products, paginationInfo, messages };
     })
   );
 
@@ -47,5 +50,9 @@ export class ProductListComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(loadProducts());
+  }
+
+  ngDestroy() {
+    this.store.dispatch(resetAdminMessages());
   }
 }

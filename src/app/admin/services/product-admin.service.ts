@@ -3,6 +3,7 @@ import { Inject, Injectable } from '@angular/core';
 import { of, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { ProductsResponse } from 'src/app/models/response.model';
+import {convertErrorToResponseMessage} from './category-admin.service';
 
 @Injectable({
   providedIn: 'root',
@@ -20,11 +21,11 @@ export class ProductAdminService {
   create(body: ProductBody) {
     return this.http.post(`${this.api_url}/api/v1/products/create`, body).pipe(
       catchError((errorRes: HttpErrorResponse) => {
-        const errorList = errorRes.error.message.map((err: any) => ({
-          type: 'failure',
-          content: err.msg,
-        }));
-        return throwError(errorList);
+        console.log(errorRes);
+        if (typeof errorRes.error.message === 'string') {
+          return throwError([{type: 'failure', content: errorRes.error.message}]);
+        }
+        return throwError(convertErrorToResponseMessage(errorRes));
       })
     );
   }
@@ -32,11 +33,11 @@ export class ProductAdminService {
   update(productId: string, body: ProductBody) {
     return this.http.put(`${this.api_url}/api/v1/products/update/${productId}`, body).pipe(
       catchError((errorRes: HttpErrorResponse) => {
-        const errorList = errorRes.error.message.map((err: any) => ({
-          type: 'failure',
-          content: err.msg,
-        }));
-        return throwError(errorList);
+        console.log(errorRes);
+        if (typeof errorRes.error.message === 'string') {
+          return throwError([{type: 'failure', content: errorRes.error.message}]);
+        }
+        return throwError(convertErrorToResponseMessage(errorRes));
       })
     );;
   }

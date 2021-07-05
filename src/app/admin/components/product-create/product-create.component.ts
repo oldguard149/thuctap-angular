@@ -13,7 +13,7 @@ export class ProductCreateComponent implements OnInit {
   ngOnInit(): void {}
 
   formSubmit(body: any) {
-    console.log(body);
-    // this.store.dispatch(createProduct({ body }));
+    this.store.dispatch(createProduct({ body }));
+    window.scroll(0, 0);
   }
 }

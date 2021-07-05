@@ -5,6 +5,7 @@ import { combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Product } from 'src/app/models/product.model';
 import {
+  selectAdminMessages,
   selectCategoriesForSelectData,
   selectIsActiveForSelectData,
 } from '../../state/admin.selectors';
@@ -22,10 +23,12 @@ export class ProductFormComponent implements OnInit {
   vm$ = combineLatest([
     this.store.select(selectCategoriesForSelectData),
     this.store.select(selectIsActiveForSelectData),
+    this.store.select(selectAdminMessages),
   ]).pipe(
-    map(([categoriesSelectData, activeSelectData]) => ({
+    map(([categoriesSelectData, activeSelectData, messages]) => ({
       categoriesSelectData,
       activeSelectData,
+      messages
     }))
   );
 
@@ -59,7 +62,7 @@ export class ProductFormComponent implements OnInit {
         price: [this.product.price],
         quantity: [this.product.quantity],
         is_active: [this.product.is_active],
-        promotion: ['null'],
+        // promotion: [''],
       });
 
       this.product.images.forEach((img) =>
@@ -69,7 +72,7 @@ export class ProductFormComponent implements OnInit {
         this.videos.push(this.fb.control(video))
       );
       this.defaultCategory = currentCatgoryId;
-      this.defaultIsActive = this.product.is_active
+      this.defaultIsActive = this.product.is_active;
     } else {
       // for create
       this.buttonText = 'Create';
@@ -77,14 +80,14 @@ export class ProductFormComponent implements OnInit {
         title: ['', Validators.required],
         desciption: [''],
         sku: ['', Validators.required],
-        images: this.fb.array([]),
-        videos: this.fb.array([]),
+        images: this.fb.array([this.fb.control('')]),
+        videos: this.fb.array([this.fb.control('')]),
         category: this.fb.array([this.fb.control(this.defaultCategory)]),
         status: ['selling', Validators.required],
         price: [''],
         quantity: [''],
         is_active: [this.defaultIsActive],
-        promotion: ['null'],
+        // promotion: [''],
       });
     }
   }

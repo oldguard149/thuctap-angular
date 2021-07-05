@@ -54,12 +54,11 @@ export const createProduct = createAction(
 
 export const updateProduct = createAction(
   '[Admin Product] Update Product',
-  props<{ productId: string; body: ProductBody }>()
+  props<{ body: ProductBody }>()
 );
 
 export const deleteProduct = createAction(
   '[Admin Product] Delete Product',
-  props<{ productId: string }>()
 );
 
 export const deactiveProduct = createAction(

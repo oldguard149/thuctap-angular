@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject } from 'rxjs';
+import { deleteProduct } from '../../state/admin.actions';
 import { selectSelectedProduct } from '../../state/admin.selectors';
 
 @Component({
@@ -14,7 +15,7 @@ export class ProductDeleteComponent implements OnInit {
   isVisible$ = this.isModalVisibleSubject.asObservable();
 
   confirmDelete() {
-    console.log('delete confirm');
+    this.store.dispatch(deleteProduct());
     this.isModalVisibleSubject.next(false);
   }
 

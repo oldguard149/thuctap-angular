@@ -6,7 +6,7 @@ import { of } from 'rxjs';
 import { catchError, exhaustMap, map } from 'rxjs/operators';
 import { ResponseMessage } from 'src/app/models/response.model';
 import { ProductAdminService } from '../services/product-admin.service';
-import { selectPaginationInfo } from './admin.selectors';
+import { selectPaginationInfo, selectSelectedProduct } from './admin.selectors';
 
 import * as AdminActions from './admin.actions';
 
@@ -52,8 +52,9 @@ export class ProductEffects {
   updateProduct$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AdminActions.updateProduct),
-      exhaustMap((action) =>
-        this.productService.update(action.productId, action.body).pipe(
+      concatLatestFrom((action) => this.store.select(selectSelectedProduct)),
+      exhaustMap(([action, selectedProduct]) =>
+        this.productService.update(selectedProduct._id, action.body).pipe(
           map((res) =>
             AdminActions.setAdminMessages({
               messages: [
@@ -76,9 +77,11 @@ export class ProductEffects {
   deleteProduct$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AdminActions.deleteProduct),
-      exhaustMap((action) =>
-        this.productService.delete(action.productId).pipe(
+      concatLatestFrom((action) => this.store.select(selectSelectedProduct)),
+      exhaustMap(([action, selectedProduct]) =>
+        this.productService.delete(selectedProduct._id).pipe(
           map((res) => {
+            this.router.navigateByUrl('/admin/product-list')
             return AdminActions.setAdminMessages({
               messages: [
                 { type: 'success', content: 'Delete product successfully' },
