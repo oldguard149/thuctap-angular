@@ -10,6 +10,7 @@ export interface AuthState {
   messages: ResponseMessage[];
   userProfile: UserProfile;
   currentActionUrl: string;
+  isAdmin: boolean;
 }
 
 const initialState: AuthState = {
@@ -18,6 +19,7 @@ const initialState: AuthState = {
   messages: null,
   userProfile: null,
   currentActionUrl: null,
+  isAdmin: false
 };
 
 export const authLocalStorageKey = 'auth';
@@ -53,6 +55,7 @@ export const authReducer = createReducer(
     isLoggedIn: false,
     message: null,
     userProfile: null,
+    isAdmin: false
   })),
   on(AuthActions.loadUserProfileSuccess, (state, { userProfile }) => ({
     ...state,
@@ -71,5 +74,6 @@ export const authReducer = createReducer(
     ...state,
     currentActionUrl,
     messages,
-  }))
+  })),
+  on(AuthActions.adminLoginSuccess, (state, {token}) => ({...state, token: token, isAdmin: true, isLoggedIn: true}))
 );

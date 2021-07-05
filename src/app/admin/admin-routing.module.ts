@@ -10,7 +10,6 @@ import { ProductDeleteComponent } from './components/product-delete/product-dele
 import { CategoryDeleteComponent } from './components/category-delete/category-delete.component';
 import { CategoryUpdateComponent } from './components/category-update/category-update.component';
 
-
 const routes: Routes = [
   {
     path: '',
@@ -18,12 +17,12 @@ const routes: Routes = [
     children: [
       { path: 'category-list', component: CategoryListComponent },
       { path: 'category-create', component: CategoryCreateComponent },
-      { path: 'category-update', component: CategoryUpdateComponent},
+      { path: 'category-update', component: CategoryUpdateComponent },
       { path: 'category-delete', component: CategoryDeleteComponent },
       { path: 'product-list', component: ProductListComponent },
       { path: 'product-create', component: ProductCreateComponent },
       { path: 'product-update', component: ProductUpdateComponent },
-      { path: 'product-delete', component: ProductDeleteComponent }
+      { path: 'product-delete', component: ProductDeleteComponent },
     ],
   },
 ];
@@ -31,6 +30,5 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  
 })
 export class AdminRoutingModule {}

@@ -73,6 +73,19 @@ export class AuthService {
       );
   }
 
+  adminLogin(body: LoginBodyObject) {
+    return this.http.post(`${this.api_url}/api/v1/admin/login`, body).pipe(
+      catchError((errorRes: HttpErrorResponse) => {
+        if (typeof errorRes.error === 'string') {
+          // error: string
+          return throwError([{ type: 'failure', content: errorRes.error }]);
+        } else {
+          return throwError([{type: 'failure', content:'Something bad happend. Please try again later'}]);
+        }
+      })
+    )
+  }
+
   updateProfile(body: object) {
     return this.http.put(`${this.api_url}/api/v2/public/auth/profile`, body);
   }

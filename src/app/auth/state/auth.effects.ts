@@ -22,6 +22,12 @@ export class AuthEffects {
         if (token === null) {
           return AuthActions.localStorageEmpty();
         } else {
+          // check if token from localStorage have admin role
+          // role=1 for admin, role=2 for customer
+          const tokenPayload = JSON.parse(window.atob(token.split('.')[1]));
+          if (tokenPayload.payload?.role === 1) {
+            return AuthActions.adminLoginSuccess({ token });
+          }
           return AuthActions.loadAuthTokenFromLocalStorageSuccess({
             token: token,
           });
@@ -33,7 +39,7 @@ export class AuthEffects {
   login$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.login),
-      concatLatestFrom(action => this.store.select(selectCurrentActionUrl)),
+      concatLatestFrom((action) => this.store.select(selectCurrentActionUrl)),
       exhaustMap(([action, currentActionUrl]) =>
         this.authService.login(action.body).pipe(
           map((res: any) => {
@@ -52,10 +58,27 @@ export class AuthEffects {
     )
   );
 
+  adminLogin$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.adminLogin),
+      exhaustMap((action) =>
+        this.authService.login(action.body).pipe(
+          map((res: any) => {
+            this.router.navigateByUrl('/admin');
+            return AuthActions.adminLoginSuccess({ token: res.token });
+          }),
+          catchError((error: ResponseMessage[]) => {
+            return of(AuthActions.loginFailure({ error: error }));
+          })
+        )
+      )
+    )
+  );
+
   saveTokenToLocalStorage$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(AuthActions.loginSuccess),
+        ofType(AuthActions.loginSuccess, AuthActions.adminLoginSuccess),
         map((action) => {
           const token = action.token;
           localStorage.removeItem(authLocalStorageKey);

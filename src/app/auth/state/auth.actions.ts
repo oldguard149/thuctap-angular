@@ -33,6 +33,11 @@ export const loginFailure = createAction(
     props<{error: ResponseMessage[]}>()
 );
 
+export const adminLogin = createAction(
+    '[Admin Login] Admin Login',
+    props<{body: LoginBodyObject}>()
+)
+
 export const register = createAction(
     '[Register / Backend API] Register',
     props<{body: RegisterBodyObject}>()
@@ -73,4 +78,9 @@ export const loadUserProfileFailure = createAction(
 export const setCurrentAction = createAction(
     '[Check Out Guard / Fav Products Guard] Set Current Action',
     props<{currentActionUrl: string, messages: ResponseMessage[]}>()
+)
+
+export const adminLoginSuccess = createAction(
+    '[Admin Login] Login Success',
+    props<{token: string}>()
 )

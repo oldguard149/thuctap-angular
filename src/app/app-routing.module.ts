@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { HaveAdminRoleGuard } from './admin/guards/have-admin-role.guard';
+import { CanLoadCustomerOrderGuard } from './customer-order/guards/can-load-customer-order.guard';
 
 const routes: Routes = [
   {
@@ -36,11 +38,13 @@ const routes: Routes = [
   },
   {
     path: 'admin',
+    canLoad: [HaveAdminRoleGuard],
     loadChildren: () =>
       import('./admin/admin.module').then((m) => m.AdminModule),
   },
   {
     path: 'orders',
+    canLoad: [CanLoadCustomerOrderGuard],
     loadChildren: () =>
       import('./customer-order/customer-order.module').then(
         (m) => m.CustomerOrderModule

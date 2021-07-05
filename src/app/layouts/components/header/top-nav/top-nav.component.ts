@@ -61,6 +61,7 @@ export class TopNavComponent {
     { displayName: 'Wishlist', value: '/wishlist'},
     { displayName: 'Cart', value: '/cart'},
     { displayName: 'Checkout', value: '/checkout'},
+    { displayName: 'Orders', value: '/orders'},
   ]
 
 }

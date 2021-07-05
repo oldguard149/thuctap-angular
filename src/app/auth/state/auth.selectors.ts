@@ -28,3 +28,8 @@ export const selectCurrentActionUrl = createSelector(
     selectAuthFeatureState,
     state => state.currentActionUrl
 )
+
+export const selectIsAdmin = createSelector(
+    selectAuthFeatureState,
+    state => state.isAdmin
+)
