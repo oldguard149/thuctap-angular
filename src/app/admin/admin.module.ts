@@ -13,9 +13,11 @@ import { ProductAdminService } from './services/product-admin.service';
 import { BuyerAdminService } from './services/buyer-admin.service';
 import { CategoryAdminService } from './services/category-admin.service';
 import { OrderAdminService } from './services/order-admin.service';
-import { AdminFeatureKey } from './state/admin.selectors';
 import { adminReducer } from './state/admin.reducer';
+import { AdminFeatureKey } from './state/admin.selectors';
 import { ProductEffects } from './state/product.effects';
+import { OrderEffects } from './state/order.effects';
+import { CategoryEffects } from './state/category.effects';
 
 import { SharedModule } from '../shared/shared.module';
 import { AdminRoutingModule } from './admin-routing.module';
@@ -30,9 +32,11 @@ import { ProductUpdateComponent } from './components/product-update/product-upda
 import { ProductDeleteComponent } from './components/product-delete/product-delete.component';
 import { CategoryUpdateComponent } from './components/category-update/category-update.component';
 import { CategoryDeleteComponent } from './components/category-delete/category-delete.component';
-import { CategoryEffects } from './state/category.effects';
 import { ConfirmDeleteComponent } from './components/confirm-delete/confirm-delete.component';
 import { CategoryFormComponent } from './components/category-form/category-form.component';
+import { OrdersListComponent } from './components/orders-list/orders-list.component';
+import { OrdersDetailsComponent } from './components/orders-details/orders-details.component';
+import { ProductModule } from '../product/product.module';
 
 @NgModule({
   declarations: [
@@ -49,6 +53,8 @@ import { CategoryFormComponent } from './components/category-form/category-form.
     CategoryDeleteComponent,
     ConfirmDeleteComponent,
     CategoryFormComponent,
+    OrdersListComponent,
+    OrdersDetailsComponent,
   ],
   imports: [
     CommonModule,
@@ -60,8 +66,9 @@ import { CategoryFormComponent } from './components/category-form/category-form.
     NgxPaginationModule,
     ReactiveFormsModule,
     NzModalModule,
+    ProductModule,
     StoreModule.forFeature(AdminFeatureKey, adminReducer),
-    EffectsModule.forFeature([ProductEffects, CategoryEffects]),
+    EffectsModule.forFeature([ProductEffects, CategoryEffects, OrderEffects]),
   ],
   providers: [
     { useClass: ProductAdminService, provide: ProductAdminService },

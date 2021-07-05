@@ -28,12 +28,16 @@ export const changePageLimit = createAction(
   props<{ limit: number }>()
 );
 
+export const resetPaginationInfo = createAction(
+  '[Admin] Reset Pagination Info'
+)
+
 export const adminErorr = createAction(
   '[Admin] Error'
 );
 
 
-
+// ======================================================================================================
 // ============================================= PRODUCT ===============================================
 export const loadProducts = createAction('[Admin Product] Load Products');
 
@@ -118,11 +122,16 @@ export const loadOrders = createAction(
 );
 
 export const loadOrdersSuccess = createAction(
-  '[Admin Order] Load Orders',
+  '[Admin Order] Load Orders Success',
   props<{res: OrderResponse}>()
 );
 
 export const checkStatusOrder = createAction(
   '[Admin Order] Check Status Order',
-  props<{orderId: string, body: CheckStatusOrderBody}>()
+  props<{ body: CheckStatusOrderBody}>()
+);
+
+export const setSelectedOrder = createAction(
+  '[Admin Order] Select Order',
+  props<{index: number}>()
 )

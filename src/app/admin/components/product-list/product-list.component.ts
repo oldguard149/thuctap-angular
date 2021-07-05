@@ -11,6 +11,7 @@ import {
   changePage,
   loadProducts,
   resetAdminMessages,
+  resetPaginationInfo,
   setSelectedProduct,
 } from '../../state/admin.actions';
 import { Router } from '@angular/router';
@@ -54,5 +55,6 @@ export class ProductListComponent implements OnInit {
 
   ngDestroy() {
     this.store.dispatch(resetAdminMessages());
+    this.store.dispatch(resetPaginationInfo());
   }
 }

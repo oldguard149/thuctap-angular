@@ -1,0 +1,44 @@
+<ng-container *ngIf="vm$ | async as vm">
+  <div class="w-10/12 mx-auto">
+    <app-messages [messages]="vm.messages"></app-messages>
+    <nz-table #basicTable [nzData]="vm.orders" [nzShowPagination]="false">
+      <thead>
+        <tr>
+          <th>Created At</th>
+          <th>Status</th>
+          <th>Total Amount</th>
+          <th style="text-align: center">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="
+            let item of basicTable.data
+              | paginate
+                : {
+                    itemsPerPage: vm.paginationInfo.limit,
+                    currentPage: vm.paginationInfo.page,
+                    totalItems: vm.paginationInfo.totalItems
+                  };
+            let index = index
+          "
+        >
+          <td>{{ item.createdAt | date }}</td>
+          <td>{{ item.status }}</td>
+          <td>{{ item.total_amount }}</td>
+          <td class="w-3/12">
+            <div class="flex justify-around">
+              <app-button
+                (click)="handleCheckStatus(index)"
+                [className]="'bg-blue-700 hover:bg-blue-400'"
+              >
+                Check Status
+              </app-button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+    <app-pagination (pageChange)="handlePageChange($event)"></app-pagination>
+  </div>
+</ng-container>

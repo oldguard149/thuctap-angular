@@ -17,14 +17,22 @@ export const selectSelectedProduct = createSelector(
 
 export const selectCategories = createSelector(
   adminFeatureState,
-  state => state.categories
+  (state) => state.categories
 );
 
 export const selectSelectedCategory = createSelector(
   adminFeatureState,
-  state => state.selectedCategory
-)
+  (state) => state.selectedCategory
+);
 
+export const selectOrders = createSelector(
+  adminFeatureState,
+  (state) => state.orders
+);
+export const selectSelectedOrder = createSelector(
+  adminFeatureState,
+  (state) => state.selectedOrder
+);
 export const selectPaginationInfo = createSelector(
   adminFeatureState,
   (state) => ({
@@ -36,8 +44,8 @@ export const selectPaginationInfo = createSelector(
 
 export const selectAdminMessages = createSelector(
   adminFeatureState,
-  state => state.messages
-)
+  (state) => state.messages
+);
 
 export const selectCategoriesForSelectData = createSelector(
   adminFeatureState,
@@ -50,5 +58,14 @@ export const selectIsActiveForSelectData = createSelector(
   (state) => [
     { label: 'Active', value: true },
     { label: 'Deactive', value: false },
+  ]
+);
+
+export const selectCheckStatusOrderForSelectData = createSelector(
+  adminFeatureState,
+  () => [
+    { label: 'Pending', value: 'PENDING' },
+    { label: 'Cancel', value: 'CANCEL' },
+    { label: 'Success', value: 'SUCCESS' },
   ]
 );

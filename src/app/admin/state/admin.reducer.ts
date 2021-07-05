@@ -13,7 +13,7 @@ export interface AdminState {
   categories: Category[];
   selectedCategory: Category;
   orders: Order[];
-  selectedOder: Order;
+  selectedOrder: Order;
 
   totalDocs: number;
   limit: number;
@@ -28,7 +28,7 @@ const initialState: AdminState = {
   categories: null,
   selectedCategory: null,
   orders: null,
-  selectedOder: null,
+  selectedOrder: null,
   totalDocs: null,
   limit: 10,
   page: 1,
@@ -53,10 +53,6 @@ export const adminReducer = createReducer(
     ...state,
     categories: res.docs,
   })),
-  on(AdminActions.loadOrdersSuccess, (state, { res }) => ({
-    ...state,
-    orders: res.docs,
-  })),
   on(AdminActions.setSelectedCategory, (state, { index }) => ({
     ...state,
     selectedCategory: state.categories[index],
@@ -65,5 +61,22 @@ export const adminReducer = createReducer(
     ...state,
     messages,
   })),
-  on(AdminActions.resetAdminMessages, (state) => ({...state, messages: null}))
+  on(AdminActions.resetAdminMessages, (state) => ({
+    ...state,
+    messages: null,
+  })),
+  on(AdminActions.resetPaginationInfo, (state) => ({
+    ...state,
+    page: 1,
+    limit: 10,
+    totalDocs: null,
+  })),
+  on(AdminActions.loadOrdersSuccess, (state, { res }) => ({
+    ...state,
+    orders: res.docs,
+  })),
+  on(AdminActions.setSelectedOrder, (state, { index }) => ({
+    ...state,
+    selectedOrder: state.orders[index],
+  }))
 );

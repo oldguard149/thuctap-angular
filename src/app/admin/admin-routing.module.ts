@@ -9,6 +9,8 @@ import { ProductUpdateComponent } from './components/product-update/product-upda
 import { ProductDeleteComponent } from './components/product-delete/product-delete.component';
 import { CategoryDeleteComponent } from './components/category-delete/category-delete.component';
 import { CategoryUpdateComponent } from './components/category-update/category-update.component';
+import { OrdersListComponent } from './components/orders-list/orders-list.component';
+import { OrdersDetailsComponent } from './components/orders-details/orders-details.component';
 
 const routes: Routes = [
   {
@@ -23,6 +25,8 @@ const routes: Routes = [
       { path: 'product-create', component: ProductCreateComponent },
       { path: 'product-update', component: ProductUpdateComponent },
       { path: 'product-delete', component: ProductDeleteComponent },
+      { path: 'order-list', component: OrdersListComponent },
+      { path: 'order-details', component: OrdersDetailsComponent },
     ],
   },
 ];
