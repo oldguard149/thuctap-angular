@@ -119,4 +119,8 @@ export class CheckoutComponent implements OnInit {
   private get productsFormArray() {
     return this.checkoutForm.get('products') as FormArray;
   }
+
+  get formControls() {
+    return this.checkoutForm.controls;
+  }
 }

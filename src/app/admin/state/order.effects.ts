@@ -17,7 +17,6 @@ export class OrderEffects {
         this.orderService
           .getAll(pagination.page, pagination.limit)
           .pipe(map((res) => {
-            console.log(res);
             return AdminActions.loadOrdersSuccess({ res })
           }))
       )

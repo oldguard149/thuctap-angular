@@ -9,11 +9,13 @@ import { productDetailAddToCart } from 'src/app/cart/state/cart.actions';
 import { CartItem } from 'src/app/models/cartItem.model';
 import { Product } from 'src/app/models/product.model';
 import { addToWishlist } from 'src/app/wishlist/state/wishlist.actions';
-import { loadProductDetails } from '../../state/product-details.actions';
+import { loadProductDetails, loadRecommendProducts } from '../../state/product-details.actions';
 import {
   selectProductDetails,
   selectProductDetailsBreadcrumb,
+  selectProductDetailsLoading,
   selectProductQuantity,
+  selectRecommendProducts,
 } from '../../state/product-details.selectors';
 
 @Component({
@@ -29,6 +31,33 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   productQuantity$ = this.store.select(selectProductQuantity);
   breadcrumb$ = this.store.select(selectProductDetailsBreadcrumb);
   isLoggedIn$ = this.store.select(selectIsLoggedIn);
+
+  vm$ = combineLatest([
+    this.store.select(selectProductDetails),
+    this.store.select(selectProductQuantity),
+    this.store.select(selectProductDetailsBreadcrumb),
+    this.store.select(selectIsLoggedIn),
+    this.store.select(selectProductDetailsLoading),
+    this.store.select(selectRecommendProducts),
+  ]).pipe(
+    map(
+      ([
+        product,
+        productQuantity,
+        breadcrumb,
+        isLoggedIn,
+        loading,
+        recommendProducts,
+      ]) => ({
+        product,
+        productQuantity,
+        breadcrumb,
+        isLoggedIn,
+        loading,
+        recommendProducts,
+      })
+    )
+  );
 
   addToCart() {
     const orderQuantity = parseInt(this.quantity.value);
@@ -71,6 +100,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     const currentProductId = this.route.snapshot.params['id'];
     this.store.dispatch(loadProductDetails({ productId: currentProductId }));
+    this.store.dispatch(loadRecommendProducts({productId: currentProductId}));
     this.product$
       .pipe(takeUntil(this.destroyed))
       .subscribe((product) => (this.product = product));

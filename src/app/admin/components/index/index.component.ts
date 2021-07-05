@@ -8,7 +8,6 @@ import { loadCategories } from '../../state/admin.actions';
   styleUrls: ['./index.component.scss']
 })
 export class IndexComponent implements OnInit {
-
   constructor(private store: Store) { }
 
   ngOnInit(): void {

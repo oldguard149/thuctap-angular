@@ -3,8 +3,10 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import {
   loadProductDetails,
   loadProductDetailsSuccess,
+  loadRecommendProducts,
+  loadRecommendProductsSuccess,
 } from './product-details.actions';
-import { switchMap, map, exhaustMap, tap } from 'rxjs/operators';
+import { map, exhaustMap } from 'rxjs/operators';
 import { Product } from 'src/app/models/product.model';
 import { ProductService } from 'src/app/product/services/product.service';
 
@@ -23,8 +25,16 @@ export class ProductDetailsEffects {
     )
   );
 
-  // implement load recommend products
-  // loadRecommendProduct$ = createEffect(() => this.actions$.pipe())
+  loadRecommendProduct$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(loadRecommendProducts),
+      exhaustMap((action) =>
+        this.productService
+          .fetchNewProducts()
+          .pipe(map((res) => loadRecommendProductsSuccess({ products: res.docs })))
+      )
+    )
+  );
 
   constructor(
     private actions$: Actions,

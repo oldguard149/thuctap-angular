@@ -7,7 +7,7 @@ export interface WishlistState extends EntityState<Product> {
   page: number;
   limit: number;
   totalDocs: number;
-  isLoading: boolean;
+  loading: boolean;
 }
 
 export const adapter: EntityAdapter<Product> = createEntityAdapter<Product>();
@@ -15,7 +15,7 @@ const initialState: WishlistState = adapter.getInitialState({
   page: 1,
   limit: 10,
   totalDocs: null,
-  isLoading: true,
+  loading: true,
 });
 
 export const wishlistReducer = createReducer(
@@ -24,7 +24,7 @@ export const wishlistReducer = createReducer(
     adapter.setAll(res.docs, {
       ...state,
       totalDocs: res.totalDocs,
-      isLoading: false,
+      loading: false,
     })
   ),
   on(wishlistActions.addToWishlist, (state, { product }) =>

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-images-section',
@@ -7,14 +7,17 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./images-section.component.scss'],
 })
 export class ImagesSectionComponent implements OnInit {
-  @Input() images = ExampleImages;
-  private imageUrlSubject = new BehaviorSubject(this.images[0]);
-  imageUrl$ = this.imageUrlSubject.asObservable();
+  @Input() images;// = ExampleImages;
+  private imageUrlSubject;
+  imageUrl$;
   breakpoints = {
     1024: { slidesPerView: 4 },
   };
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.imageUrlSubject =new BehaviorSubject(this.images[0]);
+    this.imageUrl$ = this.imageUrlSubject.asObservable();
+  }
 
   changeImage(imgUrl: string) {
     this.imageUrlSubject.next(imgUrl);

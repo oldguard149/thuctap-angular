@@ -12,6 +12,7 @@
           [parentForm]="loginForm"
           [controlName]="'email'"
         ></app-input>
+        <app-input-error *ngIf="formControls.email.hasError('required')">Please fill in email</app-input-error>
       </div>
       <div class="mb-6">
         <app-label [id]="'password'">Password</app-label>
@@ -21,6 +22,7 @@
           [controlName]="'password'"
           [inputType]="'password'"
         ></app-input>
+        <app-input-error *ngIf="formControls.password.hasError('required')">Please fill in password</app-input-error>
       </div>
       <app-button (buttonClick)="submit()">Log In</app-button>
     </form>

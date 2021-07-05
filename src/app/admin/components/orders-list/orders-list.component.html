@@ -1,4 +1,5 @@
 <ng-container *ngIf="vm$ | async as vm">
+  <app-loading-spinner [isLoading]="vm.loading"></app-loading-spinner>
   <div class="w-10/12 mx-auto">
     <app-messages [messages]="vm.messages"></app-messages>
     <nz-table #basicTable [nzData]="vm.orders" [nzShowPagination]="false">

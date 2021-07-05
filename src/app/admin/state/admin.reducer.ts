@@ -20,6 +20,7 @@ export interface AdminState {
   page: number;
   messages: ResponseMessage[];
   breadcrumbData: BreadCrumb[];
+  loading: boolean;
 }
 
 const initialState: AdminState = {
@@ -34,6 +35,7 @@ const initialState: AdminState = {
   page: 1,
   messages: null,
   breadcrumbData: null,
+  loading: true
 };
 
 export const adminReducer = createReducer(
@@ -43,6 +45,7 @@ export const adminReducer = createReducer(
     products: res.docs,
     totalDocs: res.totalDocs,
     limit: res.limit,
+    loading: false
   })),
   on(AdminActions.setSelectedProduct, (state, { index }) => ({
     ...state,
@@ -52,6 +55,7 @@ export const adminReducer = createReducer(
   on(AdminActions.loadCategoriesSuccess, (state, { res }) => ({
     ...state,
     categories: res.docs,
+    loading: false
   })),
   on(AdminActions.setSelectedCategory, (state, { index }) => ({
     ...state,
@@ -74,9 +78,14 @@ export const adminReducer = createReducer(
   on(AdminActions.loadOrdersSuccess, (state, { res }) => ({
     ...state,
     orders: res.docs,
+    loading: false,
+    totalDocs: res.totalDocs
   })),
   on(AdminActions.setSelectedOrder, (state, { index }) => ({
     ...state,
     selectedOrder: state.orders[index],
-  }))
+  })),
+  on(AdminActions.loadProducts, (state) => ({...state, loading: true})),
+  on(AdminActions.loadCategories, (state) => ({...state, loading: true})),
+  on(AdminActions.loadOrders, state => ({...state, loading: true}))
 );

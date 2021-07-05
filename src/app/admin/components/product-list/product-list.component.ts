@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {
+  selectAdminLoading,
   selectAdminMessages,
   selectPaginationInfo,
   selectProducts,
@@ -25,10 +26,11 @@ export class ProductListComponent implements OnInit {
   vm$ = combineLatest([
     this.store.select(selectProducts),
     this.store.select(selectPaginationInfo),
-    this.store.select(selectAdminMessages)
+    this.store.select(selectAdminMessages),
+    this.store.select(selectAdminLoading)
   ]).pipe(
-    map(([products, paginationInfo, messages]) => {
-      return { products, paginationInfo, messages };
+    map(([products, paginationInfo, messages, loading]) => {
+      return { products, paginationInfo, messages, loading };
     })
   );
 

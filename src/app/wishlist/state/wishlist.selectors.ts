@@ -29,6 +29,11 @@ export const selectTotalWishlistItems = createSelector(
     selectTotal
 );
 
+export const selectWishlistLoading = createSelector(
+    wishlistFeatureState,
+    state => state.loading
+)
+
 export const selectWishlistPaginationInfo = createSelector(
     wishlistFeatureState,
     state => ({page: state.page, limit: state.limit, totalItems: state.totalDocs})

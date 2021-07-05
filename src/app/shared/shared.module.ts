@@ -17,6 +17,7 @@ import { RouterModule } from '@angular/router';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 import { InputErrorComponent } from './components/input-error/input-error.component';
 import { MessagesComponent } from './components/messages/messages.component';
+import { InputHintComponent } from './components/input-hint/input-hint.component';
 
 
 
@@ -32,6 +33,7 @@ import { MessagesComponent } from './components/messages/messages.component';
     LoadingSpinnerComponent,
     InputErrorComponent,
     MessagesComponent,
+    InputHintComponent,
   ],
   imports: [
     CommonModule,

@@ -1,5 +1,6 @@
 <ng-container *ngIf="vm$ | async as vm">
   <app-breadcrumb [items]="vm.breadcrumbData"></app-breadcrumb>
+  <app-loading-spinner [isLoading]="vm.loading"></app-loading-spinner>
   <div class="w-11/12 md:w-9/12 mx-auto my-8 flex flex-col">
     <h2 class="text-xl font-semibold mb-5">WISHLIST</h2>
     <h2 *ngIf="vm.total === 0">

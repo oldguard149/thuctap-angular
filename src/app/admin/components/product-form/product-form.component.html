@@ -13,6 +13,9 @@
           [parentForm]="form"
           [controlName]="'title'"
         ></app-input>
+        <app-input-error *ngIf="formControls.title.hasError('required')">
+          Please fill in title
+        </app-input-error>
       </div>
 
       <div class="mb-6">
@@ -32,6 +35,9 @@
           [parentForm]="form"
           [controlName]="'sku'"
         ></app-input>
+        <app-input-error *ngIf="formControls.sku.hasError('required')">
+          Please fill in product's sku
+        </app-input-error>
       </div>
 
       <div class="mb-6">
@@ -41,6 +47,9 @@
           [parentForm]="form"
           [controlName]="'price'"
         ></app-input>
+        <app-input-error *ngIf="formControls.price.hasError('required')">
+          Please fill in product's price
+        </app-input-error>
       </div>
 
       <div class="mb-6">
@@ -50,6 +59,9 @@
           [parentForm]="form"
           [controlName]="'quantity'"
         ></app-input>
+        <app-input-error *ngIf="formControls.quantity.hasError('required')">
+          Please fill in product's quantity
+        </app-input-error>
       </div>
 
       <div class="mb-6">
@@ -90,6 +102,7 @@
             X
           </app-button>
         </div>
+        <app-input-hint>Delete field if it is empty</app-input-hint>
         <app-button (buttonClick)="addImageControl()">Add new field</app-button>
       </div>
 
@@ -111,6 +124,7 @@
             X
           </app-button>
         </div>
+        <app-input-hint>Delete field if it is empty</app-input-hint>
         <app-button (buttonClick)="addVideoControl()">Add new field</app-button>
       </div>
 

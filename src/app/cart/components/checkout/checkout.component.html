@@ -12,18 +12,7 @@
     </div>
 
     <div class="lg:w-7/12 lg:pt-8">
-      <form
-        class="
-          bg-white
-          rounded
-          px-8
-          pb-8
-          mb-8
-          w-full
-          max-w-md
-          mx-auto
-        "
-      >
+      <form class="bg-white rounded px-8 pb-8 mb-8 w-full max-w-md mx-auto">
         <h2 class="text-2xl font-bold text-center">Shipping Information</h2>
         <app-messages [messages]="vm.messages"></app-messages>
         <div class="form-container">
@@ -34,6 +23,9 @@
               [parentForm]="checkoutForm"
               [controlName]="'email'"
             ></app-input>
+            <app-input-error *ngIf="formControls.email.hasError('required')">
+              Please fill in email
+            </app-input-error>
           </div>
 
           <div class="mb-4">
@@ -43,6 +35,9 @@
               [parentForm]="checkoutForm"
               [controlName]="'name'"
             ></app-input>
+            <app-input-error *ngIf="formControls.name.hasError('required')">
+              Please fill in your fullname
+            </app-input-error>
           </div>
 
           <div class="mb-4 col-span-2">
@@ -52,6 +47,9 @@
               [parentForm]="checkoutForm"
               [controlName]="'address'"
             ></app-input>
+            <app-input-error *ngIf="formControls.address.hasError('required')">
+              Please fill in your address
+            </app-input-error>
           </div>
 
           <div class="mb-4 col-span-2">
@@ -62,6 +60,9 @@
               [controlName]="'phone'"
               [inputType]="'tel'"
             ></app-input>
+            <app-input-error *ngIf="formControls.phone.hasError('required')">
+              Please fill in your phone
+            </app-input-error>
           </div>
 
           <div class="mb-4 col-span-2">
@@ -83,11 +84,13 @@
           </div>
         </div>
 
-        <div class="mb-4 ">
+        <div class="mb-4">
           <div class="px-3 py-4 rounded-lg border border-gray-800">
             <ngx-stripe-card [options]="cardOptions"></ngx-stripe-card>
           </div>
-          <app-input-error [showError]="isStripeError$ | async">{{stripeError$ | async}}</app-input-error>
+          <app-input-error [showError]="isStripeError$ | async">
+            {{ stripeError$ | async }}
+          </app-input-error>
         </div>
         <app-button (buttonClick)="submit()">Complete Order</app-button>
       </form>

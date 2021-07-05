@@ -23,7 +23,7 @@ export const selectRecommendProducts = createSelector(
 
 export const selectProductQuantity = createSelector(
     selectProductDetails,
-    (product: Product) => product.quantity
+    (product: Product) => product?.quantity
 )
 
 export const selectProductDetailsBreadcrumb = createSelector(

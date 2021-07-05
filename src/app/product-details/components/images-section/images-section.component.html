@@ -1,5 +1,5 @@
 <div class="px-4">
-  <img [src]="imageUrl$ | async" alt="Image" />
+  <img [src]="imageUrl$ | async" alt="Image" class="w-64 h-64 object-contain" />
   <div>
     <swiper
       #swipercontainer
@@ -10,7 +10,7 @@
     >
       <ng-template swiperSlide let-data *ngFor="let imgUrl of images">
         <img
-          class="border-gray-500 border hover:border-brand w-full h-auto"
+          class="border-gray-500 border hover:border-brand"
           [src]="imgUrl"
           alt="Image"
           (click)="changeImage(imgUrl)"

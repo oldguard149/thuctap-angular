@@ -12,6 +12,9 @@
         [parentForm]="form"
         [controlName]="'name'"
       ></app-input>
+      <app-input-error *ngIf="formControls.name.hasError('required')">
+        Please fill in category name
+      </app-input-error>
     </div>
 
     <div class="mb-6" *ngIf="activeSelectData$ | async as activeSelectData">

@@ -47,6 +47,11 @@ export const selectAdminMessages = createSelector(
   (state) => state.messages
 );
 
+export const selectAdminLoading = createSelector(
+  adminFeatureState,
+  state => state.loading
+)
+
 export const selectCategoriesForSelectData = createSelector(
   adminFeatureState,
   (state) =>

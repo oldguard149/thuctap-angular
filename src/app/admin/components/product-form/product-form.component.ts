@@ -59,8 +59,8 @@ export class ProductFormComponent implements OnInit {
           this.fb.control(currentCatgoryId),
         ]),
         status: [this.product.status, Validators.required],
-        price: [this.product.price],
-        quantity: [this.product.quantity],
+        price: [this.product.price, Validators.required],
+        quantity: [this.product.quantity, Validators.required],
         is_active: [this.product.is_active],
         // promotion: [''],
       });
@@ -84,8 +84,8 @@ export class ProductFormComponent implements OnInit {
         videos: this.fb.array([this.fb.control('')]),
         category: this.fb.array([this.fb.control(this.defaultCategory)]),
         status: ['selling', Validators.required],
-        price: [''],
-        quantity: [''],
+        price: ['', Validators.required],
+        quantity: ['', Validators.required],
         is_active: [this.defaultIsActive],
         // promotion: [''],
       });
@@ -128,5 +128,9 @@ export class ProductFormComponent implements OnInit {
 
   addVideoControl() {
     this.videos.push(this.fb.control(['']));
+  }
+
+  get formControls() {
+    return this.form.controls;
   }
 }

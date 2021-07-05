@@ -15,18 +15,39 @@ export class RegisterComponent implements OnInit {
   constructor(private fb: FormBuilder, private store: Store) {}
   ngOnInit(): void {
     this.registerForm = this.fb.group({
-      email: ['', ],
-      first_name: ['', ],
-      last_name: ['', ],
+      email: ['', Validators.required],
+      first_name: ['', Validators.required],
+      last_name: ['', Validators.required],
       address: ['', ],
       phone: ['', ],
-      password: ['', ],
-      confirmPassword: ['', ]
-    });
+      password: ['', Validators.required],
+      confirmPassword: ['', Validators.required]
+    }, { validator: MustMatch('password', 'confirmPassword') });
   }
 
   submit() {
-    console.log(this.registerForm.value);
     this.store.dispatch(register({body: this.registerForm.value}));
+  }
+  get formControls() {
+    return this.registerForm.controls;
+  }
+}
+
+export function MustMatch(controlName: string, matchingControlName: string) {
+  return (formGroup: FormGroup) => {
+      const control = formGroup.controls[controlName];
+      const matchingControl = formGroup.controls[matchingControlName];
+
+      if (matchingControl.errors && !matchingControl.errors.mustMatch) {
+          // return if another validator has already found an error on the matchingControl
+          return;
+      }
+
+      // set error on matchingControl if validation fails
+      if (control.value !== matchingControl.value) {
+          matchingControl.setErrors({ mustMatch: true });
+      } else {
+          matchingControl.setErrors(null);
+      }
   }
 }

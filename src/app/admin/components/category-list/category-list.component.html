@@ -1,38 +1,35 @@
 <ng-container *ngIf="vm$ | async as vm">
-    <div class="w-10/12 mx-auto">
-      <app-messages [messages]="vm.messages"></app-messages>
-      <nz-table #basicTable [nzData]="vm.categories" [nzShowPagination]="false">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th style="text-align: center;">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr
-            *ngFor="
-              let item of basicTable.data;
-              let index = index
-            "
-          >
-            <td>{{ item.name }}</td>
-            <td class="w-4/12">
-              <div class="flex justify-around">
-                <app-button
-                  (click)="handleUpdate(index)"
-                  [className]="'bg-blue-700 hover:bg-blue-400'"
-                >
-                  Update
-                </app-button>
-                <app-button 
-                  (click)="handleDelete(index)"
-                  [className]="'bg-red-700 hover:bg-red-400'">
-                  Delete
-                </app-button>
-              </div>
-            </td>
-        </tbody>
-      </nz-table>
-    </div>
-  </ng-container>
-  
+  <!-- <app-loading-spinner [isLoading]="vm.loading"></app-loading-spinner> -->
+  <div class="w-10/12 mx-auto">
+    <app-messages [messages]="vm.messages"></app-messages>
+    <nz-table #basicTable [nzData]="vm.categories" [nzShowPagination]="false">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th style="text-align: center">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of basicTable.data; let index = index">
+          <td>{{ item.name }}</td>
+          <td class="w-4/12">
+            <div class="flex justify-around">
+              <app-button
+                (click)="handleUpdate(index)"
+                [className]="'bg-blue-700 hover:bg-blue-400'"
+              >
+                Update
+              </app-button>
+              <app-button
+                (click)="handleDelete(index)"
+                [className]="'bg-red-700 hover:bg-red-400'"
+              >
+                Delete
+              </app-button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+</ng-container>

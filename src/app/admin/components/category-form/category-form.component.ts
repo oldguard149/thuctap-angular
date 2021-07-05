@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Category } from 'src/app/models/category.model';
 import { selectAdminMessages, selectIsActiveForSelectData } from '../../state/admin.selectors';
@@ -35,16 +35,20 @@ export class CategoryFormComponent implements OnInit {
     if (this.category) {
       this.buttonText = 'Update';
       this.form = this.fb.group({
-        name: [this.category.name],
+        name: [this.category.name, Validators.required],
         is_active: [this.category.is_active],
       });
       this.defaultIsActive = this.category.is_active;
     } else {
       this.buttonText = 'Create';
       this.form = this.fb.group({
-        name: [''],
+        name: ['', Validators.required],
         is_active: [this.defaultIsActive],
       });
     }
+  }
+
+  get formControls () {
+    return this.form.controls;
   }
 }

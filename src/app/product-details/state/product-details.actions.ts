@@ -23,7 +23,7 @@ export const sendReview = createAction(
   props<{ productId: string, data: any }>()
 );
 
-export const loadRecommentProducts = createAction(
+export const loadRecommendProducts = createAction(
   '[Product Details / Backend API] Load Recommend Products',
   props<{ productId: string }>()
 );

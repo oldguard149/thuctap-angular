@@ -28,4 +28,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   submit(): void {
     this.store.dispatch(login({ body: this.loginForm.value }));
   }
+
+  get formControls() {
+    return this.loginForm.controls;
+  }
 }

@@ -13,6 +13,9 @@
           [parentForm]="registerForm"
           [controlName]="'email'"
         ></app-input>
+        <app-input-error *ngIf="formControls.email.hasError('required')">
+          Please fill in email
+        </app-input-error>
       </div>
 
       <div class="mb-4">
@@ -22,6 +25,9 @@
           [parentForm]="registerForm"
           [controlName]="'first_name'"
         ></app-input>
+        <app-input-error *ngIf="formControls.first_name.hasError('required')">
+          Please fill in first name
+        </app-input-error>
       </div>
 
       <div class="mb-4">
@@ -31,6 +37,9 @@
           [parentForm]="registerForm"
           [controlName]="'last_name'"
         ></app-input>
+        <app-input-error *ngIf="formControls.last_name.hasError('required')">
+          Please fill in last name
+        </app-input-error>
       </div>
 
       <div class="mb-4 col-span-2">
@@ -60,6 +69,9 @@
           [controlName]="'password'"
           [inputType]="'password'"
         ></app-input>
+        <app-input-error *ngIf="formControls.password.hasError('required')">
+          Please fill in password
+        </app-input-error>
       </div>
 
       <div class="mb-6">
@@ -70,8 +82,17 @@
           [controlName]="'confirmPassword'"
           [inputType]="'password'"
         ></app-input>
+        <app-input-error
+          *ngIf="formControls.confirmPassword.hasError('required')"
+        >
+          Please fill in confirm password
+        </app-input-error>
+        <app-input-error
+          *ngIf="formControls.confirmPassword.hasError('mustMatch')"
+        >
+          Your password doesn't match
+        </app-input-error>
       </div>
-
     </div>
     <app-button (buttonClick)="submit()">Register</app-button>
   </form>
