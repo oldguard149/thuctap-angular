@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
@@ -55,12 +56,13 @@ export class CartEffects {
       ofType(CartActions.checkOut),
       exhaustMap((action) =>
         this.checkoutService.checkout(action.body).pipe(
-          map((res: Order) =>
-            CartActions.checkOutSuccess({
+          map((res: Order) => {
+            this.router.navigateByUrl(`/orders/${res._id}`);
+            return CartActions.checkOutSuccess({
               res: res,
               messages: [{ type: 'success', content: 'Check out success' }],
-            })
-          ),
+            });
+          }),
           catchError((error: ResponseMessage[]) =>
             of(CartActions.checkOutFailure({ error }))
           )
@@ -88,7 +90,9 @@ export class CartEffects {
           CartActions.productDetailAddToCart,
           CartActions.wishlistAddToCart
         ),
-        map(() => this.message.createMessage('Item has been added to cart', 'success'))
+        map(() =>
+          this.message.createMessage('Item has been added to cart', 'success')
+        )
       ),
     { dispatch: false }
   );
@@ -97,7 +101,12 @@ export class CartEffects {
     () =>
       this.actions$.pipe(
         ofType(CartActions.removeCartItem),
-        map(() => this.message.createMessage('Item has been removed from cart', 'success'))
+        map(() =>
+          this.message.createMessage(
+            'Item has been removed from cart',
+            'success'
+          )
+        )
       ),
     { dispatch: false }
   );
@@ -106,7 +115,12 @@ export class CartEffects {
     () =>
       this.actions$.pipe(
         ofType(CartActions.updateOrderQuantity),
-        map(() => this.message.createMessage('Item quantity has been updated', 'success'))
+        map(() =>
+          this.message.createMessage(
+            'Item quantity has been updated',
+            'success'
+          )
+        )
       ),
     { dispatch: false }
   );
@@ -115,6 +129,7 @@ export class CartEffects {
     private actions$: Actions,
     private store: Store,
     private checkoutService: CheckoutService,
-    private message: PopupMessageService
+    private message: PopupMessageService,
+    private router: Router
   ) {}
 }

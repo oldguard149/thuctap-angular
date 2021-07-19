@@ -2,7 +2,7 @@
     <nav class="flex flex-col items-center sm:flex-row justify-between md:w-11/12 lg:w-9/12 md:mx-auto">
       <div
         class="
-          grid grid-cols-3
+          flex
           space-x-2
           py-2
           divide-x-2 divide-gray-200
@@ -33,6 +33,7 @@
           (onSelect)="handleAccountActionChange($event)"
         ></app-top-nav-dropdown>
         </ng-template>
+        <a *ngIf="isAdmin$ | async" [routerLink]="['/admin']" class="pl-4">Management</a>
       </div>
     
       <div class="right flex justify-center divide-x-2 divide-gray-200">

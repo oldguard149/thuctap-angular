@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { combineLatest, Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
-import { checkStatusOrder } from '../../state/admin.actions';
+import { checkStatusOrder, resetAdminMessages } from '../../state/admin.actions';
 import {
   selectAdminMessages,
   selectCheckStatusOrderForSelectData,
@@ -42,6 +42,7 @@ export class OrdersDetailsComponent implements OnInit {
   ngOnDestroy() {
     this.destroyed.next();
     this.destroyed.complete();
+    this.store.dispatch(resetAdminMessages());
   }
 
   submitForm() {

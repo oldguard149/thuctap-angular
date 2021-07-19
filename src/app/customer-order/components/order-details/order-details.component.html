@@ -1,6 +1,8 @@
 <ng-container *ngIf="vm$ | async as vm">
   <app-breadcrumb [items]="vm.breadcrumbData"></app-breadcrumb>
+  <app-loading-spinner *ngIf="vm.loading"></app-loading-spinner>
   <div *ngIf="vm.orderDetails" class="w-11/12 md:w-9/12 mx-auto">
+    <app-messages [messages]="vm.messages"></app-messages>
     <h2 class="font-bold text-xl mb-5">Order Details</h2>
     <div class="mb-5">
       <p>Created at: {{ vm.orderDetails.createdAt | date }}</p>

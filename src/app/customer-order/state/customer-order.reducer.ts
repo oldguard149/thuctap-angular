@@ -30,5 +30,6 @@ export const customerOrderReducer = createReducer(
     ...state,
     selectedOrder: res,
     loading: false,
-  }))
+  })),
+  on(CustomerOrderActions.resetSelectedOrder, (state) => ({...state, selectedOrder: null}))
 );

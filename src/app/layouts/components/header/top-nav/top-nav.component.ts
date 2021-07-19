@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { logout } from 'src/app/auth/state/auth.actions';
-import { selectIsLoggedIn } from 'src/app/auth/state/auth.selectors';
+import { selectIsAdmin, selectIsLoggedIn } from 'src/app/auth/state/auth.selectors';
 import { CurrencyUnitService } from 'src/app/services/currency-unit.service';
 import { DropdownContent } from '../top-nav-dropdown/top-nav-dropdown.component';
 
@@ -13,6 +13,7 @@ import { DropdownContent } from '../top-nav-dropdown/top-nav-dropdown.component'
 })
 export class TopNavComponent {
   isLoggedIn$ = this.store.select(selectIsLoggedIn);
+  isAdmin$ = this.store.select(selectIsAdmin);
   constructor(
     private router: Router,
     private currencyService: CurrencyUnitService,
@@ -56,7 +57,7 @@ export class TopNavComponent {
   ]
 
   accountActionsWhenLoggedIn: DropdownContent[] = [
-    { displayName: 'Acount', value: '/account'},
+    { displayName: 'Acount', value: '/orders'},
     { displayName: 'Log out', value: '/logout'},
     { displayName: 'Wishlist', value: '/wishlist'},
     { displayName: 'Cart', value: '/cart'},

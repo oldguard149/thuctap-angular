@@ -37,6 +37,7 @@ export const selectCustomerOrderDetailsBreadcrumbData = createSelector(
     (state) =>
       [
         { label: 'Home', link: '/' },
+        { label: 'Orders', link: '/orders'},
         { label: 'Oder Details', link: `/orders/${state.selectedOrder?._id}` },
       ] as BreadCrumb[]
   );

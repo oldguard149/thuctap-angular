@@ -1,6 +1,6 @@
 <ng-container *ngIf="(vm$ | async) as vm">
   <app-breadcrumb [items]="vm.breadcrumbData"></app-breadcrumb>
-  <div class="w-11/12 md:w-9/12 mx-auto">
+  <div class="w-11/12 md:w-9/12 mx-auto mb-10">
     <h2 class="font-bold text-xl mb-5">Order History</h2>
     <p *ngIf="vm.orders?.length === 0">You haven't placed any order yet.</p>
     <div *ngIf="vm.orders?.length !== 0" class="table-container">

@@ -1,4 +1,14 @@
 <ng-container *ngIf="vm$ | async as vm">
+  <div *ngIf="vm.total === 0" class="mb-10 w-11/12 lg:w-9/12 mx-auto">
+    <h1 class="uppercase p-5 bg-gray-200 mb-5 font-semibold">
+      YOUR CART IS CURRENTLY EMPTY
+    </h1>
+    <p>
+      Continue browsing
+      <a [routerLink]="['/collections/all']" class="hover:text-brand">here</a>
+    </p>
+  </div>
+  <ng-container *ngIf="vm.total !== 0">
   <div class="w-11/12 md:w-9/12 mx-auto lg:flex">
     <div class="lg:hidden border-b border-gray-300">
       <nz-collapse nzGhost class="border-t border-b border-gray-400">
@@ -170,4 +180,5 @@
       </div>
     </div>
   </ng-template>
+</ng-container>
 </ng-container>

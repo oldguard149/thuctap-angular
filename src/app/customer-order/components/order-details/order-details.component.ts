@@ -3,7 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { loadOrderDetails } from '../../state/customer-order.actions';
+import { selectCheckOutMessages } from 'src/app/cart/state/cart.selectors';
+import { loadOrderDetails, resetSelectedOrder } from '../../state/customer-order.actions';
 import {
   selectCustomerOrderDetails,
   selectCustomerOrderDetailsBreadcrumbData,
@@ -20,17 +21,23 @@ export class OrderDetailsComponent implements OnInit {
     this.store.select(selectCustomerOrderDetails),
     this.store.select(selectCustomerOrderDetailsBreadcrumbData),
     this.store.select(selectCustomerOrderLoading),
+    this.store.select(selectCheckOutMessages),
   ]).pipe(
-    map(([orderDetails, breadcrumbData, loading]) => ({
+    map(([orderDetails, breadcrumbData, loading, messages]) => ({
       orderDetails,
       breadcrumbData,
       loading,
+      messages
     }))
   );
   constructor(private store: Store, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-   const orderId = this.route.snapshot.paramMap.get('id');
-   this.store.dispatch(loadOrderDetails({orderId}))
+    const orderId = this.route.snapshot.paramMap.get('id');
+    this.store.dispatch(loadOrderDetails({ orderId }));
+  }
+
+  ngOnDestroy() {
+    this.store.dispatch(resetSelectedOrder());
   }
 }
