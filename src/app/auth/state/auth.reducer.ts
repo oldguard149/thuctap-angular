@@ -19,7 +19,7 @@ const initialState: AuthState = {
   messages: null,
   userProfile: null,
   currentActionUrl: null,
-  isAdmin: false
+  isAdmin: false,
 };
 
 export const authLocalStorageKey = 'auth';
@@ -34,7 +34,7 @@ export const authReducer = createReducer(
     ...state,
     token: token,
     isLoggedIn: true,
-    currentActionUrl: null
+    currentActionUrl: null,
   })),
   on(AuthActions.loginFailure, (state, { error }) => ({
     ...state,
@@ -55,7 +55,7 @@ export const authReducer = createReducer(
     isLoggedIn: false,
     message: null,
     userProfile: null,
-    isAdmin: false
+    isAdmin: false,
   })),
   on(AuthActions.loadUserProfileSuccess, (state, { userProfile }) => ({
     ...state,
@@ -68,12 +68,34 @@ export const authReducer = createReducer(
     token: null,
     messages: null,
     currentActionUrl: null,
-    userProfile: null
+    userProfile: null,
   })),
   on(AuthActions.setCurrentAction, (state, { currentActionUrl, messages }) => ({
     ...state,
     currentActionUrl,
     messages,
   })),
-  on(AuthActions.adminLoginSuccess, (state, {token}) => ({...state, token: token, isAdmin: true, isLoggedIn: true}))
+  on(AuthActions.adminLoginSuccess, (state, { token }) => ({
+    ...state,
+    token: token,
+    isAdmin: true,
+    isLoggedIn: true,
+  })),
+  on(AuthActions.changePasswordFailure, (state, { messages }) => ({
+    ...state,
+    messages,
+  })),
+  on(AuthActions.changePasswordSuccess, (state, { messages }) => ({
+    ...state,
+    messages,
+  })),
+  on(AuthActions.updateProfileSuccess, (state, { messages, userProfile }) => ({
+    ...state,
+    messages,
+    userProfile: {...state.userProfile, ...userProfile}
+  })),
+  on(AuthActions.updateProfileFailure, (state, { messages }) => ({
+    ...state,
+    messages,
+  })),
 );

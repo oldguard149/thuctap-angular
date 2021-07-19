@@ -80,26 +80,55 @@ export class AuthService {
           // error: string
           return throwError([{ type: 'failure', content: errorRes.error }]);
         } else {
-          return throwError([{type: 'failure', content:'Something bad happend. Please try again later'}]);
+          return throwError([
+            {
+              type: 'failure',
+              content: 'Something bad happend. Please try again later',
+            },
+          ]);
         }
       })
-    )
+    );
   }
 
   updateProfile(body: object) {
-    return this.http.put(`${this.api_url}/api/v2/public/auth/profile`, body);
+    return this.http
+      .put(`${this.api_url}/api/v2/public/auth/profile`, body)
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          const messages: ResponseMessage[] = error.error.message.map(
+            (msg) => ({
+              type: 'failure',
+              content: msg.msg,
+            })
+          );
+          return throwError(messages);
+        })
+      );
   }
 
   changePassword(body: ChangePasswordBodyObject) {
-    return this.http.put(`${this.api_url}//api/v2/public/auth/profile`, body);
+    return this.http
+      .put(`${this.api_url}/api/v2/public/auth/profile/change-password`, body)
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          const messages: ResponseMessage[] = error.error.message.map(
+            (msg) => ({
+              type: 'failure',
+              content: msg.msg,
+            })
+          );
+          return throwError(messages);
+        })
+      );
   }
 
   getProfile() {
-    return this.http
-      .get(`${this.api_url}/api/v2/public/auth/profile`)
-      .pipe(catchError((error: HttpErrorResponse) => {
+    return this.http.get(`${this.api_url}/api/v2/public/auth/profile`).pipe(
+      catchError((error: HttpErrorResponse) => {
         const errorMessage = error.error;
         return throwError(errorMessage);
-      }));
+      })
+    );
   }
 }

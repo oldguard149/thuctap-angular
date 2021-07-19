@@ -57,7 +57,9 @@ export class TopNavComponent {
   ]
 
   accountActionsWhenLoggedIn: DropdownContent[] = [
-    { displayName: 'Acount', value: '/orders'},
+    { displayName: 'Account', value: '/profile'},
+    { displayName: 'Change password', value: '/reset-password'},
+    { displayName: 'Order history', value: '/orders'},
     { displayName: 'Log out', value: '/logout'},
     { displayName: 'Wishlist', value: '/wishlist'},
     { displayName: 'Cart', value: '/cart'},

@@ -1,9 +1,7 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { NzMessageService } from 'ng-zorro-antd/message';
 import { of } from 'rxjs';
 import { catchError, exhaustMap, map } from 'rxjs/operators';
 import { ResponseMessage } from 'src/app/models/response.model';
@@ -158,6 +156,47 @@ export class AuthEffects {
         })
       ),
     { dispatch: false }
+  );
+
+  changePassword$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.changePassword),
+      exhaustMap((action) =>
+        this.authService.changePassword(action.body).pipe(
+          map((res) =>
+            AuthActions.changePasswordSuccess({
+              messages: [
+                { type: 'success', content: 'Change password success' },
+              ],
+            })
+          ),
+          catchError((error: ResponseMessage[]) => {
+            return of(AuthActions.changePasswordFailure({ messages: error }));
+          })
+        )
+      )
+    )
+  );
+
+  updateProfile$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.updateProfile),
+      exhaustMap((action) =>
+        this.authService.updateProfile(action.body).pipe(
+          map((res) =>
+            AuthActions.updateProfileSuccess({
+              userProfile: res,
+              messages: [
+                { type: 'success', content: 'Update profile successfully' },
+              ],
+            })
+          ),
+          catchError((error: ResponseMessage[]) =>
+            of(AuthActions.updateProfileFailure({ messages: error }))
+          )
+        )
+      )
+    )
   );
 
   constructor(
