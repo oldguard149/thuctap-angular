@@ -3,11 +3,13 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { of } from 'rxjs';
 import { catchError, exhaustMap, map } from 'rxjs/operators';
 import { ResponseMessage } from 'src/app/models/response.model';
 import { UserProfile } from 'src/app/models/userProfile.model';
 import { AuthService } from 'src/app/services/auth.service';
+import { PopupMessageService } from 'src/app/services/popup-message.service';
 import * as AuthActions from './auth.actions';
 import { authLocalStorageKey } from './auth.reducer';
 import { selectCurrentActionUrl } from './auth.selectors';
@@ -48,6 +50,7 @@ export class AuthEffects {
             } else {
               this.router.navigateByUrl('/');
             }
+            this.messageService.createMessage('Log in successfully', 'success');
             return AuthActions.loginSuccess({ token: res.token });
           }),
           catchError((error: ResponseMessage[]) => {
@@ -65,6 +68,7 @@ export class AuthEffects {
         this.authService.login(action.body).pipe(
           map((res: any) => {
             this.router.navigateByUrl('/admin');
+            this.messageService.createMessage('Log in successfully', 'success');
             return AuthActions.adminLoginSuccess({ token: res.token });
           }),
           catchError((error: ResponseMessage[]) => {
@@ -141,10 +145,26 @@ export class AuthEffects {
     { dispatch: false }
   );
 
+  logout$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(AuthActions.logout),
+        map(() => {
+          this.router.navigateByUrl('/');
+          this.messageService.createMessage(
+            'You have been logged out',
+            'success'
+          );
+        })
+      ),
+    { dispatch: false }
+  );
+
   constructor(
     private authService: AuthService,
     private actions$: Actions,
     private router: Router,
-    private store: Store
+    private store: Store,
+    private messageService: PopupMessageService
   ) {}
 }

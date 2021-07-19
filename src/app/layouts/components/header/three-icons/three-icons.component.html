@@ -1,12 +1,32 @@
 <div class="flex justify-center p-2 space-x-9">
-  <a class="icon zmdi zmdi-refresh" [ngClass]="[textColor]" [routerLink]="['/checkout']"></a>
-  <a class="icon zmdi zmdi-favorite-outline" [ngClass]="[textColor]" [routerLink]="['/wishlist']"></a>
+  <a
+    class="icon zmdi zmdi-refresh"
+    [ngClass]="[textColor]"
+    [routerLink]="['/checkout']"
+    nz-tooltip
+    [nzTooltipTitle]="'Checkout'"
+    [nzTooltipMouseEnterDelay]="0.75"
+    nzTooltipPlacement="bottom"
+  ></a>
+  <a
+    class="icon zmdi zmdi-favorite-outline"
+    [ngClass]="[textColor]"
+    [routerLink]="['/wishlist']"
+    nz-tooltip
+    [nzTooltipTitle]="'Wishlist'"
+    [nzTooltipMouseEnterDelay]="0.75"
+    nzTooltipPlacement="bottom"
+  ></a>
   <div>
     <a
       id="cart"
       class="icon zmdi zmdi-shopping-cart"
       [routerLink]="['/cart']"
       [ngClass]="[textColor]"
+      nz-tooltip
+      [nzTooltipTitle]="'Cart'"
+      [nzTooltipMouseEnterDelay]="0.75"
+      nzTooltipPlacement="bottom"
     ></a>
   </div>
 </div>

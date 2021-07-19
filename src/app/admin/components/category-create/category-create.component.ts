@@ -19,7 +19,7 @@ export class CategoryCreateComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    this.store.dispatch(resetAdminMessages());
+    // this.store.dispatch(resetAdminMessages());
   }
 
 }

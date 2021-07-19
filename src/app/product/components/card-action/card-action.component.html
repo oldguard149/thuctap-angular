@@ -5,11 +5,34 @@
     *ngIf="showAddToCart"
     class="shopping-cart zmdi zmdi-shopping-cart"
     (click)="handleClick('addToCart')"
+    nz-tooltip
+    [nzTooltipTitle]="'Add to cart'"
+    [nzTooltipMouseEnterDelay]="0.75"
+    nzTooltipPlacement="bottom"
   ></a>
   <!-- wish list -->
-  <a *ngIf="isLoggedIn$ | async" class="wishlist zmdi zmdi-favorite-outline" (click)="handleClick('wishlist')"></a>
+  <a
+    *ngIf="isLoggedIn$ | async"
+    class="wishlist zmdi zmdi-favorite-outline"
+    (click)="handleClick('wishlist')"
+    nz-tooltip
+    [nzTooltipTitle]="'Add to wishlist'"
+    [nzTooltipMouseEnterDelay]="0.75"
+    nzTooltipPlacement="bottom"
+  ></a>
   <!-- view detail -->
-  <a class="compare zmdi zmdi-refresh" [routerLink]="['/product', productId]"></a>
+  <a
+    class="compare zmdi zmdi-refresh"
+    [routerLink]="['/product', productId]"
+    nz-tooltip
+    [nzTooltipTitle]="'View product details'"
+    [nzTooltipMouseEnterDelay]="0.75"
+    nzTooltipPlacement="bottom"
+  ></a>
   <!-- review -->
-  <a *ngIf="showReview" class="review hidden lg:block zmdi-eye" (click)="handleClick('review')"></a>
+  <a
+    *ngIf="showReview"
+    class="review hidden lg:block zmdi-eye"
+    (click)="handleClick('review')"
+  ></a>
 </div>
