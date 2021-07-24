@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-button',
@@ -8,16 +8,11 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
     class: 'grid justify-center'
   }
 })
-export class ButtonComponent implements OnInit {
-  // @Input() className: string = " bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline";
-  @Input() className: string = "bg-gray-900 hover:bg-brand";
-  @Input() inputType: string = 'button';
+export class ButtonComponent {
+  @Input() disabled: boolean = false;
+  @Input() buttonType: string = 'submit';
   @Output() buttonClick: EventEmitter<any> = new EventEmitter();
-  
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+  @Input() className: string = "bg-gray-900 hover:bg-brand";
   
   emitClickEvent() {
     this.buttonClick.emit('');

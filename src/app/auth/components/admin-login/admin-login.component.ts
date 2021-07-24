@@ -28,4 +28,8 @@ export class AdminLoginComponent implements OnInit {
   submit(): void {
     this.store.dispatch(adminLogin({body: this.loginForm.value}));
   }
+
+  get formControls() {
+    return this.loginForm.controls;
+  }
 }

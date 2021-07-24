@@ -1,116 +1,113 @@
 <ng-container *ngIf="vm$ | async as vm">
-  <div *ngIf="vm.total === 0" class="mb-10 w-11/12 lg:w-9/12 mx-auto">
-    <h1 class="uppercase p-5 bg-gray-200 mb-5 font-semibold">
-      YOUR CART IS CURRENTLY EMPTY
-    </h1>
-    <p>
-      Continue browsing
-      <a [routerLink]="['/collections/all']" class="hover:text-brand">here</a>
-    </p>
-  </div>
-  <ng-container *ngIf="vm.total !== 0">
   <div class="w-11/12 md:w-9/12 mx-auto lg:flex">
-    <div class="lg:hidden border-b border-gray-300">
-      <nz-collapse nzGhost class="border-t border-b border-gray-400">
-        <nz-collapse-panel
-          [nzHeader]="collapseHeader$ | async"
-          (nzActiveChange)="changeCollapePanelHeader($event)"
-        >
-          <ng-container [ngTemplateOutlet]="cartSummaryTpl"> </ng-container>
-        </nz-collapse-panel>
-      </nz-collapse>
-    </div>
+    <ng-container *ngIf="vm.total === 0">
+      <h1 class="uppercase p-5 bg-gray-200 mb-5 font-semibold">
+        YOUR CART IS CURRENTLY EMPTY
+      </h1>
+      <p>
+        Continue browsing
+        <a [routerLink]="['/collections/all']" class="hover:text-brand">here</a>
+      </p>
+    </ng-container>
 
-    <div class="lg:w-7/12 lg:pt-8">
-      <form class="bg-white rounded px-8 pb-8 mb-8 w-full max-w-md mx-auto">
-        <h2 class="text-2xl font-bold text-center">Shipping Information</h2>
-        <app-messages [messages]="vm.messages"></app-messages>
-        <div class="form-container">
-          <div class="mb-4">
-            <app-label [id]="'email'">Email</app-label>
-            <app-input
-              [id]="'email'"
-              [parentForm]="checkoutForm"
-              [controlName]="'email'"
-            ></app-input>
-            <app-input-error *ngIf="formControls.email.hasError('required')">
-              Please fill in email
-            </app-input-error>
+    <ng-container *ngIf="vm.total !== 0">
+      <div class="lg:hidden border-b border-gray-300">
+        <nz-collapse nzGhost class="border-t border-b border-gray-400">
+          <nz-collapse-panel
+            [nzHeader]="collapseHeader$ | async"
+            (nzActiveChange)="changeCollapePanelHeader($event)"
+          >
+            <ng-container [ngTemplateOutlet]="cartSummaryTpl"> </ng-container>
+          </nz-collapse-panel>
+        </nz-collapse>
+      </div>
+
+      <div class="lg:w-7/12 lg:pt-8">
+        <form class="bg-white rounded px-8 pb-8 mb-8 w-full max-w-md mx-auto" (ngSubmit)="submit()">
+          <h2 class="text-2xl font-bold text-center">Shipping Information</h2>
+          <app-messages [messages]="vm.messages"></app-messages>
+          <div class="form-container">
+            <div class="mb-4">
+              <app-label [id]="'email'">Email</app-label>
+              <app-input
+                [id]="'email'"
+                [control]="checkoutForm.email"
+              ></app-input>
+              <app-input-error [control]="formControls.email">
+                Please fill in email
+              </app-input-error>
+            </div>
+
+            <div class="mb-4">
+              <app-label [id]="'name'">Fullname</app-label>
+              <app-input
+                [id]="'name'"
+                [control]="checkoutForm.name"
+              ></app-input>
+              <app-input-error [control]="formControls.name">
+                Please fill in your fullname
+              </app-input-error>
+            </div>
+
+            <div class="mb-4 col-span-2">
+              <app-label [id]="'address'">Address</app-label>
+              <app-input
+                [id]="'address'"
+                [control]="checkoutForm.address"
+              ></app-input>
+              <app-input-error
+                [control]="formControls.address"
+              >
+                Please fill in your address
+              </app-input-error>
+            </div>
+
+            <div class="mb-4 col-span-2">
+              <app-label [id]="'phone'">Phone</app-label>
+              <app-input
+                [id]="'phone'"
+                [control]="checkoutForm.phone"
+                [inputType]="'tel'"
+              ></app-input>
+              <app-input-error [control]="formControls.phone">
+                Please fill in your phone
+              </app-input-error>
+            </div>
+
+            <div class="mb-4 col-span-2">
+              <app-label [id]="'postcode'">Post Code</app-label>
+              <app-input
+                [id]="'postcode'"
+                [control]="checkoutForm.postcode"
+              ></app-input>
+            </div>
+
+            <div class="mb-4 col-span-2">
+              <app-label [id]="'description'">Description</app-label>
+              <app-input
+                [id]="'description'"
+                [control]="checkoutForm.description"
+              ></app-input>
+            </div>
           </div>
 
           <div class="mb-4">
-            <app-label [id]="'name'">Fullname</app-label>
-            <app-input
-              [id]="'name'"
-              [parentForm]="checkoutForm"
-              [controlName]="'name'"
-            ></app-input>
-            <app-input-error *ngIf="formControls.name.hasError('required')">
-              Please fill in your fullname
-            </app-input-error>
+            <div class="px-3 py-4 rounded-lg border border-gray-800">
+              <ngx-stripe-card [options]="cardOptions"></ngx-stripe-card>
+            </div>
+            <p *ngIf="isStripeError$ | async" class="stripe-error py-2">
+              {{ stripeError$ | async }}
+            </p>
           </div>
+          <app-button [disabled]="!checkoutForm.valid">Complete Order</app-button>
+        </form>
+      </div>
 
-          <div class="mb-4 col-span-2">
-            <app-label [id]="'address'">Address</app-label>
-            <app-input
-              [id]="'address'"
-              [parentForm]="checkoutForm"
-              [controlName]="'address'"
-            ></app-input>
-            <app-input-error *ngIf="formControls.address.hasError('required')">
-              Please fill in your address
-            </app-input-error>
-          </div>
-
-          <div class="mb-4 col-span-2">
-            <app-label [id]="'phone'">Phone</app-label>
-            <app-input
-              [id]="'phone'"
-              [parentForm]="checkoutForm"
-              [controlName]="'phone'"
-              [inputType]="'tel'"
-            ></app-input>
-            <app-input-error *ngIf="formControls.phone.hasError('required')">
-              Please fill in your phone
-            </app-input-error>
-          </div>
-
-          <div class="mb-4 col-span-2">
-            <app-label [id]="'postcode'">Post Code</app-label>
-            <app-input
-              [id]="'postcode'"
-              [parentForm]="checkoutForm"
-              [controlName]="'postcode'"
-            ></app-input>
-          </div>
-
-          <div class="mb-4 col-span-2">
-            <app-label [id]="'description'">Description</app-label>
-            <app-input
-              [id]="'description'"
-              [parentForm]="checkoutForm"
-              [controlName]="'description'"
-            ></app-input>
-          </div>
-        </div>
-
-        <div class="mb-4">
-          <div class="px-3 py-4 rounded-lg border border-gray-800">
-            <ngx-stripe-card [options]="cardOptions"></ngx-stripe-card>
-          </div>
-          <app-input-error [showError]="isStripeError$ | async">
-            {{ stripeError$ | async }}
-          </app-input-error>
-        </div>
-        <app-button (buttonClick)="submit()">Complete Order</app-button>
-      </form>
-    </div>
-
-    <div class="hidden lg:block w-5/12 border-l border-gray-300 lg:pt-8 pl-4">
-      <ng-container [ngTemplateOutlet]="cartSummaryTpl"> </ng-container>
-    </div>
+      <div class="hidden lg:block w-5/12 border-l border-gray-300 lg:pt-8 pl-4">
+        <ng-container [ngTemplateOutlet]="cartSummaryTpl"> </ng-container>
+      </div>
+    </ng-container>
   </div>
-
   <ng-template #cartSummaryTpl>
     <!-- cart items -->
     <table class="my-4 w-full">
@@ -180,5 +177,4 @@
       </div>
     </div>
   </ng-template>
-</ng-container>
 </ng-container>

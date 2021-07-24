@@ -15,3 +15,6 @@
 .fab {
   font: normal normal normal 14px/1 FontAwesome;
 }
+
+// tailwind set vertical-align to center, that make a bug for svg in ant design
+svg { vertical-align: baseline; }

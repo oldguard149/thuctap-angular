@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { combineLatest, Subject, Subscription } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
+import { PopupMessageService } from 'src/app/services/popup-message.service';
 import { BreadCrumb } from 'src/app/shared/components/breadcrumb/breadcrumb.component';
 import { removeCartItem, updateOrderQuantity } from '../../state/cart.actions';
 import {
@@ -19,20 +20,23 @@ import {
 })
 export class CartComponent implements OnInit {
   cart$ = this.store.select(selectCartItems);
-  total$ = this.store.select(selectTotalCartItems);
-  totalPrice$ = this.store.select(selectTotalPrice);
-  vm$ = combineLatest([this.cart$, this.total$, this.totalPrice$]).pipe(
-    map(([cart, total, totalPrice]) => ({ cart, total, totalPrice }))
-  );
+  vm$ = combineLatest([
+    this.cart$,
+    this.store.select(selectTotalCartItems),
+    this.store.select(selectTotalPrice),
+  ]).pipe(map(([cart, total, totalPrice]) => ({ cart, total, totalPrice })));
 
   form = this.fb.group({
     cart: this.fb.array([]),
   });
 
-
   handleUpdateOrderQuantity(id: string, index: number) {
     const orderQty = parseInt(this.cartFormArray.controls[index].value);
-    this.store.dispatch(updateOrderQuantity({ id, orderQty }));
+    if (orderQty <= 0) {
+      this.message.createMessage('Order quantity must greater than 0', 'error');
+    } else {
+      this.store.dispatch(updateOrderQuantity({ id, orderQty }));
+    }
   }
 
   handleRemoveItem(id: string, index: number) {
@@ -56,8 +60,11 @@ export class CartComponent implements OnInit {
   constructor(
     private store: Store,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private message: PopupMessageService
   ) {}
+  private destroyed = new Subject<void>();
+
   ngOnInit(): void {
     this.cart$.pipe(takeUntil(this.destroyed)).subscribe((items) => {
       items.forEach((item) => {
@@ -70,6 +77,4 @@ export class CartComponent implements OnInit {
     this.destroyed.next();
     this.destroyed.complete();
   }
-
-  private destroyed = new Subject<void>();
 }

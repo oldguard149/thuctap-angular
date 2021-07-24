@@ -1,1 +1,6 @@
-<p class="py-2"><ng-content></ng-content></p>
+<p
+  class="py-2"
+  *ngIf="(control.dirty || control.touched) && control.hasError(errorCode)"
+>
+  <ng-content></ng-content>
+</p>

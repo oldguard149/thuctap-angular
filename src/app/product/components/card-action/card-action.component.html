@@ -22,17 +22,12 @@
   ></a>
   <!-- view detail -->
   <a
-    class="compare zmdi zmdi-refresh"
     [routerLink]="['/product', productId]"
     nz-tooltip
     [nzTooltipTitle]="'View product details'"
     [nzTooltipMouseEnterDelay]="0.75"
     nzTooltipPlacement="bottom"
-  ></a>
-  <!-- review -->
-  <a
-    *ngIf="showReview"
-    class="review hidden lg:block zmdi-eye"
+    class="review  zmdi zmdi-eye"
     (click)="handleClick('review')"
   ></a>
 </div>

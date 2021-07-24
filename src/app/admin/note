@@ -1,0 +1,4 @@
+create success: set messages and redirect to list; failure: set and display messages;
+update success and failure: set and display messages; on destroy reset messages
+delete success: set messages and redirect to list; failure: set and display messages;
+list: on init load; on destroy reset message

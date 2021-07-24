@@ -13,7 +13,6 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { NgxStripeModule } from 'ngx-stripe';
 import { NzMessageModule } from 'ng-zorro-antd/message';
-import { NzConfig, NZ_CONFIG } from 'ng-zorro-antd/core/config';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -28,9 +27,7 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
 
 
 registerLocaleData(en);
-const ngZorroConfig: NzConfig = {
-  message: { nzTop: 30, nzMaxStack: 5 },
-};
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -57,7 +54,6 @@ const ngZorroConfig: NzConfig = {
     { provide: NZ_I18N, useValue: en_US },
     { provide: 'API_URL', useValue: 'http://45.118.134.105:3000' },
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
-    { provide: NZ_CONFIG, useValue: ngZorroConfig },
   ],
   bootstrap: [AppComponent],
 })

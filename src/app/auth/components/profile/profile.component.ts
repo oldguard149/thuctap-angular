@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { updateProfile } from '../../state/auth.actions';
+import { resetMessages, updateProfile } from '../../state/auth.actions';
 import {
   selectAuthMessages,
   selectUserProfile,
@@ -18,7 +18,7 @@ export class ProfileComponent implements OnInit {
   form: FormGroup = this.fb.group({
     first_name: ['', Validators.required],
     last_name: ['', Validators.required],
-    phone: ['', Validators.required],
+    phone: ['', [Validators.required, Validators.pattern(/^[0-9]{10}/)]],
     address: ['', Validators.required]
   });
   authMessages$ = this.store.select(selectAuthMessages);
@@ -44,6 +44,7 @@ export class ProfileComponent implements OnInit {
   ngOnDestroy() {
     this.destroyed.next();
     this.destroyed.complete();
+    this.store.dispatch(resetMessages());
   }
 
   submit() {

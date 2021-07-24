@@ -2,6 +2,7 @@
   <form
     class="bg-white shadow-md rounded px-8 pt-6 pb-8 my-8"
     [formGroup]="registerForm"
+    (ngSubmit)="submit()"
   >
     <h2 class="text-2xl font-bold text-center">Register</h2>
     <app-messages [messages]="authMessages$ | async"></app-messages>
@@ -10,10 +11,9 @@
         <app-label [id]="'email'">Email</app-label>
         <app-input
           [id]="'email'"
-          [parentForm]="registerForm"
-          [controlName]="'email'"
+          [control]="formControls.email"
         ></app-input>
-        <app-input-error *ngIf="formControls.email.hasError('required')">
+        <app-input-error [control]="formControls.email">
           Please fill in email
         </app-input-error>
       </div>
@@ -22,10 +22,9 @@
         <app-label [id]="'first_name'">First name</app-label>
         <app-input
           [id]="'first_name'"
-          [parentForm]="registerForm"
-          [controlName]="'first_name'"
+          [control]="formControls.first_name"
         ></app-input>
-        <app-input-error *ngIf="formControls.first_name.hasError('required')">
+        <app-input-error [control]="formControls.first_name">
           Please fill in first name
         </app-input-error>
       </div>
@@ -34,10 +33,9 @@
         <app-label [id]="'last_name'">Last name</app-label>
         <app-input
           [id]="'last_name'"
-          [parentForm]="registerForm"
-          [controlName]="'last_name'"
+          [control]="formControls.last_name"
         ></app-input>
-        <app-input-error *ngIf="formControls.last_name.hasError('required')">
+        <app-input-error [control]="formControls.last_name">
           Please fill in last name
         </app-input-error>
       </div>
@@ -46,8 +44,7 @@
         <app-label [id]="'address'">Address</app-label>
         <app-input
           [id]="'address'"
-          [parentForm]="registerForm"
-          [controlName]="'address'"
+          [control]="formControls.address"
         ></app-input>
       </div>
 
@@ -55,9 +52,8 @@
         <app-label [id]="'phone'">Phone</app-label>
         <app-input
           [id]="'phone'"
-          [parentForm]="registerForm"
-          [controlName]="'phone'"
           [inputType]="'tel'"
+          [control]="formControls.phone"
         ></app-input>
       </div>
 
@@ -65,11 +61,10 @@
         <app-label [id]="'password'"> Password </app-label>
         <app-input
           [id]="'password'"
-          [parentForm]="registerForm"
-          [controlName]="'password'"
           [inputType]="'password'"
+          [control]="formControls.password"
         ></app-input>
-        <app-input-error *ngIf="formControls.password.hasError('required')">
+        <app-input-error [control]="formControls.password">
           Please fill in password
         </app-input-error>
       </div>
@@ -78,22 +73,20 @@
         <app-label [id]="'confirmPassword'"> Confirm Password </app-label>
         <app-input
           [id]="'confirmPassword'"
-          [parentForm]="registerForm"
-          [controlName]="'confirmPassword'"
           [inputType]="'password'"
+          [control]="formControls.confirmPassword"
         ></app-input>
-        <app-input-error
-          *ngIf="formControls.confirmPassword.hasError('required')"
-        >
+        <app-input-error [control]="formControls.confirmPassword">
           Please fill in confirm password
         </app-input-error>
         <app-input-error
-          *ngIf="formControls.confirmPassword.hasError('mustMatch')"
+          [control]="formControls.confirmPassword"
+          [errorCode]="'mustMatch'"
         >
           Your password doesn't match
         </app-input-error>
       </div>
     </div>
-    <app-button (buttonClick)="submit()">Register</app-button>
+    <app-button [disabled]="!registerForm.valid">Register</app-button>
   </form>
 </div>

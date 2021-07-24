@@ -23,9 +23,14 @@
         </p>
 
         <!-- actions -->
-        <div class="flex items-center py-5">
+        <div class="flex items-center pt-5 pb-2">
           <form [formGroup]="cartForm" class="flex mr-4">
-            <input type="text" formControlName="quantity" id="quantity" />
+            <input
+              type="text"
+              formControlName="quantity"
+              id="quantity"
+              min="1"
+            />
             <div class="flex flex-col" *ngIf="vm.productQuantity">
               <button
                 id="plus"
@@ -41,16 +46,22 @@
               </button>
             </div>
           </form>
-          <a class="add-to-cart mr-4" (click)="addToCart()">
+          <app-button (click)="addToCart()" [disabled]="!cartForm.valid">
             <i class="shopping-cart zmdi zmdi-shopping-cart"></i>
             ADD TO CART
-          </a>
+          </app-button>
           <a
             *ngIf="vm.isLoggedIn"
-            class="wishlist zmdi zmdi-favorite-outline"
+            class="wishlist zmdi zmdi-favorite-outline ml-3"
             (click)="addProductToWishList(product)"
           ></a>
         </div>
+        <app-input-error
+          [control]="cartForm.controls.quantity"
+          [errorCode]="'min'"
+        >
+          Quantity can not be a negative number
+        </app-input-error>
         <!-- end of action -->
 
         <p class="text-gray-700 mb-3 font-semibold">

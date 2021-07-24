@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-input-error',
@@ -6,5 +7,6 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./input-error.component.scss']
 })
 export class InputErrorComponent {
-  
+  @Input() control: FormControl;
+  @Input() errorCode: string = 'required';
 }

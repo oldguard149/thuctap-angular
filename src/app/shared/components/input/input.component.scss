@@ -1,0 +1,21 @@
+input {
+  padding: 5px 10px;
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid #e0e0e0;
+  outline: none;
+
+  &.ng-invalid.ng-touched {
+    border: 2px solid #ff3d00;
+
+    &:focus {
+      border: 2px solid #ff3d00;
+      box-shadow: 0 0 0 0.2em rgba(#ff3d00, 0.5);
+    }
+  }
+
+  &:focus {
+    border: 1px solid #00b0ff;
+    box-shadow: 0 0 0 0.2em rgba(#00b0ff, 0.5);
+  }
+}

@@ -11,8 +11,8 @@
     focus:outline-none focus:shadow-outline
   "
   (click)="emitClickEvent()"
-  [type]="inputType"
+  [type]="buttonType"
+  [disabled]="disabled"
 >
   <ng-content></ng-content>
 </button>
-<div class="h-2"></div>

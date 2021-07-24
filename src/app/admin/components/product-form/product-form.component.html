@@ -3,17 +3,14 @@
     <form
       class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
       [formGroup]="form"
+      (ngSubmit)="handleSubmit()"
     >
       <h2 class="text-2xl font-bold text-center">{{ buttonText }} product</h2>
       <app-messages [messages]="vm.messages"></app-messages>
       <div class="mb-6">
         <app-label [id]="'title'">Title</app-label>
-        <app-input
-          [id]="'title'"
-          [parentForm]="form"
-          [controlName]="'title'"
-        ></app-input>
-        <app-input-error *ngIf="formControls.title.hasError('required')">
+        <app-input [id]="'title'" [control]="form.title"></app-input>
+        <app-input-error [control]="formControls.title">
           Please fill in title
         </app-input-error>
       </div>
@@ -30,36 +27,24 @@
 
       <div class="mb-6">
         <app-label [id]="'sku'">sku</app-label>
-        <app-input
-          [id]="'sku'"
-          [parentForm]="form"
-          [controlName]="'sku'"
-        ></app-input>
-        <app-input-error *ngIf="formControls.sku.hasError('required')">
+        <app-input [id]="'sku'" [control]="form.sku"></app-input>
+        <app-input-error [control]="formControls.sku">
           Please fill in product's sku
         </app-input-error>
       </div>
 
       <div class="mb-6">
         <app-label [id]="'price'">Price</app-label>
-        <app-input
-          [id]="'price'"
-          [parentForm]="form"
-          [controlName]="'price'"
-        ></app-input>
-        <app-input-error *ngIf="formControls.price.hasError('required')">
+        <app-input [id]="'price'" [control]="form.price"></app-input>
+        <app-input-error [control]="formControls.price">
           Please fill in product's price
         </app-input-error>
       </div>
 
       <div class="mb-6">
         <app-label [id]="'quantity'">Quantity</app-label>
-        <app-input
-          [id]="'quantity'"
-          [parentForm]="form"
-          [controlName]="'quantity'"
-        ></app-input>
-        <app-input-error *ngIf="formControls.quantity.hasError('required')">
+        <app-input [id]="'quantity'" [control]="form.quantity"></app-input>
+        <app-input-error [control]="formControls.quantity">
           Please fill in product's quantity
         </app-input-error>
       </div>
@@ -90,20 +75,19 @@
           *ngFor="let control of images.controls; let index = index"
           class="flex w-full justify-between"
         >
-          <app-input
-            class="w-10/12"
-            [parentForm]="images"
-            [controlName]="index"
-          ></app-input>
+          <app-input class="w-10/12" [control]="control"></app-input>
           <app-button
-            (buttonClick)="removeImageControl(index)"
+            (click)="removeImageControl(index)"
+            [buttonType]="'button'"
             [className]="'bg-red-600 hover:bg-red-300'"
           >
             X
           </app-button>
         </div>
         <app-input-hint>Delete field if it is empty</app-input-hint>
-        <app-button (buttonClick)="addImageControl()">Add new field</app-button>
+        <app-button (click)="addImageControl()" [buttonType]="'button'"
+          >Add new field</app-button
+        >
       </div>
 
       <div class="mb-6" formArrayName="videos">
@@ -112,23 +96,22 @@
           *ngFor="let control of videos.controls; let index = index"
           class="flex w-full justify-between"
         >
-          <app-input
-            class="w-10/12"
-            [parentForm]="videos"
-            [controlName]="index"
-          ></app-input>
+          <app-input class="w-10/12" [control]="control"></app-input>
           <app-button
-            (buttonClick)="removeVideoControl(index)"
+            [buttonType]="'button'"
+            (click)="removeVideoControl(index)"
             [className]="'bg-red-600 hover:bg-red-300'"
           >
             X
           </app-button>
         </div>
         <app-input-hint>Delete field if it is empty</app-input-hint>
-        <app-button (buttonClick)="addVideoControl()">Add new field</app-button>
+        <app-button [buttonType]="'button'" (buttonClick)="addVideoControl()"
+          >Add new field</app-button
+        >
       </div>
 
-      <app-button (buttonClick)="handleSubmit()">{{ buttonText }}</app-button>
+      <app-button [disabled]="!form.valid">{{ buttonText }}</app-button>
     </form>
   </div>
 </ng-container>

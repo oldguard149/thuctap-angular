@@ -25,12 +25,12 @@ import {
 })
 export class ProductDetailsComponent implements OnInit, OnDestroy {
   cartForm: FormGroup = this.fb.group({
-    quantity: ['1', Validators.required],
+    quantity: ['1', [Validators.required, Validators.min(1)]],
   });
   product$ = this.store.select(selectProductDetails);
-  productQuantity$ = this.store.select(selectProductQuantity);
-  breadcrumb$ = this.store.select(selectProductDetailsBreadcrumb);
-  isLoggedIn$ = this.store.select(selectIsLoggedIn);
+  // productQuantity$ = this.store.select(selectProductQuantity);
+  // breadcrumb$ = this.store.select(selectProductDetailsBreadcrumb);
+  // isLoggedIn$ = this.store.select(selectIsLoggedIn);
 
   vm$ = combineLatest([
     this.store.select(selectProductDetails),
