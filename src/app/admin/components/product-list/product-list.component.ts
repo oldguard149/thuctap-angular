@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { combineLatest } from 'rxjs';
+import { BehaviorSubject, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {
   selectAdminLoading,
@@ -10,6 +10,7 @@ import {
 } from '../../state/admin.selectors';
 import {
   changePage,
+  deleteProduct,
   loadProducts,
   resetAdminMessages,
   resetPaginationInfo,
@@ -46,7 +47,7 @@ export class ProductListComponent implements OnInit {
 
   handleRemove(index: number) {
     this.store.dispatch(setSelectedProduct({ index }));
-    this.router.navigateByUrl('/admin/product-delete');
+    this.isModalVisibleSubject.next(true);
   }
 
   constructor(private store: Store, private router: Router) {}
@@ -55,8 +56,21 @@ export class ProductListComponent implements OnInit {
     this.store.dispatch(loadProducts());
   }
 
-  ngDestroy() {
+  ngOnDestroy() {
     this.store.dispatch(resetAdminMessages());
     this.store.dispatch(resetPaginationInfo());
+  }
+
+  private isModalVisibleSubject = new BehaviorSubject(false);
+  isVisible$ = this.isModalVisibleSubject.asObservable();
+
+  confirmDelete() {
+    this.store.dispatch(deleteProduct());
+    this.isModalVisibleSubject.next(false);
+  }
+
+  cancelDelete() {
+    console.log('cancel');
+    this.isModalVisibleSubject.next(false);
   }
 }

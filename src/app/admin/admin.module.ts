@@ -30,9 +30,7 @@ import { ProductCreateComponent } from './components/product-create/product-crea
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { ProductFormComponent } from './components/product-form/product-form.component';
 import { ProductUpdateComponent } from './components/product-update/product-update.component';
-import { ProductDeleteComponent } from './components/product-delete/product-delete.component';
 import { CategoryUpdateComponent } from './components/category-update/category-update.component';
-import { CategoryDeleteComponent } from './components/category-delete/category-delete.component';
 import { ConfirmDeleteComponent } from './components/confirm-delete/confirm-delete.component';
 import { CategoryFormComponent } from './components/category-form/category-form.component';
 import { OrdersListComponent } from './components/orders-list/orders-list.component';
@@ -49,9 +47,7 @@ import { ProductModule } from '../product/product.module';
     ProductListComponent,
     ProductFormComponent,
     ProductUpdateComponent,
-    ProductDeleteComponent,
     CategoryUpdateComponent,
-    CategoryDeleteComponent,
     ConfirmDeleteComponent,
     CategoryFormComponent,
     OrdersListComponent,

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { combineLatest } from 'rxjs';
+import { BehaviorSubject, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {
+  deleteCategory,
   loadCategories,
   resetAdminMessages,
   setSelectedCategory,
@@ -52,6 +53,18 @@ export class CategoryListComponent implements OnInit {
 
   handleDelete(index: number) {
     this.store.dispatch(setSelectedCategory({ index }));
-    this.router.navigateByUrl('/admin/category-delete');
+    this.isModalVisibleSubject.next(true);
+  }
+
+  private isModalVisibleSubject = new BehaviorSubject(false);
+  isVisible$ = this.isModalVisibleSubject.asObservable();
+
+  confirmDelete() {
+    this.store.dispatch(deleteCategory())
+    this.isModalVisibleSubject.next(false);
+  }
+
+  cancelDelete() {
+    this.isModalVisibleSubject.next(false);
   }
 }

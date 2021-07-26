@@ -50,15 +50,16 @@
               </app-button>
             </div>
           </td>
-          <!-- <td class="w-1/5">
-            <div class="flex justify-around">
-              <app-button>Active</app-button>
-              <app-button>Deactive</app-button>
-            </div>
-          </td> -->
         </tr>
       </tbody>
     </nz-table>
     <app-pagination (pageChange)="handlePageChange($event)"></app-pagination>
+    <app-confirm-delete
+      [isVisible]="isVisible$ | async"
+      [content]="'Are you sure you want to delete this product'"
+      (confirm)="confirmDelete()"
+      (cancel)="cancelDelete()"
+    >
+    </app-confirm-delete>
   </div>
 </ng-container>

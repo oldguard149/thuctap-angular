@@ -31,5 +31,12 @@
         </tr>
       </tbody>
     </nz-table>
+    <app-confirm-delete
+      [isVisible]="isVisible$ | async"
+      [content]="'Are you sure you want to delete this category?'"
+      (confirm)="confirmDelete()"
+      (cancel)="cancelDelete()"
+    >
+    </app-confirm-delete>
   </div>
 </ng-container>
