@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { loadAuthTokenFromLocalStorage } from './auth/state/auth.actions';
 import { loadCartFromLocalStorage } from './cart/state/cart.actions';
+import { loadWishlist } from './wishlist/state/wishlist.actions';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +14,7 @@ export class AppComponent {
   ngOnInit() {
     this.store.dispatch(loadCartFromLocalStorage());
     this.store.dispatch(loadAuthTokenFromLocalStorage());
+    this.store.dispatch(loadWishlist());
   }
 
   constructor(private store: Store) {}

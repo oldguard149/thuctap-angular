@@ -32,8 +32,8 @@ export class WishlistComponent implements OnInit {
     this.store.select(selectTotalWishlistItems),
     this.store.select(selectWishlistLoading)
   ]).pipe(
-    map(([items, paginationInfo, breadcrumbData, total, loading]) => ({
-      items,
+    map(([products, paginationInfo, breadcrumbData, total, loading]) => ({
+      products,
       paginationInfo,
       breadcrumbData,
       total,

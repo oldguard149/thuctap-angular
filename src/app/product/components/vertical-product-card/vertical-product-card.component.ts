@@ -5,7 +5,11 @@ import { Product } from 'src/app/models/product.model';
 import { productCardAddToCart } from 'src/app/cart/state/cart.actions';
 import { ExampleProduct } from '../mock-data';
 import { getCartInfoFromProduct } from 'src/app/cart/state/cart.reducer';
-import { addToWishlist } from 'src/app/wishlist/state/wishlist.actions';
+import {
+  addToWishlist,
+  deleteFromWishlist,
+} from 'src/app/wishlist/state/wishlist.actions';
+import { selectWishlistIdSet } from 'src/app/wishlist/state/wishlist.selectors';
 
 @Component({
   selector: 'app-vertical-product-card',
@@ -14,6 +18,7 @@ import { addToWishlist } from 'src/app/wishlist/state/wishlist.actions';
 })
 export class VerticalProductCardComponent {
   @Input() product: Product = ExampleProduct;
+  wishlistIdSet$ = this.store.select(selectWishlistIdSet);
   constructor(private store: Store) {}
 
   handleAddToCart() {
@@ -21,7 +26,11 @@ export class VerticalProductCardComponent {
     this.store.dispatch(productCardAddToCart({ item: item }));
   }
 
-  handleAddToWishlist() {
-    this.store.dispatch(addToWishlist({product: this.product}));
+  handleWishlistAction(action: 'add' | 'remove') {
+    if (action === 'add') {
+      this.store.dispatch(addToWishlist({ product: this.product }));
+    } else {
+      this.store.dispatch(deleteFromWishlist({ productId: this.product.id }));
+    }
   }
 }

@@ -1,76 +1,17 @@
 <div class="bg-gray-800 py-3">
-  <div class="flex justify-between items-center relative lg:w-9/12 mx-auto">
-    <h2 class="text-gray-300 text-xl ml-2 inline-block uppercase lg:hidden">
-      Categories
-    </h2>
-
-    <div class="hidden lg:block w-4/6 xl:w-5/12">
-      <div class="grid grid-cols-5 items-center">
-        <div class="menu-container" *ngFor="let item of items">
-          <a
-            [routerLink]="[item.link]"
-            class="uppercase text-white hover:text-brand transition-colors"
-          >
-            {{ item.name }}
-            <span
-              *ngIf="item.subLevel.has"
-              class="zmdi zmdi-caret-down my-2"
-            ></span>
-          </a>
-          <ng-container *ngIf="item.level === 1">
-            <app-categories-nav-popup
-              class="popup-menu"
-              [hasHeaderTitle]="false"
-              [items]="item.subLevel.items"
-              [parentLink]="item.link"
-            ></app-categories-nav-popup>
-          </ng-container>
-
-          <!-- cho nay de hien thi cua shop -->
-          <ng-container *ngIf="item.level === 2">
-            <div class="popup-menu">
-              <div class="grid grid-cols-4 w-max ">
-                <ng-container *ngFor="let subItem of item.subLevel.items; let isFirst = first; let isLast = last">
-                  <app-categories-nav-popup
-                    [hasHeaderTitle]="true"
-                    [items]="subItem.subLevel.items"
-                    [parentLink]="subItem.link"
-                    [headerTitle]="subItem.name"
-                    [roundClass]="isFirst ? 'rounded-l' : (isLast ? 'rounded-r' : '')"
-                  ></app-categories-nav-popup>
-                </ng-container>
-              </div>
-            </div>
-          </ng-container>
-        </div>
-      </div>
+  <div class="flex justify-center md:justify-between items-center relative lg:w-9/12 mx-auto">
+    <div>
+      <h2 class="text-gray-300 text-xl ml-2 inline-block capitalize">
+        <a [routerLink]="'/'">Home</a>
+      </h2>
+      <h2 class="text-gray-300 text-xl inline-block capitalize ml-8">
+        <a [routerLink]="'/collections/all'">Collections</a>
+      </h2>
     </div>
 
-    <div class="flex">
-      <app-three-icons
-        class="hidden md:block mr-8"
-        [textColor]="'text-white'"
-      ></app-three-icons>
-      <button
-        (click)="showHam = !showHam"
-        class="
-          fas
-          fa-bars
-          text-gray-300
-          ml-2
-          inline-block
-          mr-3
-          focus:outline-none
-          lg:hidden
-        "
-      ></button>
-    </div>
-  </div>
-  <div
-    *ngIf="showHam"
-    class="dropdown-mobilemenu z-10 w-full absolute lg:hidden"
-  >
-    <app-categories-nav-dropdown [parentLink]="'/'" [items]="items">
-    </app-categories-nav-dropdown>
+    <app-three-icons
+      class="hidden md:block mr-8"
+      [textColor]="'text-white'"
+    ></app-three-icons>
   </div>
 </div>

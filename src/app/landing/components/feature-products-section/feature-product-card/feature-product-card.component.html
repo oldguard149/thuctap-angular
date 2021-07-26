@@ -31,8 +31,9 @@
       <app-card-action
         [showReview]="false"
         [productId]="product.id"
+        [isInWishlist]="(wishlistIdSet$ | async).has(product.id)"
         (addToCart)="handleAddToCart()"
-        (addToWishlist)="handleAddToWishlist()"
+        (wishlist)="handleWishlistAction($event)"
         class="card-action hidden"
       ></app-card-action>
     </div>

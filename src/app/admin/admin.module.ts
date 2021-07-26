@@ -8,6 +8,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NzModalModule } from 'ng-zorro-antd/modal';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 import { ProductAdminService } from './services/product-admin.service';
 import { BuyerAdminService } from './services/buyer-admin.service';
@@ -67,6 +68,7 @@ import { ProductModule } from '../product/product.module';
     ReactiveFormsModule,
     NzModalModule,
     ProductModule,
+    CKEditorModule,
     StoreModule.forFeature(AdminFeatureKey, adminReducer),
     EffectsModule.forFeature([ProductEffects, CategoryEffects, OrderEffects]),
   ],

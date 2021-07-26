@@ -1,14 +1,23 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { Product } from 'src/app/models/product.model';
 import {
   selectAdminMessages,
   selectCategoriesForSelectData,
   selectIsActiveForSelectData,
 } from '../../state/admin.selectors';
+import { ChangeEvent, CKEditorComponent } from '@ckeditor/ckeditor5-angular';
 
 @Component({
   selector: 'app-product-form',
@@ -20,6 +29,7 @@ export class ProductFormComponent implements OnInit {
   @Output() submit = new EventEmitter();
   form: FormGroup;
   buttonText: string;
+  editor = ClassicEditor;
   vm$ = combineLatest([
     this.store.select(selectCategoriesForSelectData),
     this.store.select(selectIsActiveForSelectData),
@@ -28,18 +38,19 @@ export class ProductFormComponent implements OnInit {
     map(([categoriesSelectData, activeSelectData, messages]) => ({
       categoriesSelectData,
       activeSelectData,
-      messages
+      messages,
     }))
   );
-
   defaultCategory = '';
   defaultIsActive = true;
+  @ViewChild('editorTpl', { static: true }) ckEditor: CKEditorComponent;
   constructor(private fb: FormBuilder, private store: Store) {}
   ngOnInit(): void {
     this.initializeForm();
   }
 
   handleSubmit() {
+    console.log(this.form.value);
     this.submit.emit(this.form.value);
   }
 
@@ -55,16 +66,12 @@ export class ProductFormComponent implements OnInit {
         sku: [this.product.sku, Validators.required],
         images: this.fb.array([]),
         videos: this.fb.array([]),
-        category: this.fb.array([
-          this.fb.control(currentCatgoryId),
-        ]),
+        category: this.fb.array([this.fb.control(currentCatgoryId)]),
         status: [this.product.status, Validators.required],
         price: [this.product.price, Validators.required],
         quantity: [this.product.quantity, Validators.required],
         is_active: [this.product.is_active],
-        // promotion: [''],
       });
-
       this.product.images.forEach((img) =>
         this.images.push(this.fb.control(img))
       );
@@ -92,14 +99,16 @@ export class ProductFormComponent implements OnInit {
     }
   }
 
-  
-
   handeCategoryChange(value: string) {
     this.category.controls[0].setValue(value);
   }
 
   handleIsActiveChange(value: boolean) {
     this.form.get('is_active').setValue(value);
+  }
+
+  handleDescriptionChange({ editor }: ChangeEvent) {
+    this.form.get('desciption').setValue(editor.getData());
   }
 
   get category() {

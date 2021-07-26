@@ -31,9 +31,10 @@
     <div appCardActionContainer>
       <app-card-action
         class="card-action self-center ml-3 hidden"
+        [isInWishlist]="(wishlistIdSet$ | async).has(product.id)"
         [productId]="product.id"
         (addToCart)="handleAddToCart()"
-        (addToWishlist)="handleAddToWishlist()"
+        (wishlist)="handleWishlistAction($event)"
       ></app-card-action>
     </div>
   </div>

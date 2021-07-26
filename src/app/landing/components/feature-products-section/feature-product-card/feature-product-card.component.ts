@@ -3,7 +3,11 @@ import { Store } from '@ngrx/store';
 import { productCardAddToCart } from 'src/app/cart/state/cart.actions';
 import { getCartInfoFromProduct } from 'src/app/cart/state/cart.reducer';
 import { Product } from 'src/app/models/product.model';
-import { addToWishlist } from 'src/app/wishlist/state/wishlist.actions';
+import {
+  addToWishlist,
+  deleteFromWishlist,
+} from 'src/app/wishlist/state/wishlist.actions';
+import { selectWishlistIdSet } from 'src/app/wishlist/state/wishlist.selectors';
 
 @Component({
   selector: 'app-feature-product-card',
@@ -12,6 +16,7 @@ import { addToWishlist } from 'src/app/wishlist/state/wishlist.actions';
 })
 export class FeatureProductCardComponent {
   @Input() product: Product;
+  wishlistIdSet$ = this.store.select(selectWishlistIdSet);
   constructor(private store: Store) {}
 
   handleAddToCart() {
@@ -19,7 +24,11 @@ export class FeatureProductCardComponent {
     this.store.dispatch(productCardAddToCart({ item }));
   }
 
-  handleAddToWishlist() {
-    this.store.dispatch(addToWishlist({product: this.product}));
+  handleWishlistAction(action: 'add' | 'remove') {
+    if (action === 'add') {
+      this.store.dispatch(addToWishlist({ product: this.product }));
+    } else {
+      this.store.dispatch(deleteFromWishlist({ productId: this.product.id }));
+    }
   }
 }

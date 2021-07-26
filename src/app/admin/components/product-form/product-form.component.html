@@ -1,4 +1,4 @@
-<ng-container *ngIf="vm$ | async as vm">
+<ng-container *ngIf="(vm$ | async) as vm">
   <div class="w-full max-w-2xl mx-auto">
     <form
       class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
@@ -17,12 +17,12 @@
 
       <div class="mb-6">
         <app-label [id]="'desciption'">Description</app-label>
-        <textarea
-          formControlName="desciption"
-          id="desciption"
-          rows="10"
-          class="w-full rounded-lg"
-        ></textarea>
+        <ckeditor
+          [editor]="editor"
+          #editorTpl
+          (change)="handleDescriptionChange($event)"
+          [data]="product?.desciption ? product.desciption : ''"
+        ></ckeditor>
       </div>
 
       <div class="mb-6">
@@ -43,7 +43,10 @@
 
       <div class="mb-6">
         <app-label [id]="'quantity'">Quantity</app-label>
-        <app-input [id]="'quantity'" [control]="formControls.quantity"></app-input>
+        <app-input
+          [id]="'quantity'"
+          [control]="formControls.quantity"
+        ></app-input>
         <app-input-error [control]="formControls.quantity">
           Please fill in product's quantity
         </app-input-error>

@@ -14,9 +14,14 @@
   <a
     *ngIf="isLoggedIn$ | async"
     class="wishlist zmdi zmdi-favorite-outline"
-    (click)="handleClick('wishlist')"
+    [ngClass]="{ inWishlist: isInWishlist }"
+    (click)="
+      isInWishlist
+        ? handleClick('removeFromWishlist')
+        : handleClick('addToWishlist')
+    "
+    [nzTooltipTitle]="isInWishlist ? 'Remove from wishlist' : 'Add to wishlist'"
     nz-tooltip
-    [nzTooltipTitle]="'Add to wishlist'"
     [nzTooltipMouseEnterDelay]="0.75"
     nzTooltipPlacement="bottom"
   ></a>
@@ -27,7 +32,7 @@
     [nzTooltipTitle]="'View product details'"
     [nzTooltipMouseEnterDelay]="0.75"
     nzTooltipPlacement="bottom"
-    class="review  zmdi zmdi-eye"
+    class="review zmdi zmdi-eye"
     (click)="handleClick('review')"
   ></a>
 </div>

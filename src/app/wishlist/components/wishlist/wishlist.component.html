@@ -13,7 +13,21 @@
       </a>
     </h2>
     <div *ngIf="vm.total !== 0" class="table-container mb-5">
-      <table class="min-w-max w-full">
+      <div class="grid xs:grid-cols-2 lg:grid-cols-3 mt-4">
+        <app-vertical-product-card
+          *ngFor="
+            let product of vm.products
+              | paginate
+                : {
+                    itemsPerPage: vm.paginationInfo.limit,
+                    currentPage: vm.paginationInfo.page,
+                    totalItems: vm.paginationInfo.totalProducts
+                  }
+          "
+          [product]="product"
+        ></app-vertical-product-card>
+      </div>
+      <!-- <table class="min-w-max w-full">
         <tr>
           <th class="text-center text-gray-500">Image</th>
           <th class="text-center text-gray-500">Product Name</th>
@@ -75,7 +89,7 @@
             </div>
           </td>
         </tr>
-      </table>
+      </table> -->
     </div>
     <app-pagination (pageChange)="handlePageChange($event)"></app-pagination>
   </div>

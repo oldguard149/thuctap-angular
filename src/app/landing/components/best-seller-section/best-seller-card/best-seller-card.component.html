@@ -46,8 +46,9 @@
       <app-card-action
         class="card-action hidden mt-2"
         [productId]="product.id"
+        [isInWishlist]="(wishlistIdSet$ | async).has(product.id)"
         (addToCart)="handleAddToCart()"
-        (addToWishlist)="handleAddToWishlist()"
+        (wishlist)="handleWishlistAction($event)"
       ></app-card-action>
     </div>
   </div>
