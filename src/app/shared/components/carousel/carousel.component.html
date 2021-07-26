@@ -1,0 +1,27 @@
+<div class="container">
+  <button class="btn" (click)="changeSlide('prev')">
+    <i class="zmdi zmdi-chevron-left"></i>
+  </button>
+  <swiper
+    #swiperRef
+    [slidesPerView]="slidesPerView"
+    [loop]="false"
+    [scrollbar]="true"
+    (slideChange)="slideChange($event)"
+    [breakpoints]="breakpoints"
+  >
+    <ng-template swiperSlide let-data *ngFor="let item of dataSource">
+      <ng-container
+        [ngTemplateOutlet]="cardTemplateRef"
+        [ngTemplateOutletContext]="{ data: item }"
+      ></ng-container>
+    </ng-template>
+  </swiper>
+
+  <button class="btn" (click)="changeSlide('next')">
+    <i class="zmdi zmdi-chevron-right"></i>
+  </button>
+</div>
+
+<!-- [pagination]="'bullets'" -->
+

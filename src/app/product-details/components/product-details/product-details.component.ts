@@ -8,6 +8,7 @@ import { selectIsLoggedIn } from 'src/app/auth/state/auth.selectors';
 import { productDetailAddToCart } from 'src/app/cart/state/cart.actions';
 import { CartItem } from 'src/app/models/cartItem.model';
 import { Product } from 'src/app/models/product.model';
+import { PopupMessageService } from 'src/app/services/popup-message.service';
 import { addToWishlist } from 'src/app/wishlist/state/wishlist.actions';
 import { loadProductDetails, loadRecommendProducts } from '../../state/product-details.actions';
 import {
@@ -25,12 +26,8 @@ import {
 })
 export class ProductDetailsComponent implements OnInit, OnDestroy {
   cartForm: FormGroup = this.fb.group({
-    quantity: ['1', [Validators.required, Validators.min(1)]],
+    quantity: ['1', [Validators.required, Validators.min(1), Validators.pattern(/^[1-9]*/)]],
   });
-  product$ = this.store.select(selectProductDetails);
-  // productQuantity$ = this.store.select(selectProductQuantity);
-  // breadcrumb$ = this.store.select(selectProductDetailsBreadcrumb);
-  // isLoggedIn$ = this.store.select(selectIsLoggedIn);
 
   vm$ = combineLatest([
     this.store.select(selectProductDetails),
@@ -59,51 +56,48 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     )
   );
 
-  addToCart() {
+  addToCart(product: Product) {
     const orderQuantity = parseInt(this.quantity.value);
     const item = {
-      id: this.product._id,
-      title: this.product.title,
-      quantity: this.product.quantity,
+      id: product._id,
+      title: product.title,
+      quantity: product.quantity,
       orderQuantity: orderQuantity,
-      images: this.product.images,
-      price: this.product.price,
+      images: product.images,
+      price: product.price,
     } as CartItem;
     this.store.dispatch(productDetailAddToCart({ item: item }));
   }
 
   addProductToWishList(product: Product) {
-    console.log(product);
     this.store.dispatch(addToWishlist({ product }));
   }
 
   changeQuantity(action: 'minus' | 'plus', quantity: number) {
     const currentQuantity = parseInt(this.quantity.value);
     if (action === 'minus') {
-      currentQuantity === 1
-        ? alert('Minimun quantity: 1')
+      currentQuantity < 1
+        ? this.message.createMessage('Minimun quantity: 1', 'error')
         : this.quantity.setValue(currentQuantity - 1);
     } else {
       currentQuantity < quantity
         ? this.quantity.setValue(currentQuantity + 1)
-        : alert(`Only ${quantity} items available`);
+        : this.message.createMessage(`Only ${quantity} items available`, 'error');
+        console.log(quantity);
     }
   }
 
   constructor(
     private fb: FormBuilder,
     private store: Store,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private message: PopupMessageService
   ) {}
   private destroyed = new Subject<void>();
-  private product: Product;
   ngOnInit(): void {
     const currentProductId = this.route.snapshot.params['id'];
     this.store.dispatch(loadProductDetails({ productId: currentProductId }));
     this.store.dispatch(loadRecommendProducts({productId: currentProductId}));
-    this.product$
-      .pipe(takeUntil(this.destroyed))
-      .subscribe((product) => (this.product = product));
   }
 
   ngOnDestroy() {

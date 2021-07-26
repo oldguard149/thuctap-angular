@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { selectTotalCartItems } from 'src/app/cart/state/cart.selectors';
 
 @Component({
   selector: 'app-three-icons',
@@ -7,7 +9,8 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ThreeIconsComponent implements OnInit {
   @Input() textColor: string = 'text-gray-900';
-  constructor() { }
+  totalCartItem$ = this.store.select(selectTotalCartItems);
+  constructor(private store: Store) { }
 
   ngOnInit(): void {
   }

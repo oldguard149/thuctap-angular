@@ -1,23 +1,7 @@
-<div class="today-deal-product-list relative">
-    <swiper
-      #swipercontainer
-      [slidesPerView]="slidesPerView"
-      [spaceBetween]="2"
-      [breakpoints]="breakpoints"
-      [loop]="false"
-      [navigation]="{nextEl: '.zmdi-chevron-right', prevEl: '.zmdi-chevron-left'}"
-    >
-      <ng-template
-        swiperSlide
-        let-data
-        *ngFor="let product of products;"
-      >
-        <app-vertical-product-card [product]="product"></app-vertical-product-card>
-      </ng-template>
-    </swiper>
-
-    <app-horizontal-nav-button
-      class="today-deal-nav-button hidden"
-      [shape]="'round'"
-    ></app-horizontal-nav-button>
-  </div>
+<ng-container *ngIf="products">
+  <app-carousel [dataSource]="products">
+    <ng-template #swiperCard let-p="data">
+      <app-vertical-product-card  [product]="p"></app-vertical-product-card>
+    </ng-template>
+  </app-carousel>
+</ng-container>

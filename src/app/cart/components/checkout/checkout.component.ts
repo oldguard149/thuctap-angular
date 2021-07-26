@@ -46,30 +46,31 @@ export class CheckoutComponent implements OnInit {
     phone: ['', Validators.required],
     postcode: [''],
     address: [''],
-    card_tok: ['', Validators.required],
+    card_tok: [''],
     description: [''],
     products: this.fb.array([]),
   });
 
   submit() {
-    this.stripeService.createToken(this.card.element).subscribe((result) => {
-      if (result.token) {
-        // Use the token, dispatch action to backend
-        this.isStripErrorSubject.next(false);
+    this.stripeService
+      .createToken(this.card.element)
+      .pipe(takeUntil(this.destroyed))
+      .subscribe((result) => {
+        if (result.token) {
+          // Use the token, dispatch action to backend
+          this.isStripErrorSubject.next(false);
 
-        const tokenId = result.token.id;
-        this.checkoutForm.get('card_tok').setValue(tokenId);
+          const tokenId = result.token.id;
+          this.checkoutForm.get('card_tok').setValue(tokenId);
 
-        this.store.dispatch(checkOut({ body: this.checkoutForm.value }));
-
-        console.log(this.checkoutForm.value);
-      } else if (result.error) {
-        // Error creating the token, show error
-        const errorMessage = result.error.message;
-        this.isStripErrorSubject.next(true);
-        this.stripErrorSubject.next(errorMessage);
-      }
-    });
+          this.store.dispatch(checkOut({ body: this.checkoutForm.value }));
+        } else if (result.error) {
+          // Error creating the token, show error
+          const errorMessage = result.error.message;
+          this.isStripErrorSubject.next(true);
+          this.stripErrorSubject.next(errorMessage);
+        }
+      });
   }
 
   private collapseHeaderSubject = new BehaviorSubject('Show shopping cart');
@@ -135,6 +136,7 @@ export class CheckoutComponent implements OnInit {
         },
       },
     },
+    value: { postalCode: '94110' },
   };
 
   private get productsFormArray() {

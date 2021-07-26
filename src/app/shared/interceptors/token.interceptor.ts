@@ -7,7 +7,7 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { selectAuthToken } from '../auth/state/auth.selectors';
+import { selectAuthToken } from '../../auth/state/auth.selectors';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {

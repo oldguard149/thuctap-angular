@@ -17,7 +17,7 @@
     [nzTooltipMouseEnterDelay]="0.75"
     nzTooltipPlacement="bottom"
   ></a>
-  <div>
+  <nz-badge [nzCount]="(totalCartItem$ | async)" nzShowZero>
     <a
       id="cart"
       class="icon zmdi zmdi-shopping-cart"
@@ -28,5 +28,5 @@
       [nzTooltipMouseEnterDelay]="0.75"
       nzTooltipPlacement="bottom"
     ></a>
-  </div>
+  </nz-badge>
 </div>

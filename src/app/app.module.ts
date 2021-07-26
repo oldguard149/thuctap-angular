@@ -23,7 +23,7 @@ import { authReducer } from './auth/state/auth.reducer';
 import { AuthEffects } from './auth/state/auth.effects';
 import { wishlistReducer } from './wishlist/state/wishlist.reducer';
 import { WishlistEffects } from './wishlist/state/wishlist.effects';
-import { TokenInterceptor } from './interceptors/token.interceptor';
+import { TokenInterceptor } from './shared/interceptors/token.interceptor';
 
 
 registerLocaleData(en);

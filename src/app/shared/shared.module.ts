@@ -18,6 +18,8 @@ import { LoadingSpinnerComponent } from './components/loading-spinner/loading-sp
 import { InputErrorComponent } from './components/input-error/input-error.component';
 import { MessagesComponent } from './components/messages/messages.component';
 import { InputHintComponent } from './components/input-hint/input-hint.component';
+import { CarouselComponent } from './components/carousel/carousel.component';
+import { SwiperModule } from 'swiper/angular';
 
 
 
@@ -34,6 +36,7 @@ import { InputHintComponent } from './components/input-hint/input-hint.component
     InputErrorComponent,
     MessagesComponent,
     InputHintComponent,
+    CarouselComponent,
   ],
   imports: [
     CommonModule,
@@ -43,7 +46,8 @@ import { InputHintComponent } from './components/input-hint/input-hint.component
     NzRadioModule,
     RouterModule,
     NgxPaginationModule,
-    NzSpinModule
+    NzSpinModule,
+    SwiperModule
   ],
   exports: [
     ButtonComponent,
@@ -55,7 +59,8 @@ import { InputHintComponent } from './components/input-hint/input-hint.component
     RadioGroupComponent,
     LoadingSpinnerComponent,
     InputErrorComponent,
-    MessagesComponent
+    MessagesComponent,
+    CarouselComponent
   ],
 })
 export class SharedModule { }

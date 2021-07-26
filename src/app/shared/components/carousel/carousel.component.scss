@@ -1,0 +1,31 @@
+.container {
+  display: flex;
+  align-items: center;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.btn {
+  padding: 5px 10px;
+  background-color: #E0E0E0;
+  color: #424242;
+  margin: 0 10px;
+  border-radius: 5px;
+
+  &:hover {
+    background-color: #eee;
+  }
+
+  &:active {
+    background-color: #bdbdbd;
+  }
+
+  &,
+  &:focus {
+    outline: none;
+    border: none;
+  }
+}

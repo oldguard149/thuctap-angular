@@ -9,7 +9,7 @@
       <app-messages [messages]="vm.messages"></app-messages>
       <div class="mb-6">
         <app-label [id]="'title'">Title</app-label>
-        <app-input [id]="'title'" [control]="form.title"></app-input>
+        <app-input [id]="'title'" [control]="formControls.title"></app-input>
         <app-input-error [control]="formControls.title">
           Please fill in title
         </app-input-error>
@@ -27,7 +27,7 @@
 
       <div class="mb-6">
         <app-label [id]="'sku'">sku</app-label>
-        <app-input [id]="'sku'" [control]="form.sku"></app-input>
+        <app-input [id]="'sku'" [control]="formControls.sku"></app-input>
         <app-input-error [control]="formControls.sku">
           Please fill in product's sku
         </app-input-error>
@@ -35,7 +35,7 @@
 
       <div class="mb-6">
         <app-label [id]="'price'">Price</app-label>
-        <app-input [id]="'price'" [control]="form.price"></app-input>
+        <app-input [id]="'price'" [control]="formControls.price"></app-input>
         <app-input-error [control]="formControls.price">
           Please fill in product's price
         </app-input-error>
@@ -43,7 +43,7 @@
 
       <div class="mb-6">
         <app-label [id]="'quantity'">Quantity</app-label>
-        <app-input [id]="'quantity'" [control]="form.quantity"></app-input>
+        <app-input [id]="'quantity'" [control]="formControls.quantity"></app-input>
         <app-input-error [control]="formControls.quantity">
           Please fill in product's quantity
         </app-input-error>

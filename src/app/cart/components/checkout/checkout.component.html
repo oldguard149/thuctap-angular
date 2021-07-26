@@ -23,7 +23,10 @@
       </div>
 
       <div class="lg:w-7/12 lg:pt-8">
-        <form class="bg-white rounded px-8 pb-8 mb-8 w-full max-w-md mx-auto" (ngSubmit)="submit()">
+        <form
+          class="bg-white rounded px-8 pb-8 mb-8 w-full max-w-md mx-auto"
+          (ngSubmit)="submit()"
+        >
           <h2 class="text-2xl font-bold text-center">Shipping Information</h2>
           <app-messages [messages]="vm.messages"></app-messages>
           <div class="form-container">
@@ -31,7 +34,7 @@
               <app-label [id]="'email'">Email</app-label>
               <app-input
                 [id]="'email'"
-                [control]="checkoutForm.email"
+                [control]="formControls.email"
               ></app-input>
               <app-input-error [control]="formControls.email">
                 Please fill in email
@@ -42,7 +45,7 @@
               <app-label [id]="'name'">Fullname</app-label>
               <app-input
                 [id]="'name'"
-                [control]="checkoutForm.name"
+                [control]="formControls.name"
               ></app-input>
               <app-input-error [control]="formControls.name">
                 Please fill in your fullname
@@ -53,11 +56,9 @@
               <app-label [id]="'address'">Address</app-label>
               <app-input
                 [id]="'address'"
-                [control]="checkoutForm.address"
-              ></app-input>
-              <app-input-error
                 [control]="formControls.address"
-              >
+              ></app-input>
+              <app-input-error [control]="formControls.address">
                 Please fill in your address
               </app-input-error>
             </div>
@@ -66,7 +67,7 @@
               <app-label [id]="'phone'">Phone</app-label>
               <app-input
                 [id]="'phone'"
-                [control]="checkoutForm.phone"
+                [control]="formControls.phone"
                 [inputType]="'tel'"
               ></app-input>
               <app-input-error [control]="formControls.phone">
@@ -78,7 +79,7 @@
               <app-label [id]="'postcode'">Post Code</app-label>
               <app-input
                 [id]="'postcode'"
-                [control]="checkoutForm.postcode"
+                [control]="formControls.postcode"
               ></app-input>
             </div>
 
@@ -86,7 +87,7 @@
               <app-label [id]="'description'">Description</app-label>
               <app-input
                 [id]="'description'"
-                [control]="checkoutForm.description"
+                [control]="formControls.description"
               ></app-input>
             </div>
           </div>
@@ -99,7 +100,13 @@
               {{ stripeError$ | async }}
             </p>
           </div>
-          <app-button [disabled]="!checkoutForm.valid">Complete Order</app-button>
+          <app-button
+            [buttonType]="'button'"
+            (click)="submit()"
+            [disabled]="!checkoutForm.valid"
+          >
+            Complete Order
+          </app-button>
         </form>
       </div>
 
@@ -171,7 +178,7 @@
       <div class="flex justify-between items-center py-5">
         <p>Total</p>
         <app-product-price
-          [mainPrice]="456"
+          [mainPrice]="vm.totalPrice"
           [showSecondPrice]="false"
         ></app-product-price>
       </div>

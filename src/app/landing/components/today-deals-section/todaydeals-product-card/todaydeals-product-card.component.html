@@ -7,7 +7,12 @@
       [alt]="product.title"
       [ngClass]="{ hidden: !isFirst }"
     />
-    <app-box-countdown class="box-countdown hidden"></app-box-countdown>
+    <app-box-countdown
+      class="box-countdown hidden"
+      [hours]="hours"
+      [mins]="minutes"
+      [secs]="seconds"
+    ></app-box-countdown>
   </div>
 
   <!-- info -->

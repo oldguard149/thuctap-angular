@@ -1,38 +1,35 @@
-<div class="w-11/12 lg:w-9/12 mx-auto" *ngIf="(featureProducts$ | async) as products">
+<div
+  class="w-11/12 lg:w-9/12 mx-auto"
+  *ngIf="featureProducts$ | async as products"
+>
   <div>
     <div><app-section-title>Feature products</app-section-title></div>
     <div>
-      <!-- product list -->
-      <swiper
-        #swipercontainer
-        [slidesPerView]="1"
-        [spaceBetween]="2"
-        [breakpoints]="breakpointsProductCard"
-        [loop]="false"
+      <app-carousel
+        [dataSource]="products"
+        [breakppoints]="breakpointsProductCard"
       >
-        <ng-template swiperSlide let-data *ngFor="let product of products;">
-          <app-feature-product-card [product]="product"></app-feature-product-card>
+        <ng-template let-product="data" #swiperCard>
+          <app-feature-product-card
+            [product]="product"
+          ></app-feature-product-card>
         </ng-template>
-      </swiper>
-      <!-- <div class="grid grid-cols-2 gap-2 md:grid-cols-3 xl:grid-cols-6">
-        
-      </div> -->
-
-      <swiper
-        #swipercontainer
-        [slidesPerView]="2"
-        [spaceBetween]="2"
+      </app-carousel>
+      <br>
+      <br>
+      <app-carousel
+        [dataSource]="logoUrl"
         [breakpoints]="breakpointsLogo"
-        [loop]="false"
       >
-        <ng-template swiperSlide let-data *ngFor="let i of [1, 2, 3, 4, 5, 6, 7]">
+        <ng-template #swiperCard let-imgurl="data">
           <a href=""
-            ><img class="mx-auto"
-              src="//cdn.shopify.com/s/files/1/1939/5421/files/br-03_170x130.png?v=1493771887"
+            ><img
+              class="mx-auto"
+              [src]="imgurl"
               alt=""
           /></a>
         </ng-template>
-      </swiper>
+      </app-carousel>
     </div>
   </div>
 </div>
