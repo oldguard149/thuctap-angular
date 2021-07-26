@@ -24,18 +24,20 @@ export interface ProductsState {
   sortType: SortTypes;
   catetories: Category[];
   searchKey: string;
+  hasNext: boolean;
 }
 
 const initialState: ProductsState = {
   docs: null,
   page: 1,
-  limit: 10,
+  limit: 9,
   totalDocs: 0,
   isLoading: true,
   displayListType: 'grid',
   sortType: 'manual',
   catetories: null,
   searchKey: null,
+  hasNext: true
 };
 
 export const productsReducer = createReducer(
@@ -52,10 +54,10 @@ export const productsReducer = createReducer(
   on(ProductsActions.loadProducts, (state) => ({ ...state, isLoading: true })),
   on(ProductsActions.loadProductsSuccess, (state, { res }) => ({
     ...state,
-    limit: res.limit,
     docs: res.docs,
     totalDocs: res.totalDocs,
     isLoading: false,
+    hasNext: res.hasNextPage
   })),
   on(ProductsActions.loadCategoriesSuccess, (state, { res }) => ({
     ...state,
@@ -65,14 +67,14 @@ export const productsReducer = createReducer(
     ...state,
     displayListType: listType,
   })),
-  on(ProductsActions.changePage, (state, { page }) => ({
-    ...state,
-    page,
-  })),
-  on(ProductsActions.changePageLimit, (state, { limit }) => ({
-    ...state,
-    limit,
-  })),
+  // on(ProductsActions.changePage, (state, { page }) => ({
+  //   ...state,
+  //   page,
+  // })),
+  // on(ProductsActions.changePageLimit, (state, { limit }) => ({
+  //   ...state,
+  //   limit,
+  // })),
   on(ProductsActions.changeSortType, (state, { sortType }) => ({
     ...state,
     sortType,
@@ -96,5 +98,6 @@ export const productsReducer = createReducer(
   on(ProductsActions.changePageWhenSearchProducts, (state, { page }) => ({
     ...state,
     page,
-  }))
+  })),
+  on(ProductsActions.productListLoadMore, (state) => ({...state, page: state.page + 1}))
 );

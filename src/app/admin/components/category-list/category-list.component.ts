@@ -35,7 +35,8 @@ export class CategoryListComponent implements OnInit {
       loading,
     }))
   );
-
+  private isModalVisibleSubject = new BehaviorSubject(false);
+  isVisible$ = this.isModalVisibleSubject.asObservable();
   constructor(private store: Store, private router: Router) {}
 
   ngOnInit(): void {
@@ -55,9 +56,6 @@ export class CategoryListComponent implements OnInit {
     this.store.dispatch(setSelectedCategory({ index }));
     this.isModalVisibleSubject.next(true);
   }
-
-  private isModalVisibleSubject = new BehaviorSubject(false);
-  isVisible$ = this.isModalVisibleSubject.asObservable();
 
   confirmDelete() {
     this.store.dispatch(deleteCategory())

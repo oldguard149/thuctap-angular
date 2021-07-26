@@ -20,6 +20,7 @@ import { MessagesComponent } from './components/messages/messages.component';
 import { InputHintComponent } from './components/input-hint/input-hint.component';
 import { CarouselComponent } from './components/carousel/carousel.component';
 import { SwiperModule } from 'swiper/angular';
+import { LoadMoreComponent } from './components/load-more/load-more.component';
 
 
 
@@ -37,6 +38,7 @@ import { SwiperModule } from 'swiper/angular';
     MessagesComponent,
     InputHintComponent,
     CarouselComponent,
+    LoadMoreComponent,
   ],
   imports: [
     CommonModule,
@@ -60,7 +62,8 @@ import { SwiperModule } from 'swiper/angular';
     LoadingSpinnerComponent,
     InputErrorComponent,
     MessagesComponent,
-    CarouselComponent
+    CarouselComponent,
+    LoadMoreComponent
   ],
 })
 export class SharedModule { }

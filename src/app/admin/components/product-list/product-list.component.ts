@@ -34,6 +34,29 @@ export class ProductListComponent implements OnInit {
       return { products, paginationInfo, messages, loading };
     })
   );
+  private isModalVisibleSubject = new BehaviorSubject(false);
+  isVisible$ = this.isModalVisibleSubject.asObservable();
+
+  constructor(private store: Store, private router: Router) {}
+
+  ngOnInit(): void {
+    this.store.dispatch(loadProducts());
+  }
+
+  ngOnDestroy() {
+    this.store.dispatch(resetAdminMessages());
+    this.store.dispatch(resetPaginationInfo());
+  }
+
+
+  confirmDelete() {
+    this.store.dispatch(deleteProduct());
+    this.isModalVisibleSubject.next(false);
+  }
+
+  cancelDelete() {
+    this.isModalVisibleSubject.next(false);
+  }
 
   handlePageChange(page: number) {
     this.store.dispatch(changePage({ page }));
@@ -48,29 +71,5 @@ export class ProductListComponent implements OnInit {
   handleRemove(index: number) {
     this.store.dispatch(setSelectedProduct({ index }));
     this.isModalVisibleSubject.next(true);
-  }
-
-  constructor(private store: Store, private router: Router) {}
-
-  ngOnInit(): void {
-    this.store.dispatch(loadProducts());
-  }
-
-  ngOnDestroy() {
-    this.store.dispatch(resetAdminMessages());
-    this.store.dispatch(resetPaginationInfo());
-  }
-
-  private isModalVisibleSubject = new BehaviorSubject(false);
-  isVisible$ = this.isModalVisibleSubject.asObservable();
-
-  confirmDelete() {
-    this.store.dispatch(deleteProduct());
-    this.isModalVisibleSubject.next(false);
-  }
-
-  cancelDelete() {
-    console.log('cancel');
-    this.isModalVisibleSubject.next(false);
   }
 }

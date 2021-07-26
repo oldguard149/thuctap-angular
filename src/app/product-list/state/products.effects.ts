@@ -20,7 +20,7 @@ export class ProductsEffects {
       ofType(ProductsActions.initializeQueryParams),
       map((action) => {
         const page = this.getQueryParamValue('page', 1);
-        const limit = this.getQueryParamValue('limit', 10);
+        const limit = this.getQueryParamValue('limit', 9);
         const sortType = this.getQueryParamValue('sort', 'manual');
         return ProductsActions.updateQueryParams({ page, limit, sortType });
       })
@@ -33,7 +33,7 @@ export class ProductsEffects {
       concatLatestFrom((action) => this.store.select(selectPaginationInfo)),
       exhaustMap(([action, paginationInfo]) =>
         this.productService
-          .fetchProducts(paginationInfo.page, paginationInfo.limit)
+          .fetchProducts(1, paginationInfo.limit * paginationInfo.page)
           .pipe(
             map((res: ProductsResponse) =>
               ProductsActions.loadProductsSuccess({ res: res })

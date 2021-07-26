@@ -75,6 +75,11 @@ export const activeProduct = createAction(
   props<{ productId: string }>()
 );
 
+export const deleteProductSuccess = createAction(
+  '[Admin Product] Delete Product Success',
+  props<{ messages: ResponseMessage[] }>()
+)
+
 // ======================================================================================================
 // ============================================= CATEGORY ===============================================
 
@@ -114,6 +119,11 @@ export const deactiveCategory = createAction(
   '[Admin Category] Deactive Category',
   props<{ categoryId: string }>()
 );
+
+export const deleteCategorySuccess = createAction(
+  '[Admin Product] Delete Product Success',
+  props<{ messages: ResponseMessage[] }>()
+)
 
 // ======================================================================================================
 // ============================================= ORDER ===============================================

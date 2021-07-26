@@ -14,7 +14,7 @@ import { selectSelectedCategory } from './admin.selectors';
 export class CategoryEffects {
   loadCategories$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(AdminActions.loadCategories),
+      ofType(AdminActions.loadCategories, AdminActions.deleteCategorySuccess),
       exhaustMap(() =>
         this.categoryService.getAll().pipe(
           map((res) => AdminActions.loadCategoriesSuccess({ res })),
@@ -85,7 +85,7 @@ export class CategoryEffects {
         this.categoryService.delete(selectedCategory._id).pipe(
           map((res) => {
             this.router.navigateByUrl('/admin/category-list');
-            return AdminActions.setAdminMessages({
+            return AdminActions.deleteCategorySuccess({
               messages: [
                 { type: 'success', content: 'Delete category successfully' },
               ],

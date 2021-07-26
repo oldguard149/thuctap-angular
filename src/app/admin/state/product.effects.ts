@@ -14,7 +14,7 @@ import * as AdminActions from './admin.actions';
 export class ProductEffects {
   loadProduct$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(AdminActions.loadProducts),
+      ofType(AdminActions.loadProducts, AdminActions.deleteProductSuccess),
       concatLatestFrom((action) => this.store.select(selectPaginationInfo)),
       exhaustMap(([action, paginationInfo]) =>
         this.productService
@@ -82,7 +82,7 @@ export class ProductEffects {
         this.productService.delete(selectedProduct._id).pipe(
           map((res) => {
             this.router.navigateByUrl('/admin/product-list')
-            return AdminActions.setAdminMessages({
+            return AdminActions.deleteProductSuccess({
               messages: [
                 { type: 'success', content: 'Delete product successfully' },
               ],

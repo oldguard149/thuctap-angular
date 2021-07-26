@@ -1,0 +1,26 @@
+.loadmore {
+  width: 100%;
+  border-top: 1px solid #e7e7e7;
+  display: flex;
+  justify-content: center;
+
+  &__button {
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    background-color: #e0e0e0;
+    transform: translate3d(0, -50%, 0);
+    transition: background-color 300ms, color 300ms;
+
+    &:hover {
+      cursor: pointer;
+      background-color: #bdbdbd;
+      color: white;
+    }
+
+    &:active {
+      background-color: #9e9e9e;
+    }
+  }
+}

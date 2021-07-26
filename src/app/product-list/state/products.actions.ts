@@ -88,3 +88,8 @@ export const changePageWhenSearchProducts = createAction(
   '[Search / Backend API] Change Page When Search Product',
   props<{ page: number }>()
 );
+
+
+export const productListLoadMore = createAction(
+  '[Product List] Load More'
+)

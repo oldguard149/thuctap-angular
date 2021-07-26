@@ -9,8 +9,15 @@ import { productDetailAddToCart } from 'src/app/cart/state/cart.actions';
 import { CartItem } from 'src/app/models/cartItem.model';
 import { Product } from 'src/app/models/product.model';
 import { PopupMessageService } from 'src/app/services/popup-message.service';
-import { addToWishlist } from 'src/app/wishlist/state/wishlist.actions';
-import { loadProductDetails, loadRecommendProducts } from '../../state/product-details.actions';
+import {
+  addToWishlist,
+  deleteFromWishlist,
+} from 'src/app/wishlist/state/wishlist.actions';
+import { selectWishlistIdSet } from 'src/app/wishlist/state/wishlist.selectors';
+import {
+  loadProductDetails,
+  loadRecommendProducts,
+} from '../../state/product-details.actions';
 import {
   selectProductDetails,
   selectProductDetailsBreadcrumb,
@@ -26,7 +33,10 @@ import {
 })
 export class ProductDetailsComponent implements OnInit, OnDestroy {
   cartForm: FormGroup = this.fb.group({
-    quantity: ['1', [Validators.required, Validators.min(1), Validators.pattern(/^[1-9]*/)]],
+    quantity: [
+      '1',
+      [Validators.required, Validators.min(1), Validators.pattern(/^[1-9]*/)],
+    ],
   });
 
   vm$ = combineLatest([
@@ -36,6 +46,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     this.store.select(selectIsLoggedIn),
     this.store.select(selectProductDetailsLoading),
     this.store.select(selectRecommendProducts),
+    this.store.select(selectWishlistIdSet),
   ]).pipe(
     map(
       ([
@@ -45,6 +56,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
         isLoggedIn,
         loading,
         recommendProducts,
+        wishlistIds,
       ]) => ({
         product,
         productQuantity,
@@ -52,6 +64,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
         isLoggedIn,
         loading,
         recommendProducts,
+        wishlistIds,
       })
     )
   );
@@ -69,8 +82,15 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     this.store.dispatch(productDetailAddToCart({ item: item }));
   }
 
-  addProductToWishList(product: Product) {
-    this.store.dispatch(addToWishlist({ product }));
+  // product get from product detail api dont have 'id' field
+  handleWishlistAction(action: 'add' | 'remove', rawProduct: Product) {
+    console.log(action)
+    if (action === 'add') {
+      const product = { ...rawProduct, id: rawProduct._id };
+      this.store.dispatch(addToWishlist({ product }));
+    } else {
+      this.store.dispatch(deleteFromWishlist({ productId: rawProduct._id }));
+    }
   }
 
   changeQuantity(action: 'minus' | 'plus', quantity: number) {
@@ -82,8 +102,11 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     } else {
       currentQuantity < quantity
         ? this.quantity.setValue(currentQuantity + 1)
-        : this.message.createMessage(`Only ${quantity} items available`, 'error');
-        console.log(quantity);
+        : this.message.createMessage(
+            `Only ${quantity} items available`,
+            'error'
+          );
+      console.log(quantity);
     }
   }
 
@@ -95,14 +118,20 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   ) {}
   private destroyed = new Subject<void>();
   ngOnInit(): void {
-    const currentProductId = this.route.snapshot.params['id'];
-    this.store.dispatch(loadProductDetails({ productId: currentProductId }));
-    this.store.dispatch(loadRecommendProducts({productId: currentProductId}));
+    this.reactToProductChange();
   }
 
   ngOnDestroy() {
     this.destroyed.next();
     this.destroyed.complete();
+  }
+
+  private reactToProductChange() {
+    this.route.params.pipe(takeUntil(this.destroyed)).subscribe((params) => {
+      const productId = params['id'];
+      this.store.dispatch(loadProductDetails({ productId: productId }));
+      this.store.dispatch(loadRecommendProducts({ productId: productId }));
+    });
   }
   recommendProductsBreakpoint = {
     485: { slidesPerView: 2 },

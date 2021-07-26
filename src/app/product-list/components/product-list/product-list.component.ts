@@ -10,6 +10,7 @@ import {
   selectPaginationInfo,
   selectProducts,
   selectSortType,
+  selectHasNext,
 } from '../../state/products.selectors';
 import { combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -35,15 +36,17 @@ export class ProductListComponent implements OnInit {
     this.sortType$,
     this.paginationInfo$,
     this.categories$,
-    this.isLoading$
+    this.isLoading$,
+    this.store.select(selectHasNext)
   ]).pipe(
-    map(([products, displayType, sortType, paginationInfo, categories, isLoading]) => ({
+    map(([products, displayType, sortType, paginationInfo, categories, isLoading, hasNext]) => ({
       products,
       displayType,
       sortType,
       paginationInfo,
       categories,
-      isLoading
+      isLoading,
+      hasNext
     }))
   );
 
@@ -62,8 +65,13 @@ export class ProductListComponent implements OnInit {
     this.loadProducts();
   }
 
-  handlePageChange(page: number) {
-    this.store.dispatch(ProductsActions.changePage({ page }));
+  // handlePageChange(page: number) {
+  //   this.store.dispatch(ProductsActions.changePage({ page }));
+  //   this.loadProducts();
+  // }
+
+  handleLoadMore() {
+    this.store.dispatch(ProductsActions.productListLoadMore());
     this.loadProducts();
   }
 
@@ -75,10 +83,6 @@ export class ProductListComponent implements OnInit {
 
   handleSortTypeChange(value: SortTypes) {
     this.store.dispatch(ProductsActions.changeSortType({ sortType: value }));
-  }
-
-  handleColorAndPriceChange(value: string) {
-    console.log(`Handle color and price ${value}`);
   }
 
   constructor(private store: Store) {}

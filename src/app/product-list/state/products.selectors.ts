@@ -72,3 +72,8 @@ export const selectSearchBreadCrumbData = createSelector(
     },
   ] as BreadCrumb[]) 
 );
+
+export const selectHasNext = createSelector(
+  selectProductsFeatureState,
+  state => state.hasNext
+)

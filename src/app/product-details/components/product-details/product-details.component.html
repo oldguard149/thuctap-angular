@@ -46,14 +46,22 @@
               </button>
             </div>
           </form>
-          <app-button (click)="addToCart(vm.product)" [disabled]="!cartForm.valid">
+          <app-button
+            (click)="addToCart(vm.product)"
+            [disabled]="!cartForm.valid"
+          >
             <i class="shopping-cart zmdi zmdi-shopping-cart"></i>
             ADD TO CART
           </app-button>
           <a
             *ngIf="vm.isLoggedIn"
             class="wishlist zmdi zmdi-favorite-outline ml-3"
-            (click)="addProductToWishList(product)"
+            [ngClass]="{ inWishlist: vm.wishlistIds.has(vm.product._id) }"
+            (click)="
+              vm.wishlistIds.has(vm.product._id)
+                ? handleWishlistAction('remove', vm.product)
+                : handleWishlistAction('add', vm.product)
+            "
           ></a>
         </div>
         <app-input-error
