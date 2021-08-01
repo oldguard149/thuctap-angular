@@ -61,11 +61,10 @@ export class ProductsEffects {
       ofType(ProductsActions.searchProducts),
       concatLatestFrom((action) => this.store.select(selectPaginationInfo)),
       exhaustMap(([action, paginationInfo]) => {
-        
         let searchKey = action.searchKey || this.getQueryParamValue('q', '');
         console.log(searchKey);
         return this.productService
-          .searchProduct(searchKey, paginationInfo.page, paginationInfo.limit)
+          .searchProduct(searchKey, 1, paginationInfo.limit * paginationInfo.page)
           .pipe(
             map((res) =>
               ProductsActions.searchProductsSuccess({ res, searchKey })

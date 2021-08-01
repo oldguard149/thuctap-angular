@@ -6,10 +6,10 @@
     <div *ngIf="vm.orders?.length !== 0" class="table-container">
         <table class="min-w-max w-full">
             <tr>
-              <th class="text-center text-gray-500">Create At</th>
-              <th class="text-center text-gray-500">Status</th>
-              <th class="text-center text-gray-500">Total Amount</th>
-              <th class="text-center text-gray-500">Action</th>
+              <th class="text-center text-gray-500 py-4">Create At</th>
+              <th class="text-center text-gray-500 py-4">Status</th>
+              <th class="text-center text-gray-500 py-4">Total Amount</th>
+              <th class="text-center text-gray-500 py-4">Action</th>
             </tr>
             <tr *ngFor="let item of vm.orders; let index = index">
               <td class="p-5">
@@ -34,7 +34,7 @@
                 <div class="flex justify-center">
                   <a
                   [routerLink]="['/orders', item._id]"
-                  class="px-4 py-2 bg-blue-600 hover:bg-blue-300 hover:text-white transition-colors text-white rounded"
+                  class="px-4 py-2 bg-blue-600 hover:bg-blue-400 hover:text-white transition-colors text-white rounded"
                   (click)="loadOrderDetails(item._id)"
                   >View Detail</a
                 >

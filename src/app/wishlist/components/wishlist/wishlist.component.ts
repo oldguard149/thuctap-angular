@@ -10,10 +10,12 @@ import {
   changeWishlistPage,
   deleteFromWishlist,
   loadWishlist,
+  wishListLoadMore,
 } from '../../state/wishlist.actions';
 import {
   selectTotalWishlistItems,
   selectWishlistBreadcrumbData,
+  selectWishlistHasNext,
   selectWishlistItems,
   selectWishlistLoading,
   selectWishlistPaginationInfo,
@@ -30,14 +32,16 @@ export class WishlistComponent implements OnInit {
     this.store.select(selectWishlistPaginationInfo),
     this.store.select(selectWishlistBreadcrumbData),
     this.store.select(selectTotalWishlistItems),
-    this.store.select(selectWishlistLoading)
+    this.store.select(selectWishlistLoading),
+    this.store.select(selectWishlistHasNext)
   ]).pipe(
-    map(([products, paginationInfo, breadcrumbData, total, loading]) => ({
+    map(([products, paginationInfo, breadcrumbData, total, loading, hasNext]) => ({
       products,
       paginationInfo,
       breadcrumbData,
       total,
-      loading
+      loading,
+      hasNext
     }))
   );
 
@@ -56,7 +60,9 @@ export class WishlistComponent implements OnInit {
   removeFromWishlist(id: string) {
     this.store.dispatch(deleteFromWishlist({ productId: id }));
   }
-  handlePageChange(page: number) {
-    this.store.dispatch(changeWishlistPage({ page }));
+
+  handleLoadMore() {
+    this.store.dispatch(wishListLoadMore());
+    this.store.dispatch(loadWishlist());
   }
 }

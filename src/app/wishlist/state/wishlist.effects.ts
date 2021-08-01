@@ -26,7 +26,7 @@ export class WishlistEffects {
       ),
       exhaustMap(([action, paginationInfo]) =>
         this.wishlistService
-          .get(paginationInfo.page, paginationInfo.limit)
+          .get(1, paginationInfo.limit * paginationInfo.page)
           .pipe(
             map((res) => {
               return WishlistActions.loadWishlistSuccess({ res });

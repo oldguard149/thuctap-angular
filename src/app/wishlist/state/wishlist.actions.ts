@@ -46,3 +46,7 @@ export const changeWishlistPage = createAction(
     '[Wish List] Change Page',
     props<{page: number}>()
 );
+
+export const wishListLoadMore = createAction(
+    '[Wish List] Load More'
+)

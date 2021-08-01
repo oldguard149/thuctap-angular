@@ -5,17 +5,10 @@
     <div class="grid xs:grid-cols-2 lg:grid-cols-3 mt-4 gap-3">
       <app-vertical-product-card
         *ngFor="
-          let product of vm.products
-            | paginate
-              : {
-                  itemsPerPage: vm.paginationInfo.limit,
-                  currentPage: vm.paginationInfo.page,
-                  totalItems: vm.paginationInfo.totalProducts
-                }
-        "
+          let product of vm.products"
         [product]="product"
       ></app-vertical-product-card>
     </div>
-    <app-pagination (pageChange)="handlePageChange($event)"></app-pagination>
+    <app-load-more *ngIf="vm.hasNext" (buttonClick)="handleLoadMore()"></app-load-more>
   </div>
 </ng-container>

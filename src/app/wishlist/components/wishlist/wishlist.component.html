@@ -6,28 +6,30 @@
     <h2 *ngIf="vm.total === 0">
       You have no item in wishlist, back to collection
       <a
-       [routerLink]="'/collections/all'"
+        [routerLink]="'/collections/all'"
         class="hover:text-brand transition-colors"
-        >
+      >
         here
       </a>
     </h2>
     <div *ngIf="vm.total !== 0" class="table-container mb-5">
       <div class="grid xs:grid-cols-2 lg:grid-cols-3 mt-4">
         <app-vertical-product-card
-          *ngFor="
-            let product of vm.products
-              | paginate
-                : {
-                    itemsPerPage: vm.paginationInfo.limit,
-                    currentPage: vm.paginationInfo.page,
-                    totalItems: vm.paginationInfo.totalProducts
-                  }
-          "
+          *ngFor="let product of vm.products"
           [product]="product"
         ></app-vertical-product-card>
       </div>
-      <!-- <table class="min-w-max w-full">
+    </div>
+    <app-load-more
+      *ngIf="vm.hasNext"
+      (buttonClick)="handleLoadMore()"
+    ></app-load-more>
+  </div>
+</ng-container>
+
+<!-- <app-pagination (pageChange)="handlePageChange($event)"></app-pagination> -->
+
+<!-- <table class="min-w-max w-full">
         <tr>
           <th class="text-center text-gray-500">Image</th>
           <th class="text-center text-gray-500">Product Name</th>
@@ -90,7 +92,3 @@
           </td>
         </tr>
       </table> -->
-    </div>
-    <app-pagination (pageChange)="handlePageChange($event)"></app-pagination>
-  </div>
-</ng-container>

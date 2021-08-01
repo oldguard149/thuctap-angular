@@ -6,8 +6,6 @@ import {
   selectCategories,
   selectDisplayListType,
   selectProductListIsLoading,
-  selectPageLimit,
-  selectPaginationInfo,
   selectProducts,
   selectSortType,
   selectHasNext,
@@ -23,31 +21,31 @@ import { SortTypes } from '../../state/products.reducer';
   styleUrls: ['./product-list.component.scss'],
 })
 export class ProductListComponent implements OnInit {
-  products$ = this.store.select(selectProducts);
-  displayType$ = this.store.select(selectDisplayListType);
-  sortType$ = this.store.select(selectSortType);
-  pageLimit$ = this.store.select(selectPageLimit);
-  paginationInfo$ = this.store.select(selectPaginationInfo);
-  categories$ = this.store.select(selectCategories);
-  isLoading$ = this.store.select(selectProductListIsLoading);
   vm$ = combineLatest([
-    this.products$,
-    this.displayType$,
-    this.sortType$,
-    this.paginationInfo$,
-    this.categories$,
-    this.isLoading$,
-    this.store.select(selectHasNext)
+    this.store.select(selectProducts),
+    this.store.select(selectDisplayListType),
+    this.store.select(selectSortType),
+    this.store.select(selectCategories),
+    this.store.select(selectProductListIsLoading),
+    this.store.select(selectHasNext),
   ]).pipe(
-    map(([products, displayType, sortType, paginationInfo, categories, isLoading, hasNext]) => ({
-      products,
-      displayType,
-      sortType,
-      paginationInfo,
-      categories,
-      isLoading,
-      hasNext
-    }))
+    map(
+      ([
+        products,
+        displayType,
+        sortType,
+        categories,
+        isLoading,
+        hasNext,
+      ]) => ({
+        products,
+        displayType,
+        sortType,
+        categories,
+        isLoading,
+        hasNext,
+      })
+    )
   );
 
   ngOnInit(): void {
@@ -64,11 +62,6 @@ export class ProductListComponent implements OnInit {
     this.store.dispatch(ProductsActions.changePageLimit({ limit: value }));
     this.loadProducts();
   }
-
-  // handlePageChange(page: number) {
-  //   this.store.dispatch(ProductsActions.changePage({ page }));
-  //   this.loadProducts();
-  // }
 
   handleLoadMore() {
     this.store.dispatch(ProductsActions.productListLoadMore());

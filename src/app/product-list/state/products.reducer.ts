@@ -67,14 +67,6 @@ export const productsReducer = createReducer(
     ...state,
     displayListType: listType,
   })),
-  // on(ProductsActions.changePage, (state, { page }) => ({
-  //   ...state,
-  //   page,
-  // })),
-  // on(ProductsActions.changePageLimit, (state, { limit }) => ({
-  //   ...state,
-  //   limit,
-  // })),
   on(ProductsActions.changeSortType, (state, { sortType }) => ({
     ...state,
     sortType,
@@ -94,6 +86,7 @@ export const productsReducer = createReducer(
     totalDocs: res.totalDocs,
     isLoading: false,
     searchKey,
+    hasNext: res.hasNextPage
   })),
   on(ProductsActions.changePageWhenSearchProducts, (state, { page }) => ({
     ...state,

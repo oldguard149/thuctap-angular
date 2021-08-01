@@ -55,3 +55,8 @@ export const selectWishlistBreadcrumbData = createSelector(
       { label: 'Wishlist', link: '/wishlist' },
     ] as BreadCrumb[]
 );
+
+export const selectWishlistHasNext = createSelector(
+  wishlistFeatureState,
+  (state) => state.hasNext
+);

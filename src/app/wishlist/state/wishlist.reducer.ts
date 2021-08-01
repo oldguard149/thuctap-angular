@@ -8,14 +8,16 @@ export interface WishlistState extends EntityState<Product> {
   limit: number;
   totalDocs: number;
   loading: boolean;
+  hasNext: boolean;
 }
 
 export const adapter: EntityAdapter<Product> = createEntityAdapter<Product>();
 const initialState: WishlistState = adapter.getInitialState({
   page: 1,
-  limit: 10,
+  limit: 9,
   totalDocs: null,
   loading: true,
+  hasNext: false
 });
 
 export const wishlistReducer = createReducer(
@@ -25,6 +27,7 @@ export const wishlistReducer = createReducer(
       ...state,
       totalDocs: res.totalDocs,
       loading: false,
+      hasNext: res.hasNextPage
     })
   ),
   on(wishlistActions.addToWishlist, (state, { product }) =>
@@ -33,8 +36,5 @@ export const wishlistReducer = createReducer(
   on(wishlistActions.deleteFromWishlist, (state, { productId }) =>
     adapter.removeOne(productId, state)
   ),
-  on(wishlistActions.changeWishlistPage, (state, { page }) => ({
-    ...state,
-    page,
-  }))
+  on(wishlistActions.wishListLoadMore, (state) => ({...state, page: state.page + 1}))
 );
